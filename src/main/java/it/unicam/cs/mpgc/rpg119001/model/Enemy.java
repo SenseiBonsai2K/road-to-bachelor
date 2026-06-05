@@ -1,15 +1,20 @@
 package it.unicam.cs.mpgc.rpg119001.model;
 
-import it.unicam.cs.mpgc.rpg119001.util.CharacterConstants.EnemyConstants;
+import it.unicam.cs.mpgc.rpg119001.util.Constants.EnemyConstants;
 
+/**
+ * The Enemy class represents the adversaries that the player will encounter in the RPG game.
+ * It extends the Character class and includes specific attributes and behaviors for enemies.
+ */
 public class Enemy extends Character {
 
-    public Enemy(String name, int healthPoints, int attackPoints) {
+    public Enemy(String name, int healthPoints, int attackPoints, Position position) {
         validateEnemyName(name);
         super(
                 name,
                 validateEnemyStat(healthPoints, EnemyConstants.HEALTH_POINTS),
-                validateEnemyStat(attackPoints, EnemyConstants.ATTACK_POINTS)
+                validateEnemyStat(attackPoints, EnemyConstants.ATTACK_POINTS),
+                position
         );
     }
 
