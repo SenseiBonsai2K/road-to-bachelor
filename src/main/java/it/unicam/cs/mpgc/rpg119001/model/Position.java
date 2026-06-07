@@ -1,14 +1,17 @@
 package it.unicam.cs.mpgc.rpg119001.model;
 
-/**
- * The Position class represents the coordinates of a character or an object in the RPG game.
- * It contains x and y coordinates and provides methods to get and set these values.
- */
 public class Position {
     private int x;
     private int y;
 
     public Position(int x, int y) {
+
+        if (x < 0 || y < 0) {
+            throw new IllegalArgumentException(
+                    "Position coordinates must be non-negative."
+            );
+        }
+
         this.x = x;
         this.y = y;
     }

@@ -1,20 +1,20 @@
 package it.unicam.cs.mpgc.rpg119001.util;
 
+import it.unicam.cs.mpgc.rpg119001.model.Position;
+
 public class Constants {
+    public static final String GAME_TITLE = "Road to Bachelor";
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 400;
+
+    public static class MainMenuConstants {
+        public static final String CONTINUE_BUTTON_TEXT = "Continue";
+        public static final String NEW_GAME_BUTTON_TEXT = "New Game";
+        public static final String SETTINGS_BUTTON_TEXT = "Settings";
+        public static final String EXIT_BUTTON_TEXT = "Exit";
+    }
+
     public static class GameConstants {
-        public static final String GAME_TITLE = "Road To Bachelor";
-        public static final int WIDTH = 800;
-        public static final int HEIGHT = 600;
-    }
-
-    public static class PlayerConstants {
-        public static final String DEFAULT_NAME = "Cristian";
-        public static final int HEALTH_POINTS = 100;
-        public static final int ATTACK_POINTS = 20;
-    }
-
-    public static class EnemyConstants {
-        public static final int HEALTH_POINTS = 50;
-        public static final int ATTACK_POINTS = 10;
+        public static final Position PLAYER_START_POSITION = new Position(0, HEIGHT/2);
     }
 }
