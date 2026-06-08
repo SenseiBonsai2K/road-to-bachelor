@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpg119001.manager;
 import it.unicam.cs.mpgc.rpg119001.controller.GameController;
 import it.unicam.cs.mpgc.rpg119001.controller.MainMenuController;
 import it.unicam.cs.mpgc.rpg119001.controller.PlayerSelectionController;
+import it.unicam.cs.mpgc.rpg119001.game.config.Constants;
 import it.unicam.cs.mpgc.rpg119001.game.factory.GameFactory;
 import it.unicam.cs.mpgc.rpg119001.game.core.Game;
 import it.unicam.cs.mpgc.rpg119001.game.session.GameSession;
@@ -33,37 +34,22 @@ public class SceneManager {
     }
 
     public void showMainMenu() {
-        loadScene("/view/main-menu-view.fxml", MainMenuController.class);
+        loadScene(Constants.ViewPathsConstants.MAIN_MENU_VIEW_PATH, MainMenuController.class);
     }
 
     public void showPlayerSelection() {
-        loadScene("/view/player-selection-view.fxml", PlayerSelectionController.class);
+        loadScene(Constants.ViewPathsConstants.PLAYER_SELECTION_VIEW_PATH, PlayerSelectionController.class);
     }
 
     public void showGame() {
-        loadScene("/view/game-view.fxml", GameController.class);
+        loadScene(Constants.ViewPathsConstants.GAME_VIEW_PATH, GameController.class);
     }
 
     private <T> void loadScene(String fxml, Class<T> controllerClass) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
-            loader.setControllerFactory(type -> {
-
-                if (type == MainMenuController.class) {
-                    return new MainMenuController(this);
-                }
-
-                if (type == PlayerSelectionController.class) {
-                    return new PlayerSelectionController(this);
-                }
-
-                if (type == GameController.class) {
-                    return new GameController(this);
-                }
-
-                throw new RuntimeException("Unknown controller: " + type);
-            });
+            loader.setControllerFactory(this::createController);
 
             Parent root = loader.load();
 
@@ -73,6 +59,23 @@ public class SceneManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Object createController(Class<?> type) {
+
+        if (type == MainMenuController.class) {
+            return new MainMenuController(this);
+        }
+
+        if (type == PlayerSelectionController.class) {
+            return new PlayerSelectionController(this);
+        }
+
+        if (type == GameController.class) {
+            return new GameController(this);
+        }
+
+        throw new RuntimeException("Unknown controller: " + type);
     }
 
     public void startGame(PlayerPreset preset) {

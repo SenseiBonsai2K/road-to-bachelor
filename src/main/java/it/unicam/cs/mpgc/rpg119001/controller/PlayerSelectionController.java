@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.controller;
 
+import it.unicam.cs.mpgc.rpg119001.game.config.Constants.PlayerSelectionConstants;
 import it.unicam.cs.mpgc.rpg119001.manager.SceneManager;
 import it.unicam.cs.mpgc.rpg119001.game.preset.PlayerPreset;
 import it.unicam.cs.mpgc.rpg119001.game.preset.PlayerPresets;
@@ -37,6 +38,8 @@ public class PlayerSelectionController {
     @FXML
     private void initialize() {
         showCurrentPlayer();
+        nextPlayerButton.setText(PlayerSelectionConstants.NEXT_PLAYER_BUTTON_TEXT);
+        startGameButton.setText(PlayerSelectionConstants.START_GAME_BUTTON_TEXT);
     }
 
     @FXML

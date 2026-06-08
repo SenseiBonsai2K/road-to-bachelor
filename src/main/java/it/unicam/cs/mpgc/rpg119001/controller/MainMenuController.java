@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg119001.controller;
 
 import it.unicam.cs.mpgc.rpg119001.manager.SceneManager;
-import it.unicam.cs.mpgc.rpg119001.game.config.Constants;
+import it.unicam.cs.mpgc.rpg119001.game.config.Constants.GameConstants;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,7 +30,7 @@ public class MainMenuController {
 
     @FXML
     private void initialize() {
-        titleText.setText(Constants.GAME_TITLE);
+        titleText.setText(GameConstants.GAME_TITLE);
         continueButton.setText(MainMenuConstants.CONTINUE_BUTTON_TEXT);
         newGameButton.setText(MainMenuConstants.NEW_GAME_BUTTON_TEXT);
         settingButton.setText(MainMenuConstants.SETTINGS_BUTTON_TEXT);
