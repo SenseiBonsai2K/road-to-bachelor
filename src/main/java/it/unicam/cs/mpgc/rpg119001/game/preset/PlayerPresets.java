@@ -1,4 +1,7 @@
-package it.unicam.cs.mpgc.rpg119001.preset;
+package it.unicam.cs.mpgc.rpg119001.game.preset;
+
+import java.util.List;
+import java.util.Map;
 
 public final class PlayerPresets {
 
@@ -21,4 +24,22 @@ public final class PlayerPresets {
                     30,
                     1.2
             );
+
+    public static final List<PlayerPreset> ALL = List.of(
+            WARRIOR,
+            MAGE
+    );
+
+    private static final Map<String, PlayerPreset> BY_ID = Map.of(
+            WARRIOR.id(), WARRIOR,
+            MAGE.id(), MAGE
+    );
+
+    public static List<PlayerPreset> getAll() {
+        return ALL;
+    }
+
+    public static PlayerPreset getById(String id) {
+        return BY_ID.get(id);
+    }
 }

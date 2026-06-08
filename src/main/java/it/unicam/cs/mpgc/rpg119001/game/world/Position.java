@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg119001.model;
+package it.unicam.cs.mpgc.rpg119001.game.world;
 
 public class Position {
     private int x;

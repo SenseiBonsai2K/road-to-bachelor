@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg119001.preset;
+package it.unicam.cs.mpgc.rpg119001.game.preset;
 
 public class EnemyPresets {
 

@@ -1,6 +1,6 @@
-package it.unicam.cs.mpgc.rpg119001.util;
+package it.unicam.cs.mpgc.rpg119001.game.config;
 
-import it.unicam.cs.mpgc.rpg119001.model.Position;
+import it.unicam.cs.mpgc.rpg119001.game.world.Position;
 
 public class Constants {
     public static final String GAME_TITLE = "Road to Bachelor";

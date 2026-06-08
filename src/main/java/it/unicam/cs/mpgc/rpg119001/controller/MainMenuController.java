@@ -1,11 +1,12 @@
 package it.unicam.cs.mpgc.rpg119001.controller;
 
-import it.unicam.cs.mpgc.rpg119001.util.Constants;
+import it.unicam.cs.mpgc.rpg119001.manager.SceneManager;
+import it.unicam.cs.mpgc.rpg119001.game.config.Constants;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-import it.unicam.cs.mpgc.rpg119001.util.Constants.MainMenuConstants;
+import it.unicam.cs.mpgc.rpg119001.game.config.Constants.MainMenuConstants;
 import javafx.scene.text.Text;
 
 public class MainMenuController {
@@ -21,6 +22,12 @@ public class MainMenuController {
     @FXML
     private Button exitButton;
 
+    private final SceneManager sceneManager;
+
+    public MainMenuController(SceneManager sceneManager) {
+        this.sceneManager = sceneManager;
+    }
+
     @FXML
     private void initialize() {
         titleText.setText(Constants.GAME_TITLE);
@@ -31,16 +38,17 @@ public class MainMenuController {
     }
 
     @FXML
-    private void onNewGame() {
+    private void onNewGame(){
         System.out.println("Starting new game...");
-        // TODO:
-        // Game game = GameFactory.createNewGame();
-        // SceneManager.showGame(game);
+        if (sceneManager != null) {
+            sceneManager.showPlayerSelection();
+        } else {
+            System.out.println("SceneManager is not initialized.");
+        }
     }
 
     @FXML
     private void onExit() {
-
         Platform.exit();
     }
 }

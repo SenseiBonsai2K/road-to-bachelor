@@ -1,8 +1,7 @@
-package it.unicam.cs.mpgc.rpg119001.character;
+package it.unicam.cs.mpgc.rpg119001.game.entity;
 
-import it.unicam.cs.mpgc.rpg119001.model.Position;
-import it.unicam.cs.mpgc.rpg119001.preset.EnemyPreset;
-import it.unicam.cs.mpgc.rpg119001.preset.EnemyPresets;
+import it.unicam.cs.mpgc.rpg119001.game.world.Position;
+import it.unicam.cs.mpgc.rpg119001.game.preset.EnemyPreset;
 
 public class Enemy extends Character {
 

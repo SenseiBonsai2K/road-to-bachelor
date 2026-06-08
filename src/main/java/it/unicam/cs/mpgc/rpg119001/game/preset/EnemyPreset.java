@@ -1,11 +1,12 @@
-package it.unicam.cs.mpgc.rpg119001.preset;
+package it.unicam.cs.mpgc.rpg119001.game.preset;
 
-public record PlayerPreset(
+public record EnemyPreset(
         String id,
         String archetype,
         String displayName,
         int baseHealthPoints,
         int baseAttackPoints,
-        double baseSpeed
+        double baseSpeed,
+        int experiencePointsReward
 ) {
 }
