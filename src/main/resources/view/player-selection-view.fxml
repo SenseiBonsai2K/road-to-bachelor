@@ -22,7 +22,7 @@
       </VBox>
    </left>
    <center>
-      <ImageView fx:id="playerImage" id="playerImage" fitHeight="285.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" translateX="-25.0" BorderPane.alignment="CENTER" />
+      <ImageView fx:id="playerImage" id="playerImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="-25.0" BorderPane.alignment="CENTER" />
    </center>
    <right>
       <Button fx:id="nextPlayerButton" id="nextPlayerButton" onAction="#onNextPlayer" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" translateX="-25.0" BorderPane.alignment="CENTER" />

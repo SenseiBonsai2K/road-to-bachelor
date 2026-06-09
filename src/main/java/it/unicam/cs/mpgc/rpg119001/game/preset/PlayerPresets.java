@@ -1,5 +1,7 @@
 package it.unicam.cs.mpgc.rpg119001.game.preset;
 
+import it.unicam.cs.mpgc.rpg119001.game.config.Constants.PlayerImagePathConstants;
+
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +14,8 @@ public final class PlayerPresets {
                     "Cristian",
                     100,
                     20,
-                    1.0
+                    1.0,
+                    PlayerImagePathConstants.WARRIOR
             );
 
     public static final PlayerPreset MAGE =
@@ -22,7 +25,8 @@ public final class PlayerPresets {
                     "Gandalf",
                     80,
                     30,
-                    1.2
+                    1.2,
+                    PlayerImagePathConstants.MAGE
             );
 
     public static final List<PlayerPreset> ALL = List.of(

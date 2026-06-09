@@ -77,5 +77,8 @@ public class PlayerSelectionController {
                 "Attack Points: " + preset.baseAttackPoints(),
                 "Speed: " + preset.baseSpeed()
         );
+
+        ImageView imageView = new ImageView(preset.imagePath());
+        playerImage.setImage(imageView.getImage());
     }
 }

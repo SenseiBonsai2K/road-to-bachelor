@@ -6,6 +6,7 @@ public record PlayerPreset(
         String displayName,
         int baseHealthPoints,
         int baseAttackPoints,
-        double baseSpeed
+        double baseSpeed,
+        String imagePath
 ) {
 }

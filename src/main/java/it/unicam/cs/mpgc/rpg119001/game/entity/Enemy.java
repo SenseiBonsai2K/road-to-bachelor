@@ -12,7 +12,8 @@ public class Enemy extends Character {
             enemyPreset.baseHealthPoints(),
             enemyPreset.baseAttackPoints(),
             position,
-            enemyPreset.baseSpeed()
+            enemyPreset.baseSpeed(),
+            enemyPreset.imagePath()
          );
         this.enemyPreset = enemyPreset;
     }

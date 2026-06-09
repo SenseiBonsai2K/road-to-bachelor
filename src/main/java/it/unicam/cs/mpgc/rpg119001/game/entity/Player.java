@@ -12,8 +12,9 @@ public class Player extends Character {
         super(
                 playerPreset.baseHealthPoints(),
                 playerPreset.baseAttackPoints(),
-                GameConstants.PLAYER_START_POSITION,
-                playerPreset.baseSpeed()
+                position,
+                playerPreset.baseSpeed(),
+                playerPreset.imagePath()
         );
         this.playerPreset = playerPreset;
     }

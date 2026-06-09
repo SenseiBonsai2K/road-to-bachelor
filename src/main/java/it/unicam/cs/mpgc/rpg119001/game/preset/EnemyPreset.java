@@ -7,6 +7,7 @@ public record EnemyPreset(
         int baseHealthPoints,
         int baseAttackPoints,
         double baseSpeed,
-        int experiencePointsReward
+        int experiencePointsReward,
+        String imagePath
 ) {
 }
