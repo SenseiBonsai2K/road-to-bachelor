@@ -15,7 +15,14 @@ public class Constants {
 
     public static class GameConstants {
         public static final String GAME_TITLE = "Road to Bachelor";
-        public static final Position PLAYER_START_POSITION = new Position(0, ScreenConstants.HEIGHT/2);
+        public static final int START_GAME_LEVEL = 1;
+        public static final int HEALTH_POINTS_PER_LEVEL = 10;
+        public static final int ATTACK_POINTS_PER_LEVEL = 2;
+    }
+
+    public static class RoomConstants {
+        public static final int ROOM_WIDTH = 600;
+        public static final int ROOM_HEIGHT = 400;
     }
 
     public static class ViewPathConstants {

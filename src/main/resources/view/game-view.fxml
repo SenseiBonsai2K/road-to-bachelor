@@ -9,27 +9,27 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg119001.controller.GameController">
    <top>
-      <HBox id="statHBox" prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox fx:id="statHBox" id="statHBox" prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox id="playerVBox" prefHeight="111.0" prefWidth="300.0">
+            <VBox fx:id="playerVBox" id="playerVBox" prefHeight="111.0" prefWidth="300.0">
                <children>
-                  <Label id="playerHpLabel" prefHeight="50.0" prefWidth="300.0" />
-                  <Label id="playerAttLabel" prefHeight="50.0" prefWidth="300.0" />
+                  <Label fx:id="playerHpLabel" id="playerHpLabel" prefHeight="50.0" prefWidth="300.0" />
+                  <Label fx:id="playerAttLabel" id="playerAttLabel" prefHeight="50.0" prefWidth="300.0" />
                </children>
             </VBox>
-            <VBox id="enemyVBox" prefHeight="111.0" prefWidth="300.0">
+            <VBox fx:id="enemyVBox" id="enemyVBox" prefHeight="111.0" prefWidth="300.0">
                <children>
-                  <Label id="enemyHpLabel" prefHeight="50.0" prefWidth="300.0" />
-                  <Label id="enemyAttLabel" prefHeight="50.0" prefWidth="300.0" />
+                  <Label fx:id="enemyHpLabel" id="enemyHpLabel" prefHeight="50.0" prefWidth="300.0" />
+                  <Label fx:id="enemyAttLabel" id="enemyAttLabel" prefHeight="50.0" prefWidth="300.0" />
                </children>
             </VBox>
          </children>
       </HBox>
    </top>
    <center>
-      <AnchorPane id="gamePane" prefHeight="270.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="gamePane" id="gamePane" prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <ListView id="eventLog" prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="eventLog" id="eventLog" prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>

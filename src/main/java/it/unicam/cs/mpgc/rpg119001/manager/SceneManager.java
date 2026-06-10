@@ -6,7 +6,6 @@ import it.unicam.cs.mpgc.rpg119001.controller.PlayerSelectionController;
 import it.unicam.cs.mpgc.rpg119001.game.config.Constants;
 import it.unicam.cs.mpgc.rpg119001.game.factory.GameFactory;
 import it.unicam.cs.mpgc.rpg119001.game.core.Game;
-import it.unicam.cs.mpgc.rpg119001.game.session.GameSession;
 import it.unicam.cs.mpgc.rpg119001.game.preset.PlayerPreset;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,31 +17,31 @@ import java.io.IOException;
 public class SceneManager {
 
     private final Stage stage;
-    private GameSession gameSession;
+    private Game currentGame;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
-        this.gameSession = new GameSession();
+        this.currentGame = null;
     }
 
-    public GameSession getGameSession() {
-        return gameSession;
+    public Game getCurrentGame() {
+        return currentGame;
     }
 
-    public void setGameSession(GameSession gameSession) {
-        this.gameSession = gameSession;
+    public void setCurrentGame(Game currentGame) {
+        this.currentGame = currentGame;
     }
 
     public void showMainMenu() {
-        loadScene(Constants.ViewPathsConstants.MAIN_MENU_VIEW_PATH, MainMenuController.class);
+        loadScene(Constants.ViewPathConstants.MAIN_MENU_VIEW_PATH, MainMenuController.class);
     }
 
     public void showPlayerSelection() {
-        loadScene(Constants.ViewPathsConstants.PLAYER_SELECTION_VIEW_PATH, PlayerSelectionController.class);
+        loadScene(Constants.ViewPathConstants.PLAYER_SELECTION_VIEW_PATH, PlayerSelectionController.class);
     }
 
     public void showGame() {
-        loadScene(Constants.ViewPathsConstants.GAME_VIEW_PATH, GameController.class);
+        loadScene(Constants.ViewPathConstants.GAME_VIEW_PATH, GameController.class);
     }
 
     private <T> void loadScene(String fxml, Class<T> controllerClass) {
@@ -80,7 +79,7 @@ public class SceneManager {
 
     public void startGame(PlayerPreset preset) {
         Game game = GameFactory.createNewGame(preset);
-        gameSession.setGame(game);
+        setCurrentGame(game);
         showGame();
     }
 }
