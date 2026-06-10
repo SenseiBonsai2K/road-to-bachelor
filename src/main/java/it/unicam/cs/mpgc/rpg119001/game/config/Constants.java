@@ -18,6 +18,7 @@ public class Constants {
         public static final int START_GAME_LEVEL = 1;
         public static final int HEALTH_POINTS_PER_LEVEL = 10;
         public static final int ATTACK_POINTS_PER_LEVEL = 2;
+        public static final int DIFFICULTY = 2;
     }
 
     public static class RoomConstants {
@@ -39,5 +40,9 @@ public class Constants {
     public static class EnemyImagePathConstants {
         public static final String GOBLIN = "/images/enemies/goblin.png";
         public static final String ORC = "/images/enemies/orc.png";
+    }
+
+    public static class ObstacleImagePathConstants {
+        public static final String WALL = "/images/obstacles/wall.png";
     }
 }

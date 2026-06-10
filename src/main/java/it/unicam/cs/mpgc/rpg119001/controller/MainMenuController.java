@@ -30,6 +30,10 @@ public class MainMenuController {
 
     @FXML
     private void initialize() {
+        updateUI();
+    }
+
+    private void updateUI() {
         titleText.setText(GameConstants.GAME_TITLE);
         continueButton.setText(MainMenuConstants.CONTINUE_BUTTON_TEXT);
         newGameButton.setText(MainMenuConstants.NEW_GAME_BUTTON_TEXT);

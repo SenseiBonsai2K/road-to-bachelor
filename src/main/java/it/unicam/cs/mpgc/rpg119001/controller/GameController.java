@@ -3,6 +3,8 @@ package it.unicam.cs.mpgc.rpg119001.controller;
 import it.unicam.cs.mpgc.rpg119001.manager.SceneManager;
 import it.unicam.cs.mpgc.rpg119001.game.core.Game;
 import it.unicam.cs.mpgc.rpg119001.game.entity.Enemy;
+import it.unicam.cs.mpgc.rpg119001.game.world.obstacle.Wall;
+import it.unicam.cs.mpgc.rpg119001.game.config.Constants.ObstacleImagePathConstants;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -34,18 +36,47 @@ public class GameController {
         System.out.println("GameController initialized with player: " + game.getPlayer().getName());
         System.out.println("Enemies: " + game.getCurrentRoom().getEnemies().size());
         System.out.println("Player: " + game.getPlayer().getName());
-        renderGameScene(game);
         updateUI(game);
     }
 
     private void renderGameScene(Game game) {
         gamePane.getChildren().clear();
         
-        spawnPlayer(game);
-        spawnEnemies(game);
+        showWalls(game);
+        showPlayer(game);
+        showEnemies(game);
     }
 
-    private void spawnPlayer(Game game) {
+    private void showWalls(Game game) {
+        for (Object obstacle : game.getCurrentRoom().getObstacles()) {
+            if (obstacle instanceof Wall wall) {
+                ImageView wallImageView = loadWallImage();
+                
+                if (wallImageView != null) {
+                    wallImageView.setLayoutX(wall.getPosition().getX());
+                    wallImageView.setLayoutY(wall.getPosition().getY());
+                    wallImageView.setFitWidth(wall.getWidth());
+                    wallImageView.setFitHeight(wall.getHeight());
+                    
+                    gamePane.getChildren().add(wallImageView);
+                }
+            }
+        }
+    }
+
+    private ImageView loadWallImage() {
+        try {
+            Image image = new Image(ObstacleImagePathConstants.WALL);
+            ImageView imageView = new ImageView(image);
+            imageView.setPreserveRatio(false);
+            return imageView;
+        } catch (Exception e) {
+            System.err.println("Failed to load wall image: " + ObstacleImagePathConstants.WALL);
+            return null;
+        }
+    }
+
+    private void showPlayer(Game game) {
         String imagePath = game.getPlayer().getImagePath();
         ImageView playerImageView = loadCharacterImage(imagePath);
         
@@ -60,7 +91,7 @@ public class GameController {
         }
     }
 
-    private void spawnEnemies(Game game) {
+    private void showEnemies(Game game) {
         for (Enemy enemy : game.getCurrentRoom().getEnemies()) {
             String imagePath = enemy.getImagePath();
             ImageView enemyImageView = loadCharacterImage(imagePath);
@@ -94,5 +125,6 @@ public class GameController {
     private void updateUI(Game game) {
         playerHpLabel.setText("HP: " + game.getPlayer().getHealthPoints());
         playerAttLabel.setText("Att: " + game.getPlayer().getAttackPoints());
+        renderGameScene(game);
     }
 }

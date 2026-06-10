@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.game.factory;
 
+import it.unicam.cs.mpgc.rpg119001.game.config.Constants.GameConstants;
 import it.unicam.cs.mpgc.rpg119001.game.config.Constants.RoomConstants;
 import it.unicam.cs.mpgc.rpg119001.game.entity.Enemy;
 import it.unicam.cs.mpgc.rpg119001.game.world.Position;
@@ -22,10 +23,11 @@ public class RoomFactory {
     public static Room createRoom(int level) {
 
         List<Enemy> enemies = new RoomFactory(new EnemyFactory()).createEnemies(level);
-        //TODO: create obstacles
-        List<Obstacle> obstacles = null;
+        List<Obstacle> obstacles = new ArrayList<>(ObstacleFactory.createBoundaryWalls());
+        //TODO spawn door and other obstacles when implemented
 
-        Position spawn = new Position(1, 1);
+        //TODO change with door position when implemented
+        Position spawn = new Position(2, RoomConstants.ROOM_HEIGHT/2);
 
         return new Room(enemies, obstacles, spawn);
     }
@@ -33,7 +35,7 @@ public class RoomFactory {
     private List<Enemy> createEnemies(int level) {
 
         List<Enemy> enemies = new ArrayList<>();
-        int enemyCount = 1 + random.nextInt(2 + level / 2);
+        int enemyCount = 1 + random.nextInt(GameConstants.DIFFICULTY + level / 2);
 
         for (int i = 0; i < enemyCount; i++) {
             Enemy enemy = enemyFactory.createRandomEnemies(level);
