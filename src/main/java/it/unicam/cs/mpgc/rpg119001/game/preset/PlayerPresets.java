@@ -14,7 +14,7 @@ public final class PlayerPresets {
                     "Cristian",
                     100,
                     20,
-                    1.0,
+                    140,
                     PlayerImagePathConstants.WARRIOR
             );
 
@@ -25,7 +25,7 @@ public final class PlayerPresets {
                     "Gandalf",
                     80,
                     30,
-                    1.2,
+                    180,
                     PlayerImagePathConstants.MAGE
             );
 

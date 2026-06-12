@@ -25,7 +25,10 @@ public class GameRenderer {
 
     public void render(Game game) {
         clear();
+
+        //TODO walls has to be called only on room enter
         showWalls(game);
+
         showPlayer(game);
         showEnemies(game);
     }

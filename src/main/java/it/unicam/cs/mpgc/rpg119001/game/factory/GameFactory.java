@@ -9,7 +9,7 @@ import it.unicam.cs.mpgc.rpg119001.game.world.Room;
 public class GameFactory {
     public static Game createNewGame(PlayerPreset preset) {
         Room startRoom = RoomFactory.createRoom(GameConstants.START_GAME_LEVEL);
-        Player player = new Player(preset, startRoom.getSpawnPosition());
+        Player player = new Player(preset, startRoom.getPlayerSpawnPosition());
         Game game = new Game(player, startRoom, GameConstants.START_GAME_LEVEL);
         game.setPlayer(player);
         return game;

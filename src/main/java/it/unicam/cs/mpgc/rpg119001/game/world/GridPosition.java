@@ -1,17 +1,21 @@
 package it.unicam.cs.mpgc.rpg119001.game.world;
 
-/**
- * Represents a position on the tile grid.
- * Each tile is 16x16 pixels.
- * Coordinates are in tile units, not pixels.
- */
+import it.unicam.cs.mpgc.rpg119001.game.config.Constants.GridConstants;
+
 public class GridPosition {
-    private int tileX;
-    private int tileY;
+    private final int tileX;
+    private final int tileY;
 
     public GridPosition(int tileX, int tileY) {
         this.tileX = tileX;
         this.tileY = tileY;
+    }
+
+    public GridPosition translate(int dx, int dy) {
+        return new GridPosition(
+                tileX + dx,
+                tileY + dy
+        );
     }
 
     public int getTileX() {
@@ -22,20 +26,12 @@ public class GridPosition {
         return tileY;
     }
 
-    public void setTileX(int tileX) {
-        this.tileX = tileX;
-    }
-
-    public void setTileY(int tileY) {
-        this.tileY = tileY;
-    }
-
     public double toPixelX() {
-        return tileX * 16;
+        return tileX * GridConstants.TILE_SIZE;
     }
 
     public double toPixelY() {
-        return tileY * 16;
+        return tileY * GridConstants.TILE_SIZE;
     }
 
     @Override

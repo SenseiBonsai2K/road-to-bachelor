@@ -7,6 +7,8 @@ import it.unicam.cs.mpgc.rpg119001.game.config.Constants;
 import it.unicam.cs.mpgc.rpg119001.game.factory.GameFactory;
 import it.unicam.cs.mpgc.rpg119001.game.core.Game;
 import it.unicam.cs.mpgc.rpg119001.game.preset.PlayerPreset;
+import it.unicam.cs.mpgc.rpg119001.service.CollisionService;
+import it.unicam.cs.mpgc.rpg119001.service.MovementService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,11 +19,12 @@ import java.io.IOException;
 public class SceneManager {
 
     private final Stage stage;
+    private final MovementService movementService;
     private Game currentGame;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
-        this.currentGame = null;
+        this.movementService = new MovementService(new CollisionService());
     }
 
     public Game getCurrentGame() {
@@ -62,17 +65,11 @@ public class SceneManager {
 
     private Object createController(Class<?> type) {
 
-        if (type == MainMenuController.class) {
-            return new MainMenuController(this);
-        }
+        if (type == MainMenuController.class) return new MainMenuController(this);
 
-        if (type == PlayerSelectionController.class) {
-            return new PlayerSelectionController(this);
-        }
+        if (type == PlayerSelectionController.class) return new PlayerSelectionController(this);
 
-        if (type == GameController.class) {
-            return new GameController(this);
-        }
+        if (type == GameController.class) return new GameController(this, this.movementService);
 
         throw new RuntimeException("Unknown controller: " + type);
     }

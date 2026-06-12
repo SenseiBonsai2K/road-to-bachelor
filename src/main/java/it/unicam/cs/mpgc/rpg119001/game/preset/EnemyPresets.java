@@ -14,7 +14,7 @@ public final class EnemyPresets {
                 "Goblin",
                 30,
                 5,
-                2,
+                300,
                 10,
                 EnemyImagePathConstants.GOBLIN
             );
@@ -26,7 +26,7 @@ public final class EnemyPresets {
                 "Orc",
                 50,
                 10,
-                3,
+                500,
                 20,
                 EnemyImagePathConstants.ORC
             );

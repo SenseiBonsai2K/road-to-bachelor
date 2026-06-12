@@ -1,17 +1,19 @@
 package it.unicam.cs.mpgc.rpg119001.game.entity;
 
+import it.unicam.cs.mpgc.rpg119001.game.Movable;
+import it.unicam.cs.mpgc.rpg119001.game.MovementState;
 import it.unicam.cs.mpgc.rpg119001.game.world.GridPosition;
 
-public abstract class Character implements SpriteEntity {
-    private String name;
+public abstract class Character implements SpriteEntity, Movable {
     private int healthPoints;
     private int attackPoints;
     private GridPosition gridPosition;
     private boolean isAlive;
-    private double speed;
+    private int speed;
     private final String imagePath;
+    private final MovementState movementState = new MovementState();
 
-    public Character(int healthPoints, int attackPoints, GridPosition gridPosition, double speed, String imagePath) {
+    public Character(int healthPoints, int attackPoints, GridPosition gridPosition, int speed, String imagePath) {
         this.healthPoints = healthPoints;
         this.attackPoints = attackPoints;
         this.gridPosition = gridPosition;
@@ -36,6 +38,7 @@ public abstract class Character implements SpriteEntity {
         this.attackPoints = attackPoints;
     }
 
+    @Override
     public void setGridPosition(GridPosition gridPosition) {
         this.gridPosition = gridPosition;
     }
@@ -49,19 +52,17 @@ public abstract class Character implements SpriteEntity {
         return imagePath;
     }
 
-    public boolean isAlive() {
-        return isAlive;
+    @Override
+    public MovementState getMovementState() {
+        return movementState;
     }
 
-    public void setAlive(boolean alive) {
-        isAlive = alive;
-    }
-
-    public double getSpeed() {
+    @Override
+    public int getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 }
