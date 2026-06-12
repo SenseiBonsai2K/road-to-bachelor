@@ -1,20 +1,20 @@
 package it.unicam.cs.mpgc.rpg119001.game.entity;
 
-import it.unicam.cs.mpgc.rpg119001.game.world.Position;
+import it.unicam.cs.mpgc.rpg119001.game.world.GridPosition;
 
-public abstract class Character {
+public abstract class Character implements SpriteEntity {
     private String name;
     private int healthPoints;
     private int attackPoints;
-    private Position position;
+    private GridPosition gridPosition;
     private boolean isAlive;
     private double speed;
     private final String imagePath;
 
-    public Character(int healthPoints, int attackPoints, Position position, double speed, String imagePath) {
+    public Character(int healthPoints, int attackPoints, GridPosition gridPosition, double speed, String imagePath) {
         this.healthPoints = healthPoints;
         this.attackPoints = attackPoints;
-        this.position = position;
+        this.gridPosition = gridPosition;
         this.speed = speed;
         this.imagePath = imagePath;
         this.isAlive = true;
@@ -36,12 +36,13 @@ public abstract class Character {
         this.attackPoints = attackPoints;
     }
 
-    public void setPosition(Position playerSpawnPosition) {
-        this.position = playerSpawnPosition;
+    public void setGridPosition(GridPosition gridPosition) {
+        this.gridPosition = gridPosition;
     }
 
-    public Position getPosition() {
-        return position;
+    @Override
+    public GridPosition getGridPosition() {
+        return gridPosition;
     }
 
     public String getImagePath() {

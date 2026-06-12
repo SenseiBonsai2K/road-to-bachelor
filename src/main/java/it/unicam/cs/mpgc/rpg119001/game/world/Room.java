@@ -8,18 +8,14 @@ import java.util.List;
 public class Room {
     private final List<Enemy> enemies;
     private final List<Obstacle> obstacles;
-    private final Position spawnPosition;
+    private final GridPosition spawnPosition;
 
     public Room(List<Enemy> enemies,
                 List<Obstacle> obstacles,
-                Position spawnPosition) {
+                GridPosition spawnPosition) {
         this.enemies = enemies;
         this.obstacles = obstacles;
         this.spawnPosition = spawnPosition;
-    }
-
-    public boolean isCompleted() {
-        return enemies.isEmpty();
     }
 
     public List<Enemy> getEnemies() {
@@ -30,7 +26,7 @@ public class Room {
         return obstacles;
     }
 
-    public Position getSpawnPosition() {
+    public GridPosition getSpawnPosition() {
         return spawnPosition;
     }
 }

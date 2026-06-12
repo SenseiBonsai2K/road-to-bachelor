@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.game.entity;
 
-import it.unicam.cs.mpgc.rpg119001.game.world.Position;
+import it.unicam.cs.mpgc.rpg119001.game.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.game.preset.PlayerPreset;
 import it.unicam.cs.mpgc.rpg119001.game.config.Constants.GameConstants;
 
@@ -8,11 +8,11 @@ public class Player extends Character {
 
     public final PlayerPreset playerPreset;
 
-    public Player(PlayerPreset playerPreset, Position position) {
+    public Player(PlayerPreset playerPreset, GridPosition gridPosition) {
         super(
                 playerPreset.baseHealthPoints(),
                 playerPreset.baseAttackPoints(),
-                position,
+                gridPosition,
                 playerPreset.baseSpeed(),
                 playerPreset.imagePath()
         );

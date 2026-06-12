@@ -1,20 +1,17 @@
 package it.unicam.cs.mpgc.rpg119001.game.core;
 
-import it.unicam.cs.mpgc.rpg119001.game.entity.Enemy;
 import it.unicam.cs.mpgc.rpg119001.game.entity.Player;
 import it.unicam.cs.mpgc.rpg119001.game.world.Room;
 
-import java.util.List;
-
 public class Game {
     private Player player;
-    private Room currenRoom;
-    private int currentLevel;
+    private Room currentRoom;
+    private int currentlevel;
 
-    public Game(Player player, Room currentRoom, int currentLevel) {
+    public Game(Player player, Room currentRoom, int level) {
         this.player = player;
-        this.currenRoom = currentRoom;
-        this.currentLevel = currentLevel;
+        this.currentRoom = currentRoom;
+        this.currentlevel = level;
     }
 
     public Player getPlayer() {
@@ -26,18 +23,10 @@ public class Game {
     }
 
     public Room getCurrentRoom() {
-        return currenRoom;
+        return currentRoom;
     }
 
-    public void setCurrentRoom(Room currentRoom) {
-        this.currenRoom = currentRoom;
-    }
-
-    public int getCurrentLevel() {
-        return currentLevel;
-    }
-
-    public void setCurrentLevel(int currentLevel) {
-        this.currentLevel = currentLevel;
+    public int getLevel() {
+        return currentlevel;
     }
 }

@@ -1,9 +1,9 @@
 package it.unicam.cs.mpgc.rpg119001.game.factory;
 
 import it.unicam.cs.mpgc.rpg119001.game.config.Constants.GameConstants;
-import it.unicam.cs.mpgc.rpg119001.game.config.Constants.RoomConstants;
+import it.unicam.cs.mpgc.rpg119001.game.config.Constants.GridConstants;
 import it.unicam.cs.mpgc.rpg119001.game.entity.Enemy;
-import it.unicam.cs.mpgc.rpg119001.game.world.Position;
+import it.unicam.cs.mpgc.rpg119001.game.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.game.world.Room;
 import it.unicam.cs.mpgc.rpg119001.game.world.obstacle.Obstacle;
 
@@ -25,9 +25,11 @@ public class RoomFactory {
         List<Enemy> enemies = new RoomFactory(new EnemyFactory()).createEnemies(level);
         List<Obstacle> obstacles = new ArrayList<>(ObstacleFactory.createBoundaryWalls());
         //TODO spawn door and other obstacles when implemented
-
-        //TODO change with door position when implemented
-        Position spawn = new Position(2, RoomConstants.ROOM_HEIGHT/2);
+        // Spawn player at left side, middle height
+        GridPosition spawn = new GridPosition(
+            GridConstants.WALL_THICKNESS_TILES,
+            GridConstants.ROOM_TILES_HEIGHT / 2
+        );
 
         return new Room(enemies, obstacles, spawn);
     }
@@ -39,18 +41,17 @@ public class RoomFactory {
 
         for (int i = 0; i < enemyCount; i++) {
             Enemy enemy = enemyFactory.createRandomEnemies(level);
-            enemy.setPosition(randomPosition());
+            enemy.setGridPosition(randomGridPosition());
             enemies.add(enemy);
         }
 
         return enemies;
     }
 
-    private Position randomPosition() {
+    private GridPosition randomGridPosition() {
+        int tileX = GridConstants.WALL_THICKNESS_TILES + random.nextInt(GridConstants.ROOM_TILES_WIDTH - 2 * GridConstants.WALL_THICKNESS_TILES);
+        int tileY = GridConstants.WALL_THICKNESS_TILES + random.nextInt(GridConstants.ROOM_TILES_HEIGHT - 2 * GridConstants.WALL_THICKNESS_TILES);
 
-        int x = random.nextInt(RoomConstants.ROOM_WIDTH);
-        int y = random.nextInt(RoomConstants.ROOM_HEIGHT);
-
-        return new Position(x, y);
+        return new GridPosition(tileX, tileY);
     }
 }

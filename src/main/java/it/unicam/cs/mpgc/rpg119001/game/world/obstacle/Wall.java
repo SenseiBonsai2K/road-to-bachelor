@@ -1,23 +1,26 @@
 package it.unicam.cs.mpgc.rpg119001.game.world.obstacle;
 
+import it.unicam.cs.mpgc.rpg119001.game.config.Constants.ObstacleImagePathConstants;
 import it.unicam.cs.mpgc.rpg119001.game.entity.Player;
-import it.unicam.cs.mpgc.rpg119001.game.world.Position;
+import it.unicam.cs.mpgc.rpg119001.game.entity.SpriteEntity;
+import it.unicam.cs.mpgc.rpg119001.game.world.GridPosition;
 
-public class Wall implements Obstacle {
+public class Wall implements Obstacle, SpriteEntity {
 
-    private final Position position;
-    private final double width;
-    private final double height;
+    private final GridPosition gridPosition;
 
-    public Wall(Position position, double width, double height) {
-        this.position = position;
-        this.width = width;
-        this.height = height;
+    public Wall(GridPosition gridPosition) {
+        this.gridPosition = gridPosition;
     }
 
     @Override
-    public Position getPosition() {
-        return this.position;
+    public GridPosition getGridPosition() {
+        return this.gridPosition;
+    }
+
+    @Override
+    public String getImagePath() {
+        return ObstacleImagePathConstants.WALL;
     }
 
     @Override
@@ -27,13 +30,5 @@ public class Wall implements Obstacle {
     @Override
     public boolean isPassable() {
         return false;
-    }
-
-    public double getWidth() {
-        return width;
-    }
-
-    public double getHeight() {
-        return height;
     }
 }

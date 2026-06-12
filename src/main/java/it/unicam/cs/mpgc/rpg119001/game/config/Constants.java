@@ -18,12 +18,16 @@ public class Constants {
         public static final int START_GAME_LEVEL = 1;
         public static final int HEALTH_POINTS_PER_LEVEL = 10;
         public static final int ATTACK_POINTS_PER_LEVEL = 2;
-        public static final int DIFFICULTY = 2;
+        public static final int DIFFICULTY = 2; // 1 = Easy, 2 = Normal, 3 = Hard
     }
 
-    public static class RoomConstants {
-        public static final int ROOM_WIDTH = 600;
-        public static final int ROOM_HEIGHT = 400;
+    public static class GridConstants {
+        public static final int TILE_SIZE = 16;
+        public static final int ROOM_WIDTH_PX = 656;  // 41 tiles * 16px
+        public static final int ROOM_HEIGHT_PX = 464; // 29 tiles * 16px
+        public static final int ROOM_TILES_WIDTH = ROOM_WIDTH_PX / TILE_SIZE;  // 41 tiles
+        public static final int ROOM_TILES_HEIGHT = ROOM_HEIGHT_PX / TILE_SIZE; // 29 tiles
+        public static final int WALL_THICKNESS_TILES = 1; // 1 tile wall border
     }
 
     public static class ViewPathConstants {
