@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpg119001.manager;
 import it.unicam.cs.mpgc.rpg119001.controller.GameController;
 import it.unicam.cs.mpgc.rpg119001.controller.MainMenuController;
 import it.unicam.cs.mpgc.rpg119001.controller.PlayerSelectionController;
+import it.unicam.cs.mpgc.rpg119001.game.InputMapper;
 import it.unicam.cs.mpgc.rpg119001.game.config.Constants;
 import it.unicam.cs.mpgc.rpg119001.game.factory.GameFactory;
 import it.unicam.cs.mpgc.rpg119001.game.core.Game;
@@ -20,11 +21,13 @@ public class SceneManager {
 
     private final Stage stage;
     private final MovementService movementService;
+    private final InputMapper inputMapper;
     private Game currentGame;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
         this.movementService = new MovementService(new CollisionService());
+        this.inputMapper = new InputMapper();
     }
 
     public Game getCurrentGame() {
@@ -69,7 +72,7 @@ public class SceneManager {
 
         if (type == PlayerSelectionController.class) return new PlayerSelectionController(this);
 
-        if (type == GameController.class) return new GameController(this, this.movementService);
+        if (type == GameController.class) return new GameController(this, this.movementService, this.inputMapper);
 
         throw new RuntimeException("Unknown controller: " + type);
     }
