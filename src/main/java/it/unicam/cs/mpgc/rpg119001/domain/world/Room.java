@@ -1,8 +1,7 @@
 package it.unicam.cs.mpgc.rpg119001.domain.world;
 
-import it.unicam.cs.mpgc.rpg119001.domain.entity.BlockingEntity;
+import it.unicam.cs.mpgc.rpg119001.domain.interaction.BlockingEntity;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.Entity;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,21 +74,14 @@ public class Room {
 
     public boolean isWalkable(GridPosition position) {
 
-        if (!isInside(position)) {
-            return false;
-        }
+        if (!isInside(position)) return false;
 
         Tile tile = getTile(position);
 
-        if (!tile.isWalkable()) {
-            return false;
-        }
+        if (!tile.isWalkable()) return false;
 
         for (Entity entity : getEntitiesAt(position)) {
-            if (entity instanceof BlockingEntity blocking &&
-                    blocking.blocksMovement()) {
-                return false;
-            }
+            if (entity instanceof BlockingEntity blocking && blocking.blocksMovement()) return false;
         }
 
         return true;

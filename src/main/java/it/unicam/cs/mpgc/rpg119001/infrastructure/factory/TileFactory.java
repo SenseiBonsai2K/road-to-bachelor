@@ -1,8 +1,8 @@
 package it.unicam.cs.mpgc.rpg119001.infrastructure.factory;
 
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Tile;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.TileType;
+import it.unicam.cs.mpgc.rpg119001.domain.world.Tile;
+import it.unicam.cs.mpgc.rpg119001.domain.world.TileType;
 
 public class TileFactory {
 
