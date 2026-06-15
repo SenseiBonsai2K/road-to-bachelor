@@ -21,7 +21,6 @@ public class SceneManager {
     private final InputMapper inputMapper;
 
     private Game currentGame;
-    private GameController gameController;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
@@ -37,18 +36,18 @@ public class SceneManager {
     }
 
     public void showMainMenu() {
-        loadScene(Constants.ViewPathConstants.MAIN_MENU_VIEW_PATH, MainMenuController.class);
+        loadScene(Constants.ViewPathConstants.MAIN_MENU_VIEW_PATH);
     }
 
     public void showPlayerSelection() {
-        loadScene(Constants.ViewPathConstants.PLAYER_SELECTION_VIEW_PATH, PlayerSelectionController.class);
+        loadScene(Constants.ViewPathConstants.PLAYER_SELECTION_VIEW_PATH);
     }
 
     public void showGame() {
-        loadScene(Constants.ViewPathConstants.GAME_VIEW_PATH, GameController.class);
+        loadScene(Constants.ViewPathConstants.GAME_VIEW_PATH);
     }
 
-    private <T> void loadScene(String fxml, Class<T> controllerClass) {
+    private <T> void loadScene(String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             loader.setControllerFactory(this::createController);

@@ -103,17 +103,17 @@ public class GameRenderer {
         gamePane.getChildren().add(imageView);
     }
 
-    private ImageView loadImageView(String imagePath) {
+    private ImageView loadImageView(String spritePath) {
 
         try {
-            ImageView imageView = new ImageView(getImage(imagePath));
+            ImageView imageView = new ImageView(getImage(spritePath));
             imageView.setPreserveRatio(true);
 
             return imageView;
 
         } catch (Exception e) {
 
-            System.err.println("Failed to load image: " + imagePath);
+            System.err.println("Failed to load sprite: " + spritePath);
             return null;
         }
     }

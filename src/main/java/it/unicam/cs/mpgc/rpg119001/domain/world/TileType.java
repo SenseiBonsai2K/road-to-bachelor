@@ -1,11 +1,11 @@
 package it.unicam.cs.mpgc.rpg119001.domain.world;
 
-import it.unicam.cs.mpgc.rpg119001.config.Constants.TileImagePathConstants;
+import it.unicam.cs.mpgc.rpg119001.config.Constants.TileSpritePathConstants;
 
 public enum TileType {
 
-    FLOOR(true, TileImagePathConstants.FLOOR),
-    WALL(false, TileImagePathConstants.WALL);
+    FLOOR(true, TileSpritePathConstants.FLOOR),
+    WALL(false, TileSpritePathConstants.WALL);
 
     private final boolean walkable;
     private final String spritePath;

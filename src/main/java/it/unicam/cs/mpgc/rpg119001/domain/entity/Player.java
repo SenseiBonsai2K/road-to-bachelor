@@ -14,7 +14,7 @@ public class Player extends Character {
                 preset.baseAttackPoints(),
                 gridPosition,
                 preset.baseSpeed(),
-                preset.imagePath()
+                preset.spritePath()
         );
         this.preset = preset;
     }

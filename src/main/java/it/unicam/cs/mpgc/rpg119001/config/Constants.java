@@ -36,20 +36,18 @@ public class Constants {
         public static final String GAME_VIEW_PATH = "/view/game-view.fxml";
     }
 
-    public static class PlayerImagePathConstants {
-        public static final String WARRIOR = "/images/players/warrior.png";
-        public static final String MAGE = "/images/players/mage.png";
+    public static class PlayerSpritePathConstants {
+        public static final String WARRIOR = "/sprite/player/warrior.png";
+        public static final String MAGE = "/sprite/player/mage.png";
     }
 
-    public static class EnemyImagePathConstants {
-        public static final String GOBLIN = "/images/enemies/goblin.png";
-        public static final String ORC = "/images/enemies/orc.png";
+    public static class EnemySpritePathConstants {
+        public static final String GOBLIN = "/sprite/enemy/goblin.png";
+        public static final String ORC = "/sprite/enemy/orc.png";
     }
 
-    public static class TileImagePathConstants {
-        public static final String WALL = "/images/world/tile/wall.png";
-        public static final String FLOOR = "/images/world/tile/floor.png";
-        public static final String WATER = "/images/world/tile/water.png";
-
+    public static class TileSpritePathConstants {
+        public static final String WALL = "/sprite/world/tile/wall.png";
+        public static final String FLOOR = "/sprite/world/tile/floor.png";
     }
 }

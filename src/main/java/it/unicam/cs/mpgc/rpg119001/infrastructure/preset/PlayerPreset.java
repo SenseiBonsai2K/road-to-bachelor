@@ -7,6 +7,6 @@ public record PlayerPreset(
         int baseHealthPoints,
         int baseAttackPoints,
         int baseSpeed, //ms between moves --> 1000/speed = steps for second, higher is slower
-        String imagePath
+        String spritePath
 ) {
 }

@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.infrastructure.preset;
 
-import it.unicam.cs.mpgc.rpg119001.config.Constants.EnemyImagePathConstants;
+import it.unicam.cs.mpgc.rpg119001.config.Constants.EnemySpritePathConstants;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +16,7 @@ public final class EnemyPresets {
                 5,
                 300,
                 10,
-                EnemyImagePathConstants.GOBLIN
+                EnemySpritePathConstants.GOBLIN
             );
 
     public static final EnemyPreset ORC =
@@ -28,7 +28,7 @@ public final class EnemyPresets {
                 10,
                 500,
                 20,
-                EnemyImagePathConstants.ORC
+                EnemySpritePathConstants.ORC
             );
 
     public static final List<EnemyPreset> ALL = List.of(

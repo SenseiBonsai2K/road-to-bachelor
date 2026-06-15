@@ -78,7 +78,7 @@ public class PlayerSelectionController {
                 "Speed: " + preset.baseSpeed()
         );
 
-        ImageView imageView = new ImageView(preset.imagePath());
+        ImageView imageView = new ImageView(preset.spritePath());
         playerImage.setImage(imageView.getImage());
     }
 }
