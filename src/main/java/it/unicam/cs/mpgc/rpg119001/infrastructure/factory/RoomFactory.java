@@ -3,9 +3,10 @@ package it.unicam.cs.mpgc.rpg119001.infrastructure.factory;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GameConstants;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.Enemy;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.Entity;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.Tile;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
-import it.unicam.cs.mpgc.rpg119001.domain.world.obstacle.Obstacle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,38 +21,51 @@ public class RoomFactory {
         this.enemyFactory = enemyFactory;
     }
 
-    public static Room createRoom(int level) {
+    public Room createRoom(int level) {
 
-        List<Enemy> enemies = new RoomFactory(new EnemyFactory()).createEnemies(level);
-        List<Obstacle> obstacles = new ArrayList<>(ObstacleFactory.createBoundaryWalls());
-        //TODO spawn door and other obstacles when implemented
-        // Spawn player at left side, middle height
-        GridPosition spawn = new GridPosition(
-            GridConstants.WALL_THICKNESS_TILES,
-            GridConstants.ROOM_TILES_HEIGHT / 2
-        );
+        Tile[][] tiles = TileFactory.createBaseRoom();
 
-        return new Room(enemies, obstacles, spawn);
-    }
+        List<Entity> entities = new ArrayList<>();
 
-    private List<Enemy> createEnemies(int level) {
+        boolean[][] occupied = new boolean[GridConstants.ROOM_TILES_WIDTH][GridConstants.ROOM_TILES_HEIGHT];
 
-        List<Enemy> enemies = new ArrayList<>();
         int enemyCount = 1 + random.nextInt(GameConstants.DIFFICULTY + level / 2);
 
+        //TODO manage Spawn Position by using level
+
+        GridPosition spawnPlayerPosition = new GridPosition(
+                GridConstants.WALL_THICKNESS_TILES,
+                GridConstants.ROOM_TILES_HEIGHT / 2
+        );
+
         for (int i = 0; i < enemyCount; i++) {
+
             Enemy enemy = enemyFactory.createRandomEnemies(level);
-            enemy.setGridPosition(randomGridPosition());
-            enemies.add(enemy);
+
+            GridPosition pos = randomValidPosition(occupied, tiles, spawnPlayerPosition);
+
+            enemy.setGridPosition(pos);
+
+            entities.add(enemy);
+
+            occupied[pos.getTileX()][pos.getTileY()] = true;
         }
 
-        return enemies;
+        return new Room(tiles, entities, spawnPlayerPosition);
     }
 
-    private GridPosition randomGridPosition() {
-        int tileX = GridConstants.WALL_THICKNESS_TILES + random.nextInt(GridConstants.ROOM_TILES_WIDTH - 2 * GridConstants.WALL_THICKNESS_TILES);
-        int tileY = GridConstants.WALL_THICKNESS_TILES + random.nextInt(GridConstants.ROOM_TILES_HEIGHT - 2 * GridConstants.WALL_THICKNESS_TILES);
+    private GridPosition randomValidPosition(boolean[][] occupied, Tile[][] tiles, GridPosition spawnPlayerPosition) {
+        for (int i = 0; i < 50; i++) {
 
-        return new GridPosition(tileX, tileY);
+            int x = 1 + random.nextInt(GridConstants.ROOM_TILES_WIDTH - 2);
+            int y = 1 + random.nextInt(GridConstants.ROOM_TILES_HEIGHT - 2);
+
+            GridPosition position = new GridPosition(x, y);
+            if (!occupied[x][y] && tiles[x][y].isWalkable() && !spawnPlayerPosition.equals(position)) {
+                return position;
+            }
+        }
+
+        throw new IllegalStateException("Cannot find valid spawn position");
     }
 }

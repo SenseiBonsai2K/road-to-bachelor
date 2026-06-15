@@ -5,24 +5,25 @@ import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.PlayerPreset;
 
 public class Player extends Character {
 
-    public final PlayerPreset playerPreset;
+    private final PlayerPreset preset;
 
-    public Player(PlayerPreset playerPreset, GridPosition gridPosition) {
+    public Player(PlayerPreset preset, GridPosition gridPosition) {
         super(
-            playerPreset.baseHealthPoints(),
-            playerPreset.baseAttackPoints(),
-            gridPosition,
-            playerPreset.baseSpeed(),
-            playerPreset.imagePath()
+                preset.id(),
+                preset.baseHealthPoints(),
+                preset.baseAttackPoints(),
+                gridPosition,
+                preset.baseSpeed(),
+                preset.imagePath()
         );
-        this.playerPreset = playerPreset;
+        this.preset = preset;
     }
 
-    public String getName() {
-        return this.playerPreset.displayName();
-    }
+    public String getArchetype() {return this.preset.archetype();}
+    public String getDisplayName() {return this.preset.displayName();}
 
-    public String getArchetype() {
-        return this.playerPreset.archetype();
+    @Override
+    public boolean blocksMovement(){
+        return true;
     }
 }

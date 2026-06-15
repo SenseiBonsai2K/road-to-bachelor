@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.application.service;
 
+import it.unicam.cs.mpgc.rpg119001.domain.entity.Entity;
 import it.unicam.cs.mpgc.rpg119001.domain.movement.Movable;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Direction;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
@@ -13,27 +14,29 @@ public class MovementService {
         this.collisionService = collisionService;
     }
 
-    public void move(
-            Movable entity,
-            Direction direction,
-            Room room) {
+    public void move(Movable movable, Direction direction, Room room) {
 
         long now = System.currentTimeMillis();
 
-        if (!entity.getMovementState()
-                .canMove(now, entity.getSpeed())) {
+        if (!movable.getMovementState().canMove(now, movable.getSpeed())) {
             return;
         }
 
-        GridPosition target = entity.getGridPosition()
-                .translate(direction.getDeltaX(), direction.getDeltaY());
+        GridPosition current = movable.getGridPosition();
 
-        if (!collisionService.isWalkable(target, room)) {
+        GridPosition target = switch (direction) {
+            case UP -> current.translate(0, -1);
+            case DOWN -> current.translate(0, 1);
+            case LEFT -> current.translate(-1, 0);
+            case RIGHT -> current.translate(1, 0);
+        };
+
+        if (!collisionService.canMoveTo(room, target)) {
             return;
         }
 
-        entity.setGridPosition(target);
-        entity.getMovementState().registerMove(now);
+        room.moveEntity((Entity) movable, target);
 
+        movable.getMovementState().registerMove(now);
     }
 }

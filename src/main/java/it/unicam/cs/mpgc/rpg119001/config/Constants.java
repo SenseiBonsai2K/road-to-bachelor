@@ -46,7 +46,10 @@ public class Constants {
         public static final String ORC = "/images/enemies/orc.png";
     }
 
-    public static class ObstacleImagePathConstants {
-        public static final String WALL = "/images/obstacles/wall.png";
+    public static class TileImagePathConstants {
+        public static final String WALL = "/images/world/tile/wall.png";
+        public static final String FLOOR = "/images/world/tile/floor.png";
+        public static final String WATER = "/images/world/tile/water.png";
+
     }
 }

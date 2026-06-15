@@ -5,24 +5,25 @@ import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.EnemyPreset;
 
 public class Enemy extends Character {
 
-    public final EnemyPreset enemyPreset;
+    private final EnemyPreset preset;
 
-    public Enemy(EnemyPreset enemyPreset, GridPosition gridPosition) {
-        super(
-            enemyPreset.baseHealthPoints(),
-            enemyPreset.baseAttackPoints(),
-            gridPosition,
-            enemyPreset.baseSpeed(),
-            enemyPreset.imagePath()
-         );
-        this.enemyPreset = enemyPreset;
+    public Enemy(EnemyPreset preset, GridPosition gridPosition) {
+        super(preset.id(),
+                preset.baseHealthPoints(),
+                preset.baseAttackPoints(),
+                gridPosition,
+                preset.baseSpeed(),
+                preset.imagePath()
+        );
+        this.preset = preset;
     }
 
-    public String getName() {
-        return this.enemyPreset.displayName();
-    }
+    public String getArchetype() {return this.preset.archetype();}
+    public String getDisplayName() {return this.preset.displayName();}
+    public int getExperiencePointsReward() {return this.preset.experiencePointsReward();}
 
-    public String getArchetype() {
-        return this.enemyPreset.archetype();
+    @Override
+    public boolean blocksMovement(){
+        return true;
     }
 }

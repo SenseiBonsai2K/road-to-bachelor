@@ -8,8 +8,6 @@ import it.unicam.cs.mpgc.rpg119001.config.Constants;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.GameFactory;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.PlayerPreset;
-import it.unicam.cs.mpgc.rpg119001.application.service.CollisionService;
-import it.unicam.cs.mpgc.rpg119001.application.service.MovementService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,13 +18,13 @@ import java.io.IOException;
 public class SceneManager {
 
     private final Stage stage;
-    private final MovementService movementService;
     private final InputMapper inputMapper;
+
     private Game currentGame;
+    private GameController gameController;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
-        this.movementService = new MovementService(new CollisionService());
         this.inputMapper = new InputMapper();
     }
 
@@ -53,7 +51,6 @@ public class SceneManager {
     private <T> void loadScene(String fxml, Class<T> controllerClass) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-
             loader.setControllerFactory(this::createController);
 
             Parent root = loader.load();
@@ -68,17 +65,20 @@ public class SceneManager {
 
     private Object createController(Class<?> type) {
 
-        if (type == MainMenuController.class) return new MainMenuController(this);
+        if (type == MainMenuController.class)
+            return new MainMenuController(this);
 
-        if (type == PlayerSelectionController.class) return new PlayerSelectionController(this);
+        if (type == PlayerSelectionController.class)
+            return new PlayerSelectionController(this);
 
-        if (type == GameController.class) return new GameController(this, this.movementService, this.inputMapper);
+        if (type == GameController.class)
+            return new GameController(this, inputMapper);
 
         throw new RuntimeException("Unknown controller: " + type);
     }
 
     public void startGame(PlayerPreset preset) {
-        Game game = GameFactory.createNewGame(preset);
+        Game game = new GameFactory().createNewGame(preset);
         setCurrentGame(game);
         showGame();
     }

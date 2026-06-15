@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.presentation.controller;
 
+import it.unicam.cs.mpgc.rpg119001.application.service.CollisionService;
 import it.unicam.cs.mpgc.rpg119001.presentation.renderer.GameRenderer;
 import it.unicam.cs.mpgc.rpg119001.presentation.input.InputMapper;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
@@ -11,31 +12,27 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class GameController {
 
     private final SceneManager sceneManager;
-    private final MovementService movementService;
     private final InputMapper inputMapper;
-    private final List<KeyCode> pressedKeys = new ArrayList<>();
+    private final CollisionService collisionService = new CollisionService();
+    private final MovementService movementService = new MovementService(collisionService);
+
     private Game game;
     private GameRenderer gameRenderer;
-    @FXML
-    private Label playerHpLabel;
-    @FXML
-    private Label playerAttLabel;
-    @FXML
-    private Label enemyHpLabel;
-    @FXML
-    private Label enemyAttLabel;
-    @FXML
-    private AnchorPane gamePane;
 
-    public GameController(SceneManager sceneManager, MovementService movementService, InputMapper inputMapper) {
+    private final List<KeyCode> pressedKeys = new LinkedList<>();
+
+    @FXML private Label playerHpLabel;
+    @FXML private Label playerAttLabel;
+    @FXML private AnchorPane gamePane;
+
+    public GameController(SceneManager sceneManager, InputMapper inputMapper) {
         this.sceneManager = sceneManager;
-        this.movementService = movementService;
         this.inputMapper = inputMapper;
     }
 
@@ -44,8 +41,7 @@ public class GameController {
         this.game = sceneManager.getCurrentGame();
         this.gameRenderer = new GameRenderer(gamePane);
 
-        //TODO this should be called when the player get damaged or request/on update of some enemy info
-        this.updateUI(this.game);
+        updateUI(game);
 
         setupInput();
         gamePane.requestFocus();
@@ -55,7 +51,6 @@ public class GameController {
     private void startGameLoop() {
 
         AnimationTimer timer = new AnimationTimer() {
-
             @Override
             public void handle(long now) {
                 handleMovement();
@@ -86,9 +81,9 @@ public class GameController {
             pressedKeys.add(event.getCode());
         });
 
-        gamePane.setOnKeyReleased(event -> {
-            pressedKeys.remove(event.getCode());
-        });
+        gamePane.setOnKeyReleased(event ->
+                pressedKeys.remove(event.getCode())
+        );
     }
 
     private void updateUI(Game game) {

@@ -1,11 +1,11 @@
 package it.unicam.cs.mpgc.rpg119001.presentation.renderer;
 
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.Entity;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.Tile;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Character;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Enemy;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.SpriteEntity;
-import it.unicam.cs.mpgc.rpg119001.domain.world.obstacle.Wall;
+import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
+import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -16,7 +16,6 @@ import java.util.Map;
 public class GameRenderer {
 
     private final Pane gamePane;
-
     private final Map<String, Image> imageCache = new HashMap<>();
 
     public GameRenderer(Pane gamePane) {
@@ -24,62 +23,84 @@ public class GameRenderer {
     }
 
     public void render(Game game) {
+
         clear();
 
-        //TODO walls has to be called only on room enter
-        showWalls(game);
+        Room room = game.getCurrentRoom();
 
-        showPlayer(game);
-        showEnemies(game);
+        renderTiles(room);
+        renderPlayer(game);
+        renderEntities(room);
     }
 
     public void clear() {
         gamePane.getChildren().clear();
     }
 
-    public void showPlayer(Game game) {
-        Character player = game.getPlayer();
-        addSprite(player);
-    }
+    private void renderTiles(Room room) {
 
-    public void showEnemies(Game game) {
-        for (Enemy enemy : game.getCurrentRoom().getEnemies()) {
-            addSprite(enemy);
-        }
-    }
+        Tile[][] tiles = room.getTiles();
 
-    public void showWalls(Game game) {
-        for (Object obstacle : game.getCurrentRoom().getObstacles()) {
-            if (obstacle instanceof Wall wall) {
-                addSprite(wall);
+        for (int x = 0; x < tiles.length; x++) {
+            for (int y = 0; y < tiles[0].length; y++) {
+
+                Tile tile = tiles[x][y];
+
+                addTileSprite(tile, new GridPosition(x, y));
             }
         }
     }
 
-    private void addSprite(SpriteEntity entity) {
+    private void renderEntities(Room room) {
 
-        ImageView imageView = loadImageView(entity.getImagePath());
+        Tile[][] tiles = room.getTiles();
 
-        if (imageView == null) {
-            return;
+        for (int x = 0; x < tiles.length; x++) {
+            for (int y = 0; y < tiles[0].length; y++) {
+
+                for (Entity e : room.getEntitiesAt(new GridPosition(x, y))) {
+                    addEntitySprite(e);
+                }
+            }
         }
+    }
+
+    private void renderPlayer(Game game) {
+        addEntitySprite(game.getPlayer());
+    }
+
+    private void addTileSprite(Tile tile, GridPosition pos) {
+
+        ImageView imageView = loadImageView(tile.getSpritePath());
+
+        if (imageView == null) return;
 
         int tileSize = GridConstants.TILE_SIZE;
 
         imageView.setFitWidth(tileSize);
         imageView.setFitHeight(tileSize);
-        imageView.setLayoutX(entity.getGridPosition().toPixelX());
-        imageView.setLayoutY(entity.getGridPosition().toPixelY());
+
+        imageView.setLayoutX(pos.toPixelX());
+        imageView.setLayoutY(pos.toPixelY());
 
         gamePane.getChildren().add(imageView);
     }
 
-    private Image getImage(String path) {
+    private void addEntitySprite(Entity entity) {
 
-        return imageCache.computeIfAbsent(
-                path,
-                Image::new
-        );
+        ImageView imageView = loadImageView(entity.getSpritePath());
+
+        if (imageView == null) return;
+
+        int tileSize = GridConstants.TILE_SIZE;
+
+        imageView.setFitWidth(tileSize);
+        imageView.setFitHeight(tileSize);
+
+        imageView.setLayoutX(entity.getGridPosition().toPixelX());
+        imageView.setLayoutY(entity.getGridPosition().toPixelY());
+
+        gamePane.getChildren().add(imageView);
     }
 
     private ImageView loadImageView(String imagePath) {
@@ -95,5 +116,13 @@ public class GameRenderer {
             System.err.println("Failed to load image: " + imagePath);
             return null;
         }
+    }
+
+    private Image getImage(String path) {
+
+        return imageCache.computeIfAbsent(
+                path,
+                Image::new
+        );
     }
 }
