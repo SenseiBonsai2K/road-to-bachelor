@@ -1,15 +1,14 @@
-package it.unicam.cs.mpgc.rpg119001.domain.entity;
+package it.unicam.cs.mpgc.rpg119001.domain.entity.character;
 
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
-import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.PlayerPreset;
+import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character.EnemyPreset;
 
-public class Player extends Character {
+public class Enemy extends Character {
 
-    private final PlayerPreset preset;
+    private final EnemyPreset preset;
 
-    public Player(PlayerPreset preset, GridPosition gridPosition) {
-        super(
-                preset.id(),
+    public Enemy(EnemyPreset preset, GridPosition gridPosition) {
+        super(preset.id(),
                 preset.baseHealthPoints(),
                 preset.baseAttackPoints(),
                 gridPosition,
@@ -21,6 +20,7 @@ public class Player extends Character {
 
     public String getArchetype() {return this.preset.archetype();}
     public String getDisplayName() {return this.preset.displayName();}
+    public int getExperiencePointsReward() {return this.preset.experiencePointsReward();}
 
     @Override
     public boolean blocksMovement(){

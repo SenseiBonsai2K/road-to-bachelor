@@ -1,9 +1,9 @@
 package it.unicam.cs.mpgc.rpg119001.infrastructure.factory;
 
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GameConstants;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Enemy;
-import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.EnemyPreset;
-import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.EnemyPresets;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
+import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character.EnemyPreset;
+import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character.EnemyPresets;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 
 public class EnemyFactory {

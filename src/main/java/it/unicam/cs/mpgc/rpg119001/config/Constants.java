@@ -50,4 +50,19 @@ public class Constants {
         public static final String WALL = "/sprite/world/tile/wall.png";
         public static final String FLOOR = "/sprite/world/tile/floor.png";
     }
+
+    public static class ArmorSpritePathConstants {
+        public static final String LEATHER_ARMOR = "/sprite/world/item/leather-armor.png";
+        public static final String HEAVY_ARMOR = "/sprite/world/item/heavy-armor.png";
+    }
+
+    public static class WeaponSpritePathConstants {
+        public static final String LONG_SWORD = "/sprite/world/item/long-sword.png";
+        public static final String WOOD_STAFF = "/sprite/world/item/wood-staff.png";
+    }
+
+    public static class ConsumableSpritePathConstants {
+        public static final String HEAL_POTION = "/sprite/world/item/heal-potion.png";
+        public static final String SPEED_POTION = "/sprite/world/item/speed-potion.png";
+    }
 }

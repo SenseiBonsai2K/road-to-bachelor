@@ -1,9 +1,9 @@
 package it.unicam.cs.mpgc.rpg119001.infrastructure.factory;
 
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GameConstants;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Player;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Player;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
-import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.PlayerPreset;
+import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character.PlayerPreset;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 
 public class GameFactory {

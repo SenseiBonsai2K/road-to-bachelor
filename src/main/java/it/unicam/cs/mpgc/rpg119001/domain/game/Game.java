@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.domain.game;
 
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Player;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Player;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 
 public class Game {

@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg119001.presentation.renderer;
 
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Entity;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Tile;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;

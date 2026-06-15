@@ -2,8 +2,8 @@ package it.unicam.cs.mpgc.rpg119001.infrastructure.factory;
 
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GameConstants;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Enemy;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Entity;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Tile;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;

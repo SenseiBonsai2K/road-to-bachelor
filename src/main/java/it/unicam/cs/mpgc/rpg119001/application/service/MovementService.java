@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.application.service;
 
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Entity;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
 import it.unicam.cs.mpgc.rpg119001.domain.movement.Movable;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Direction;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;

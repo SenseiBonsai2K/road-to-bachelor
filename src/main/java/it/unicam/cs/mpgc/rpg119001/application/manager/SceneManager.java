@@ -7,7 +7,7 @@ import it.unicam.cs.mpgc.rpg119001.presentation.input.InputMapper;
 import it.unicam.cs.mpgc.rpg119001.config.Constants;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.GameFactory;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
-import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.PlayerPreset;
+import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character.PlayerPreset;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

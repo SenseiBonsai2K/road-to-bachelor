@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg119001.infrastructure.preset;
+package it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character;
 
 import it.unicam.cs.mpgc.rpg119001.config.Constants.PlayerSpritePathConstants;
 

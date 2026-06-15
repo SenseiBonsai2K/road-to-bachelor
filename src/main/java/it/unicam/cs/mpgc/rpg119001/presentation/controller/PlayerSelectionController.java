@@ -2,8 +2,8 @@ package it.unicam.cs.mpgc.rpg119001.presentation.controller;
 
 import it.unicam.cs.mpgc.rpg119001.config.Constants.PlayerSelectionConstants;
 import it.unicam.cs.mpgc.rpg119001.application.manager.SceneManager;
-import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.PlayerPreset;
-import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.PlayerPresets;
+import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character.PlayerPreset;
+import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character.PlayerPresets;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;

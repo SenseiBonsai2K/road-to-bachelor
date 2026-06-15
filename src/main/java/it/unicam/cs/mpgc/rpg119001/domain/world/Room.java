@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg119001.domain.world;
 
 import it.unicam.cs.mpgc.rpg119001.domain.interaction.BlockingEntity;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.Entity;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
 
 import java.util.ArrayList;
 import java.util.List;

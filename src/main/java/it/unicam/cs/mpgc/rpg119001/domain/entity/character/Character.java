@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg119001.domain.entity;
+package it.unicam.cs.mpgc.rpg119001.domain.entity.character;
 
 import it.unicam.cs.mpgc.rpg119001.domain.interaction.BlockingEntity;
 import it.unicam.cs.mpgc.rpg119001.domain.movement.Movable;
