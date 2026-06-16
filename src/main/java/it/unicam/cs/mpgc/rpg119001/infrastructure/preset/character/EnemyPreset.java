@@ -6,6 +6,7 @@ public record EnemyPreset(
         String displayName,
         int baseHealthPoints,
         int baseAttackPoints,
+        int baseAttackRange,
         int baseSpeed, //ms between moves --> 1000/speed = steps for second, higher is slower
         int experiencePointsReward,
         String spritePath

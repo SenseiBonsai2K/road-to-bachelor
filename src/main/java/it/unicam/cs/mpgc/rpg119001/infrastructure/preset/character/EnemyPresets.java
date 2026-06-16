@@ -14,6 +14,7 @@ public final class EnemyPresets {
                 "Goblin",
                 30,
                 5,
+                1,
                 300,
                 10,
                 EnemySpritePathConstants.GOBLIN
@@ -26,6 +27,7 @@ public final class EnemyPresets {
                 "Orc",
                 50,
                 10,
+                1,
                 500,
                 20,
                 EnemySpritePathConstants.ORC

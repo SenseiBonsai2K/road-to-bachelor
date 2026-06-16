@@ -11,6 +11,7 @@ public class Enemy extends Character {
         super(preset.id(),
                 preset.baseHealthPoints(),
                 preset.baseAttackPoints(),
+                preset.baseAttackRange(),
                 gridPosition,
                 preset.baseSpeed(),
                 preset.spritePath()

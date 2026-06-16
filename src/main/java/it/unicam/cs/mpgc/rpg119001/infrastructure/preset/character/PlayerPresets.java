@@ -14,6 +14,7 @@ public final class PlayerPresets {
                     "Cristian",
                     100,
                     20,
+                    1,
                     140,
                     PlayerSpritePathConstants.WARRIOR
             );
@@ -25,6 +26,7 @@ public final class PlayerPresets {
                     "Gandalf",
                     80,
                     30,
+                    6,
                     180,
                     PlayerSpritePathConstants.MAGE
             );

@@ -12,6 +12,7 @@ public class Player extends Character {
                 preset.id(),
                 preset.baseHealthPoints(),
                 preset.baseAttackPoints(),
+                preset.baseAttackRange(),
                 gridPosition,
                 preset.baseSpeed(),
                 preset.spritePath()
