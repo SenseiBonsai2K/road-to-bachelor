@@ -61,6 +61,7 @@ public class Constants {
     public static class TileSpritePathConstants {
         public static final String WALL = "/sprite/world/tile/wall.png";
         public static final String FLOOR = "/sprite/world/tile/floor.png";
+        public static final String DOOR = "/sprite/world/tile/door.png";
     }
 
     public static class ArmorSpritePathConstants {

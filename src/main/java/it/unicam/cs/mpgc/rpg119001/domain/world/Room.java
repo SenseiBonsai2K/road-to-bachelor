@@ -10,13 +10,11 @@ public class Room {
     private final Tile[][] tiles;
     private final GridPosition playerSpawnPosition;
     private final List<Entity>[][] entityGrid;
-    private final GridPosition entranceSpawn;
     private final GridPosition leaveSpawn;
 
-    public Room(Tile[][] tiles, List<Entity> entities, GridPosition playerSpawn, GridPosition entranceSpawn, GridPosition leaveSpawn) {
+    public Room(Tile[][] tiles, List<Entity> entities, GridPosition playerSpawn, GridPosition leaveSpawn) {
         this.tiles = tiles;
         this.playerSpawnPosition = playerSpawn;
-        this.entranceSpawn = entranceSpawn;
         this.leaveSpawn = leaveSpawn;
 
         int width = tiles.length;
@@ -65,6 +63,10 @@ public class Room {
 
     public GridPosition getPlayerSpawnPosition() {
         return playerSpawnPosition;
+    }
+
+    public void destroyExitDoor() {
+       getTileAt(leaveSpawn).setType(TileType.FLOOR);
     }
 
     public int getWidth() {

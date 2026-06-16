@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg119001.domain.world;
 
 public class Tile {
-    private final TileType type;
+    private TileType type;
 
     public Tile(TileType type) {
         this.type = type;
@@ -9,6 +9,10 @@ public class Tile {
 
     public TileType getType() {
         return type;
+    }
+
+    public void setType(TileType type) {
+        this.type = type;
     }
 
     public boolean isWalkable() {

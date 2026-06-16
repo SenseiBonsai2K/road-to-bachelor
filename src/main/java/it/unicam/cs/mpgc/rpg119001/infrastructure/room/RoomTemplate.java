@@ -9,7 +9,6 @@ public record RoomTemplate(
         Tile[][] tiles,
         GridPosition playerSpawn,
         List<GridPosition> enemySpawns,
-        GridPosition entranceSpawn,
         GridPosition leaveSpawn
 ) {
 }

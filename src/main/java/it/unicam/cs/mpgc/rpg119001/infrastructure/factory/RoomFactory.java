@@ -28,6 +28,6 @@ public class RoomFactory {
             enemies.add(enemy);
         }
 
-        return new Room(template.tiles(), enemies, template.playerSpawn(), template.entranceSpawn(), template.leaveSpawn());
+        return new Room(template.tiles(), enemies, template.playerSpawn(), template.leaveSpawn());
     }
 }

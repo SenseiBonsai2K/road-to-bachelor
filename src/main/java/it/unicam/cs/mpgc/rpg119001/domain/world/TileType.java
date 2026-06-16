@@ -5,7 +5,8 @@ import it.unicam.cs.mpgc.rpg119001.config.Constants.TileSpritePathConstants;
 public enum TileType {
 
     FLOOR(true, TileSpritePathConstants.FLOOR),
-    WALL(false, TileSpritePathConstants.WALL);
+    WALL(false, TileSpritePathConstants.WALL),
+    DOOR(false, TileSpritePathConstants.DOOR);
 
     private final boolean walkable;
     private final String spritePath;
@@ -18,7 +19,6 @@ public enum TileType {
     public boolean isWalkable() {
         return walkable;
     }
-
 
     public String getSpritePath() {
         return this.spritePath;

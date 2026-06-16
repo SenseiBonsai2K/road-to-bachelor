@@ -23,7 +23,6 @@ public class RoomTemplateParser {
         Tile[][] tiles = new Tile[width][height];
 
         GridPosition playerSpawn = null;
-        GridPosition entranceSpawn = null;
         GridPosition leaveSpawn = null;
         List<GridPosition> enemySpawns = new ArrayList<>();
 
@@ -43,12 +42,11 @@ public class RoomTemplateParser {
                         break;
 
                     case 'E':
-                        tiles[x][y] = new Tile(TileType.FLOOR);
-                        entranceSpawn = new GridPosition(x, y);
+                        tiles[x][y] = new Tile(TileType.DOOR);
                         break;
 
                     case 'L':
-                        tiles[x][y] = new Tile(TileType.FLOOR);
+                        tiles[x][y] = new Tile(TileType.DOOR);
                         leaveSpawn = new GridPosition(x, y);
                         break;
 
@@ -74,7 +72,6 @@ public class RoomTemplateParser {
                 tiles,
                 playerSpawn,
                 enemySpawns,
-                entranceSpawn,
                 leaveSpawn
         );
     }
