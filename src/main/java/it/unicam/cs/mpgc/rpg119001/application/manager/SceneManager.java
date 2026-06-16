@@ -3,7 +3,6 @@ package it.unicam.cs.mpgc.rpg119001.application.manager;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.GameController;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.MainMenuController;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.PlayerSelectionController;
-import it.unicam.cs.mpgc.rpg119001.presentation.input.InputMapper;
 import it.unicam.cs.mpgc.rpg119001.config.Constants;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.GameFactory;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
@@ -18,13 +17,11 @@ import java.io.IOException;
 public class SceneManager {
 
     private final Stage stage;
-    private final InputMapper inputMapper;
 
     private Game currentGame;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
-        this.inputMapper = new InputMapper();
     }
 
     public Game getCurrentGame() {
@@ -71,7 +68,7 @@ public class SceneManager {
             return new PlayerSelectionController(this);
 
         if (type == GameController.class)
-            return new GameController(this, inputMapper);
+            return new GameController(this);
 
         throw new RuntimeException("Unknown controller: " + type);
     }
