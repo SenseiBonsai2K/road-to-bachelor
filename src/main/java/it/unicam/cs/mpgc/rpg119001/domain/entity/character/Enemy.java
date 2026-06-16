@@ -36,11 +36,11 @@ public class Enemy extends Character {
 
     public List<String> getStats() {
         return List.of(
-                "Health: "+preset.healthPoints(),
-                "Attack: "+preset.attackPoints(),
-                "Range: "+preset.attackRange(),
-                "Speed: " + String.format("%.2f", MS_PER_SECOND / preset.speed()) + " tiles/s",
-                "Atk Speed: " + String.format("%.2f", MS_PER_SECOND / preset.attackSpeed()) + " hit/s"
+                "Health: "+this.getHealthPoints(),
+                "Attack: "+this.getAttackPoints(),
+                "Range: "+this.getAttackRange(),
+                "Speed: " + String.format("%.2f", MS_PER_SECOND / this.getSpeed()) + " tiles/s",
+                "Atk Speed: " + String.format("%.2f", MS_PER_SECOND / this.getAttackSpeed()) + " hit/s"
         );
     }
 }

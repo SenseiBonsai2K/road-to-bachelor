@@ -11,6 +11,10 @@ public class Player extends Character {
 
     private final PlayerPreset preset;
 
+    private int level;
+    private int experience;
+    private int experienceCap;
+
     public Player(PlayerPreset preset, GridPosition gridPosition) {
         super(
                 preset.id(),
@@ -22,11 +26,35 @@ public class Player extends Character {
                 preset.attackSpeed(),
                 preset.spritePath()
         );
+        this.level = preset.level();
+        this.experience = preset.experience();
+        this.experienceCap = preset.experienceCap();
         this.preset = preset;
     }
 
     public String getArchetype() {return this.preset.archetype();}
     public String getDisplayName() {return this.preset.displayName();}
+    public int getLevel() {return this.level;}
+    public int getExperience() {return this.experience;}
+    public int getExperienceCap() {return this.experienceCap;}
+
+    public void levelUp() {
+        this.level++;
+        nextExperienceCap();
+    }
+
+    public void addExperience(int experienceGained) {
+        this.experience += experienceGained;
+
+        while (this.experience >= this.experienceCap) {
+            this.experience -= this.experienceCap;
+            levelUp();
+        }
+    }
+
+    public void nextExperienceCap() {
+        this.experienceCap = this.experienceCap + (this.experienceCap / 2);
+    }
 
     @Override
     public boolean blocksMovement(){
@@ -35,11 +63,13 @@ public class Player extends Character {
 
     public List<String> getStats() {
         return List.of(
-                "Health: "+preset.healthPoints(),
-                "Attack: "+preset.attackPoints(),
-                "Range: "+preset.attackRange(),
-                "Speed: " + String.format("%.2f", MS_PER_SECOND / preset.speed()) + " tiles/s",
-                "Atk Speed: " + String.format("%.2f", MS_PER_SECOND / preset.attackSpeed()) + " hit/s"
+                "Level: "+getLevel(),
+                "Exp: "+getExperience()+" / "+getExperienceCap(),
+                "Health: "+this.getHealthPoints(),
+                "Attack: "+this.getAttackPoints(),
+                "Range: "+this.getAttackRange(),
+                "Speed: " + String.format("%.2f", MS_PER_SECOND / this.getSpeed()) + " tiles/s",
+                "Atk Speed: " + String.format("%.2f", MS_PER_SECOND / this.getAttackSpeed()) + " hit/s"
         );
     }
 }
