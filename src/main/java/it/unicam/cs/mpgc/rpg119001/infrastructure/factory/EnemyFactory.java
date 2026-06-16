@@ -11,8 +11,8 @@ public class EnemyFactory {
 
         EnemyPreset preset = EnemyPresets.getAll().get((int) (Math.random() * EnemyPresets.getAll().size()));
 
-        int hp = preset.baseHealthPoints() + level * GameConstants.HEALTH_POINTS_PER_LEVEL;
-        int atk = preset.baseAttackPoints() + level * GameConstants.ATTACK_POINTS_PER_LEVEL;
+        int hp = preset.healthPoints() + level * GameConstants.HEALTH_POINTS_PER_LEVEL;
+        int atk = preset.attackPoints() + level * GameConstants.ATTACK_POINTS_PER_LEVEL;
 
         // Default starting position (0,0) - will be set by RoomFactory
         Enemy enemy = new Enemy(preset, new GridPosition(0, 0));

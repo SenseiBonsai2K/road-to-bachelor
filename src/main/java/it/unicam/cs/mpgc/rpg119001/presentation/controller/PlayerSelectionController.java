@@ -73,9 +73,9 @@ public class PlayerSelectionController {
 
         statsListView.getItems().setAll(
                 "Archetype: " + preset.archetype(),
-                "Health Points: " + preset.baseHealthPoints(),
-                "Attack Points: " + preset.baseAttackPoints(),
-                "Speed: " + preset.baseSpeed()
+                "Health Points: " + preset.healthPoints(),
+                "Attack Points: " + preset.attackPoints(),
+                "Speed: " + preset.speed()
         );
 
         ImageView imageView = new ImageView(preset.spritePath());

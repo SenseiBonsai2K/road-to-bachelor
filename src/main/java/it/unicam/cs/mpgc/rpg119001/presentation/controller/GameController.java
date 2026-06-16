@@ -5,12 +5,16 @@ import it.unicam.cs.mpgc.rpg119001.application.service.CollisionService;
 import it.unicam.cs.mpgc.rpg119001.application.service.MovementService;
 import it.unicam.cs.mpgc.rpg119001.application.service.PathfindingService;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Player;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.presentation.renderer.GameRenderer;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.LinkedList;
@@ -28,8 +32,14 @@ public class GameController {
 
     private List<GridPosition> currentPath = new LinkedList<>();
 
-    @FXML private Label playerHpLabel;
-    @FXML private Label playerAttLabel;
+    private Entity selectedEnemy;
+
+    @FXML private Label playerNameLabel;
+    @FXML private ListView<String> playerStatsList;
+
+    @FXML private Label selectedEnemyNameLabel;
+    @FXML private ListView<String> selectedEnemyStatsList;
+
     @FXML private AnchorPane gamePane;
 
     public GameController(SceneManager sceneManager) {
@@ -45,6 +55,7 @@ public class GameController {
         setupInput();
         startGameLoop();
 
+        showPlayer();
         gamePane.requestFocus();
     }
 
@@ -57,11 +68,39 @@ public class GameController {
             int tileX = (int) Math.floor(event.getX() / tileSize);
             int tileY = (int) Math.floor(event.getY() / tileSize);
 
-            GridPosition start = game.getPlayer().getGridPosition();
-            GridPosition goal = new GridPosition(tileX, tileY);
+            GridPosition clicked = new GridPosition(tileX, tileY);
 
-            currentPath = PathfindingService.findPath(start, goal, game.getCurrentRoom(), collisionService);
+            List<Entity> entities = game.getCurrentRoom().getEntitiesAt(clicked);
+
+            if (!entities.isEmpty()) {
+
+                selectedEnemy = entities.getFirst();
+                if (selectedEnemy instanceof Enemy) {
+                    showEnemy((Enemy) selectedEnemy);
+                    return;
+                }
+            }
+
+            GridPosition start = game.getPlayer().getGridPosition();
+
+            currentPath = PathfindingService.findPath(
+                    start,
+                    clicked,
+                    game.getCurrentRoom(),
+                    collisionService
+            );
         });
+    }
+
+    private void showPlayer() {
+        Player player = game.getPlayer();
+        playerNameLabel.setText(player.getDisplayName());
+        playerStatsList.getItems().setAll(player.getStats());
+    }
+
+    private void showEnemy(Enemy enemy) {
+        selectedEnemyNameLabel.setText(enemy.getDisplayName());
+        selectedEnemyStatsList.getItems().setAll(enemy.getStats());
     }
 
     private void startGameLoop() {
@@ -71,6 +110,8 @@ public class GameController {
             public void handle(long now) {
                 handleMovement();
                 gameRenderer.render(game);
+
+                showPlayer();
             }
         };
 

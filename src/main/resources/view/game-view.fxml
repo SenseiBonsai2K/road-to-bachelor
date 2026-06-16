@@ -1,32 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg119001.presentation.controller.GameController">
-   <top>
-      <HBox fx:id="statHBox" id="statHBox" prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox fx:id="playerVBox" id="playerVBox" prefHeight="111.0" prefWidth="300.0">
-               <children>
-                  <Label fx:id="playerHpLabel" id="playerHpLabel" prefHeight="50.0" prefWidth="300.0" />
-                  <Label fx:id="playerAttLabel" id="playerAttLabel" prefHeight="50.0" prefWidth="300.0" />
-               </children>
-            </VBox>
-            <VBox fx:id="enemyVBox" id="enemyVBox" prefHeight="111.0" prefWidth="300.0">
-               <children>
-                  <Label fx:id="enemyHpLabel" id="enemyHpLabel" prefHeight="50.0" prefWidth="300.0" />
-                  <Label fx:id="enemyAttLabel" id="enemyAttLabel" prefHeight="50.0" prefWidth="300.0" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </top>
-   <center>
-      <AnchorPane fx:id="gamePane" id="gamePane" prefHeight="464.0" prefWidth="656.0" BorderPane.alignment="CENTER" />
-   </center>
+<?import javafx.scene.control.Label?>
+<BorderPane xmlns="http://javafx.com/javafx/26"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="it.unicam.cs.mpgc.rpg119001.presentation.controller.GameController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <!-- ================= CENTER: GAME ================= -->
+    <center>
+        <StackPane fx:id="gameStack"
+                   prefHeight="200.0"
+                   prefWidth="200.0"
+                   BorderPane.alignment="CENTER">
+
+            <AnchorPane fx:id="gamePane"
+                        prefHeight="200.0"
+                        prefWidth="200.0" />
+
+        </StackPane>
+    </center>
+
+    <!-- ================= LEFT: PLAYER ================= -->
+    <left>
+        <VBox alignment="TOP_CENTER"
+              spacing="10"
+              prefWidth="150"
+              BorderPane.alignment="CENTER">
+
+            <Label fx:id="playerNameLabel"
+                  text="PLAYER">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+
+            <ListView fx:id="playerStatsList"
+                      prefHeight="300.0"
+                      prefWidth="140.0"/>
+        </VBox>
+    </left>
+
+    <!-- ================= RIGHT: SELECTED ENEMY ================= -->
+    <right>
+        <VBox alignment="TOP_CENTER"
+              spacing="10"
+              prefWidth="150"
+              BorderPane.alignment="CENTER">
+
+            <Label fx:id="selectedEnemyNameLabel"
+                  text="SELECTED">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+
+            <ListView fx:id="selectedEnemyStatsList"
+                      prefHeight="300.0"
+                      prefWidth="140.0"/>
+        </VBox>
+    </right>
+
+    <!-- ================= BOTTOM: ACTION BUTTONS ================= -->
+    <bottom>
+        <HBox alignment="CENTER"
+              spacing="20"
+              prefHeight="60.0"
+              BorderPane.alignment="CENTER">
+
+            <Button fx:id="actionBtn1"
+                    text="Action 1"
+                    prefWidth="120"/>
+
+            <Button fx:id="actionBtn2"
+                    text="Action 2"
+                    prefWidth="120"/>
+
+            <Button fx:id="actionBtn3"
+                    text="Action 3"
+                    prefWidth="120"/>
+
+        </HBox>
+    </bottom>
+
 </BorderPane>

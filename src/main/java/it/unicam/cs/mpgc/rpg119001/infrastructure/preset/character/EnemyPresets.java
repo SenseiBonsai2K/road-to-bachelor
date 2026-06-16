@@ -16,6 +16,7 @@ public final class EnemyPresets {
                 5,
                 1,
                 300,
+                1000,
                 10,
                 EnemySpritePathConstants.GOBLIN
             );
@@ -29,6 +30,7 @@ public final class EnemyPresets {
                 10,
                 1,
                 500,
+                1500,
                 20,
                 EnemySpritePathConstants.ORC
             );

@@ -4,10 +4,11 @@ public record PlayerPreset(
         String id,
         String archetype,
         String displayName,
-        int baseHealthPoints,
-        int baseAttackPoints,
-        int baseAttackRange,
-        int baseSpeed, //ms between moves --> 1000/speed = steps for second, higher is slower
+        int healthPoints,
+        int attackPoints,
+        int attackRange,
+        int speed, //ms between moves --> 1000/speed = steps for second, higher is slower
+        int attackSpeed,
         String spritePath
 ) {
 }

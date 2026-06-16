@@ -10,23 +10,27 @@ public abstract class Character extends Entity implements Movable, BlockingEntit
     private int attackPoints;
     private int speed;
     private int attackRange;
+    private int attackSpeed;
     private final MovementState movementState = new MovementState();
 
-    public Character(String id, int healthPoints, int attackPoints, int attackRange, GridPosition gridPosition, int speed, String spritePath) {
+    public Character(String id, int healthPoints, int attackPoints, int attackRange, GridPosition gridPosition, int speed, int attackSpeed, String spritePath) {
         super(id, gridPosition, spritePath);
         this.healthPoints = healthPoints;
         this.attackPoints = attackPoints;
         this.speed = speed;
+        this.attackSpeed = attackSpeed;
         this.attackRange = attackRange;
     }
 
     public int getAttackPoints() {return attackPoints;}
     public int getHealthPoints() {return healthPoints;}
     public int getAttackRange() {return this.attackRange;}
+    public int getAttackSpeed() {return this.attackSpeed;}
 
     public void setHealthPoints(int healthPoints) {this.healthPoints = healthPoints;}
     public void setAttackPoints(int attackPoints) {this.attackPoints = attackPoints;}
     public void setAttackRange(int attackRange) {this.attackRange = attackRange;}
+    public void setAttackSpeed(int attackSpeed) {this.attackSpeed = attackSpeed;}
 
     @Override
     public int getSpeed() {

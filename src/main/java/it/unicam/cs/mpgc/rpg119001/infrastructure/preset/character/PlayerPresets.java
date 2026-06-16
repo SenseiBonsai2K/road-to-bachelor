@@ -16,6 +16,7 @@ public final class PlayerPresets {
                     20,
                     1,
                     140,
+                    500,
                     PlayerSpritePathConstants.WARRIOR
             );
 
@@ -28,6 +29,7 @@ public final class PlayerPresets {
                     30,
                     6,
                     180,
+                    800,
                     PlayerSpritePathConstants.MAGE
             );
 
