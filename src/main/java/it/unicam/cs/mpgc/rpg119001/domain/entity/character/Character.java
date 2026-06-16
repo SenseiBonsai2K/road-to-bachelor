@@ -22,7 +22,7 @@ public abstract class Character extends Entity implements Movable, BlockingEntit
 
     public int getAttackPoints() {return attackPoints;}
     public int getHealthPoints() {return healthPoints;}
-    public int getRange() {return this.attackRange;}
+    public int getAttackRange() {return this.attackRange;}
 
     public void setHealthPoints(int healthPoints) {this.healthPoints = healthPoints;}
     public void setAttackPoints(int attackPoints) {this.attackPoints = attackPoints;}

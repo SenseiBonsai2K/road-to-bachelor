@@ -28,7 +28,7 @@ public class MovementService {
 
         GridPosition next = current.translate(dx, dy);
 
-        if (!collisionService.canMoveTo(room, next)) return;
+        if (!collisionService.canMoveTo(room, next, (Entity) movable)) return;
 
         room.moveEntity((Entity) movable, next);
 

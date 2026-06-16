@@ -16,25 +16,25 @@ public class PathfindingService {
         visited.add(start);
 
         while (!queue.isEmpty()) {
+
             GridPosition current = queue.poll();
+
             if (current.equals(goal)) return rebuild(cameFrom, start, goal);
 
-            for (GridPosition n : neighbors(current)) {
-                if (visited.contains(n)) continue;
-                if (!collisionService.canMoveTo(room, n)) continue;
-                visited.add(n);
-                cameFrom.put(n, current);
-                queue.add(n);
+            for (GridPosition next : neighbors(current)) {
+                if (visited.contains(next)) continue;
+                if (!collisionService.canMoveTo(room, next, null)) continue;
+                visited.add(next);
+                cameFrom.put(next, current);
+                queue.add(next);
             }
         }
 
-        return new LinkedList<>();
+        return List.of();
     }
 
     private static List<GridPosition> rebuild(Map<GridPosition, GridPosition> cameFrom, GridPosition start, GridPosition goal) {
-
         LinkedList<GridPosition> path = new LinkedList<>();
-
         GridPosition current = goal;
 
         while (current != null && !current.equals(start)) {
