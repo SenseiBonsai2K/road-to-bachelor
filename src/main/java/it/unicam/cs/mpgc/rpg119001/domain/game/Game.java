@@ -22,9 +22,9 @@ public class Game {
         this.player = player;
     }
 
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
+    public Room getCurrentRoom() { return currentRoom; }
+
+    public void setCurrentRoom(Room currentRoom) { this.currentRoom = currentRoom; }
 
     public int getLevel() {
         return currentlevel;

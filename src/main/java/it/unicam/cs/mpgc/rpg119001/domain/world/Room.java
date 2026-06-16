@@ -10,10 +10,14 @@ public class Room {
     private final Tile[][] tiles;
     private final GridPosition playerSpawnPosition;
     private final List<Entity>[][] entityGrid;
+    private final GridPosition entranceSpawn;
+    private final GridPosition leaveSpawn;
 
-    public Room(Tile[][] tiles, List<Entity> entities, GridPosition playerSpawnPosition) {
+    public Room(Tile[][] tiles, List<Entity> entities, GridPosition playerSpawn, GridPosition entranceSpawn, GridPosition leaveSpawn) {
         this.tiles = tiles;
-        this.playerSpawnPosition = playerSpawnPosition;
+        this.playerSpawnPosition = playerSpawn;
+        this.entranceSpawn = entranceSpawn;
+        this.leaveSpawn = leaveSpawn;
 
         int width = tiles.length;
         int height = tiles[0].length;

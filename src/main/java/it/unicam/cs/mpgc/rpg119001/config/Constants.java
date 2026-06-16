@@ -18,7 +18,7 @@ public class Constants {
         public static final int START_GAME_LEVEL = 1;
         public static final int HEALTH_POINTS_PER_LEVEL = 10;
         public static final int ATTACK_POINTS_PER_LEVEL = 2;
-        public static final int DIFFICULTY = 2; // 1 = Easy, 2 = Normal, 3 = Hard
+        public static final int DIFFICULTY = 1; // 1 = Easy, 2 = Normal, 3 = Hard
         public static final double MS_PER_SECOND = 1000.0;
     }
 
@@ -29,6 +29,17 @@ public class Constants {
         public static final int ROOM_TILES_WIDTH = ROOM_WIDTH_PX / TILE_SIZE;  // 41 tiles
         public static final int ROOM_TILES_HEIGHT = ROOM_HEIGHT_PX / TILE_SIZE; // 29 tiles
         public static final int WALL_THICKNESS_TILES = 1; // 1 tile wall border
+    }
+
+    public static class RoomPathConstants {
+        public static final String CORRIDOR = "/room/room_01_corridor.json";
+        public static final String CHAMBERS = "/room/room_02_chambers.json";
+        public static final String CROSSROAD = "/room/room_03_crossroad.json";
+        public static final String RING = "/room/room_04_ring.json";
+    }
+
+    public static class BoosRoomPathConstants {
+        public static final String BOSS_CHAMBER = "/room/room_05_boss_chamber.json";
     }
 
     public static class ViewPathConstants {
