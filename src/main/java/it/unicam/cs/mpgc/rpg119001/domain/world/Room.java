@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg119001.domain.world;
 
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class Room {
     private final GridPosition playerSpawnPosition;
     private final List<Entity>[][] entityGrid;
     private final GridPosition leaveSpawn;
+    private final List<Enemy> enemies = new ArrayList<>();
 
     public Room(Tile[][] tiles, List<Entity> entities, GridPosition playerSpawn, GridPosition leaveSpawn) {
         this.tiles = tiles;
@@ -32,6 +34,9 @@ public class Room {
         for (Entity entity : entities) {
             GridPosition pos = entity.getGridPosition();
             entityGrid[pos.getTileX()][pos.getTileY()].add(entity);
+            if (entity instanceof Enemy enemy) {
+                enemies.add(enemy);
+            }
         }
     }
 
@@ -57,6 +62,10 @@ public class Room {
         }
 
         return all;
+    }
+
+    public List<Enemy> getEnemies() {
+        return this.enemies;
     }
 
     public boolean hasEnemies() {
