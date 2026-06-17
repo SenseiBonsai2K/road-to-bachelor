@@ -29,4 +29,8 @@ public class Game {
     public int getLevel() {
         return currentlevel;
     }
+
+    public void nextLevel() {
+        ++this.currentlevel;
+    }
 }

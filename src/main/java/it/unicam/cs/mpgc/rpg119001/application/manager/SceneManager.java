@@ -1,5 +1,10 @@
 package it.unicam.cs.mpgc.rpg119001.application.manager;
 
+import it.unicam.cs.mpgc.rpg119001.application.service.CollisionService;
+import it.unicam.cs.mpgc.rpg119001.application.service.GameFlowService;
+import it.unicam.cs.mpgc.rpg119001.application.service.MovementService;
+import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.RoomFactory;
+import it.unicam.cs.mpgc.rpg119001.infrastructure.room.RoomTemplateRepository;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.GameController;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.MainMenuController;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.PlayerSelectionController;
@@ -17,11 +22,24 @@ import java.io.IOException;
 public class SceneManager {
 
     private final Stage stage;
-
     private Game currentGame;
+
+    private final RoomFactory roomFactory;
+    private final RoomTemplateRepository roomTemplateRepository;
+
+    private final CollisionService collisionService;
+    private final MovementService movementService;
+    private final GameFlowService gameFlowService;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
+
+        this.roomFactory = new RoomFactory();
+        this.roomTemplateRepository = new RoomTemplateRepository();
+
+        this.gameFlowService = new GameFlowService(roomFactory, roomTemplateRepository);
+        this.collisionService = new CollisionService();
+        this.movementService = new MovementService(collisionService);
     }
 
     public Game getCurrentGame() {
@@ -30,6 +48,26 @@ public class SceneManager {
 
     public void setCurrentGame(Game currentGame) {
         this.currentGame = currentGame;
+    }
+
+    public RoomFactory getRoomFactory() {
+        return roomFactory;
+    }
+
+    public RoomTemplateRepository getRoomTemplateRepository() {
+        return roomTemplateRepository;
+    }
+
+    public GameFlowService getGameFlowService() {
+        return gameFlowService;
+    }
+
+    public MovementService getMovementService() {
+        return movementService;
+    }
+
+    public CollisionService getCollisionService() {
+        return collisionService;
     }
 
     public void showMainMenu() {

@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg119001.presentation.controller;
 
 import it.unicam.cs.mpgc.rpg119001.application.manager.SceneManager;
 import it.unicam.cs.mpgc.rpg119001.application.service.CollisionService;
+import it.unicam.cs.mpgc.rpg119001.application.service.GameFlowService;
 import it.unicam.cs.mpgc.rpg119001.application.service.MovementService;
 import it.unicam.cs.mpgc.rpg119001.application.service.PathfindingService;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
@@ -10,6 +11,7 @@ import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Player;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
+import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 import it.unicam.cs.mpgc.rpg119001.presentation.renderer.GameRenderer;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -24,11 +26,13 @@ public class GameController {
 
     private final SceneManager sceneManager;
 
-    private final CollisionService collisionService = new CollisionService();
-    private final MovementService movementService = new MovementService(collisionService);
+    private final CollisionService collisionService;
+    private final MovementService movementService;
+    private final GameFlowService gameFlowService;
 
     private Game game;
     private GameRenderer gameRenderer;
+    private boolean changingRoom = false;
 
     private List<GridPosition> currentPath = new LinkedList<>();
 
@@ -44,6 +48,9 @@ public class GameController {
 
     public GameController(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
+        this.collisionService = sceneManager.getCollisionService();
+        this.movementService = sceneManager.getMovementService();
+        this.gameFlowService = sceneManager.getGameFlowService();
     }
 
     @FXML
@@ -109,6 +116,7 @@ public class GameController {
             @Override
             public void handle(long now) {
                 handleMovement();
+                handleExit();
                 gameRenderer.render(game);
 
                 showPlayer();
@@ -131,5 +139,31 @@ public class GameController {
         }
 
         movementService.moveTowards(game.getPlayer(), target, game.getCurrentRoom());
+    }
+
+    private void handleExit() {
+
+        if (changingRoom) return;
+
+        Room currentRoom = game.getCurrentRoom();
+        Player player = game.getPlayer();
+
+        if (!player.getGridPosition().equals(currentRoom.getLeavePosition())) {
+            return;
+        }
+
+        changingRoom = true;
+
+        game.nextLevel();
+
+        Room nextRoom = gameFlowService.nextRoom(game.getLevel());
+
+        game.setCurrentRoom(nextRoom);
+
+        player.setGridPosition(nextRoom.getPlayerSpawnPosition());
+
+        currentPath.clear();
+
+        changingRoom = false;
     }
 }

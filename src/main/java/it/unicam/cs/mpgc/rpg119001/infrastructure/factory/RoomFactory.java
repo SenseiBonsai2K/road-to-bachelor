@@ -15,10 +15,9 @@ public class RoomFactory {
     private final RoomTemplateParser roomTemplateParser = new RoomTemplateParser();
     private final RoomTemplateRepository roomTemplateRepository = new RoomTemplateRepository();
 
-    public Room createRoom(int level) {
+    public Room createRoom(int level, RoomTemplateDTO templateDTO) {
 
-        RoomTemplateDTO dto = roomTemplateRepository.randomTemplate();
-        RoomTemplate template = roomTemplateParser.parse(dto);
+        RoomTemplate template = roomTemplateParser.parse(templateDTO);
 
         List<Entity> enemies = new ArrayList<>();
 

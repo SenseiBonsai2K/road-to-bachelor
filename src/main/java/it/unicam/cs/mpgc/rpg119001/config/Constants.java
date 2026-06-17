@@ -38,7 +38,7 @@ public class Constants {
         public static final String RING = "/room/room_04_ring.json";
     }
 
-    public static class BoosRoomPathConstants {
+    public static class BossRoomPathConstants {
         public static final String BOSS_CHAMBER = "/room/room_05_boss_chamber.json";
     }
 

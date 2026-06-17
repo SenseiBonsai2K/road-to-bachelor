@@ -95,6 +95,10 @@ public class Room {
        getTileAt(leaveSpawn).setType(TileType.FLOOR);
     }
 
+    public GridPosition getLeavePosition() {
+        return this.leaveSpawn;
+    }
+
     public int getWidth() {
         return tiles.length;
     }
