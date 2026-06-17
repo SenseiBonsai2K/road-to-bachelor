@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.domain.world;
 
+import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
 
 import java.util.ArrayList;
@@ -44,6 +45,22 @@ public class Room {
 
     public List<Entity> getEntitiesAt(GridPosition pos) {
         return entityGrid[pos.getTileX()][pos.getTileY()];
+    }
+
+    public List<Entity> getEntities() {
+        List<Entity> all = new ArrayList<>();
+
+        for (int x = 0; x < getWidth(); x++) {
+            for (int y = 0; y < getHeight(); y++) {
+                all.addAll(entityGrid[x][y]);
+            }
+        }
+
+        return all;
+    }
+
+    public boolean hasEnemies() {
+        return getEntities().stream().anyMatch(e -> e instanceof Enemy);
     }
 
     public void addEntity(Entity entity) {
