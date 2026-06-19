@@ -2,7 +2,9 @@ package it.unicam.cs.mpgc.rpg119001.application.manager;
 
 import it.unicam.cs.mpgc.rpg119001.application.service.CollisionService;
 import it.unicam.cs.mpgc.rpg119001.application.service.GameFlowService;
-import it.unicam.cs.mpgc.rpg119001.application.service.MovementService;
+import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementService;
+import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementStrategy;
+import it.unicam.cs.mpgc.rpg119001.application.service.movement.OrthogonalMovementStrategy;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.RoomFactory;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.room.RoomTemplateRepository;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.GameController;
@@ -29,6 +31,7 @@ public class SceneManager {
 
     private final CollisionService collisionService;
     private final MovementService movementService;
+    private final MovementStrategy movementStrategy;
     private final GameFlowService gameFlowService;
 
     public SceneManager(Stage stage) {
@@ -39,36 +42,19 @@ public class SceneManager {
 
         this.gameFlowService = new GameFlowService(roomFactory, roomTemplateRepository);
         this.collisionService = new CollisionService();
-        this.movementService = new MovementService(collisionService);
+        this.movementStrategy = new OrthogonalMovementStrategy();
+        this.movementService = new MovementService(collisionService, movementStrategy);
     }
 
-    public Game getCurrentGame() {
-        return currentGame;
-    }
+    public void setCurrentGame(Game currentGame) {this.currentGame = currentGame;}
 
-    public void setCurrentGame(Game currentGame) {
-        this.currentGame = currentGame;
-    }
-
-    public RoomFactory getRoomFactory() {
-        return roomFactory;
-    }
-
-    public RoomTemplateRepository getRoomTemplateRepository() {
-        return roomTemplateRepository;
-    }
-
-    public GameFlowService getGameFlowService() {
-        return gameFlowService;
-    }
-
-    public MovementService getMovementService() {
-        return movementService;
-    }
-
-    public CollisionService getCollisionService() {
-        return collisionService;
-    }
+    public Game getCurrentGame() {return currentGame;}
+    public RoomFactory getRoomFactory() {return roomFactory;}
+    public RoomTemplateRepository getRoomTemplateRepository() {return roomTemplateRepository;}
+    public GameFlowService getGameFlowService() {return gameFlowService;}
+    public MovementService getMovementService() {return movementService;}
+    public CollisionService getCollisionService() {return collisionService;}
+    public MovementStrategy getMovementStrategy() {return movementStrategy;}
 
     public void showMainMenu() {
         loadScene(Constants.ViewPathConstants.MAIN_MENU_VIEW_PATH);

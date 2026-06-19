@@ -3,7 +3,7 @@ package it.unicam.cs.mpgc.rpg119001.presentation.controller;
 import it.unicam.cs.mpgc.rpg119001.application.manager.SceneManager;
 import it.unicam.cs.mpgc.rpg119001.application.service.CollisionService;
 import it.unicam.cs.mpgc.rpg119001.application.service.GameFlowService;
-import it.unicam.cs.mpgc.rpg119001.application.service.MovementService;
+import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementService;
 import it.unicam.cs.mpgc.rpg119001.application.service.PathfindingService;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
@@ -138,7 +138,7 @@ public class GameController {
             return;
         }
 
-        movementService.moveTowards(game.getPlayer(), target, game.getCurrentRoom());
+        movementService.move(game.getPlayer(), target, game.getCurrentRoom());
     }
 
     private void handleExit() {
