@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg119001.application.manager;
 
 import it.unicam.cs.mpgc.rpg119001.application.service.CollisionService;
 import it.unicam.cs.mpgc.rpg119001.application.service.GameFlowService;
+import it.unicam.cs.mpgc.rpg119001.application.service.PathfindingService;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementService;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementStrategy;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.OrthogonalMovementStrategy;
@@ -33,6 +34,7 @@ public class SceneManager {
     private final MovementService movementService;
     private final MovementStrategy movementStrategy;
     private final GameFlowService gameFlowService;
+    private final PathfindingService pathfindingService;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
@@ -43,6 +45,7 @@ public class SceneManager {
         this.gameFlowService = new GameFlowService(roomFactory, roomTemplateRepository);
         this.collisionService = new CollisionService();
         this.movementStrategy = new OrthogonalMovementStrategy();
+        this.pathfindingService = new PathfindingService();
         this.movementService = new MovementService(collisionService, movementStrategy);
     }
 
@@ -55,6 +58,7 @@ public class SceneManager {
     public MovementService getMovementService() {return movementService;}
     public CollisionService getCollisionService() {return collisionService;}
     public MovementStrategy getMovementStrategy() {return movementStrategy;}
+    public PathfindingService getPathfindingService() {return pathfindingService;}
 
     public void showMainMenu() {
         loadScene(Constants.ViewPathConstants.MAIN_MENU_VIEW_PATH);

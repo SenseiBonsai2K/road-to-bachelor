@@ -6,12 +6,12 @@ import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 public class Game {
     private Player player;
     private Room currentRoom;
-    private int currentlevel;
+    private int currentLevel;
 
     public Game(Player player, Room currentRoom, int level) {
         this.player = player;
         this.currentRoom = currentRoom;
-        this.currentlevel = level;
+        this.currentLevel = level;
     }
 
     public Player getPlayer() {
@@ -27,10 +27,10 @@ public class Game {
     public void setCurrentRoom(Room currentRoom) { this.currentRoom = currentRoom; }
 
     public int getLevel() {
-        return currentlevel;
+        return currentLevel;
     }
 
     public void nextLevel() {
-        ++this.currentlevel;
+        ++this.currentLevel;
     }
 }

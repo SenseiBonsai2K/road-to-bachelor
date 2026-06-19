@@ -29,6 +29,7 @@ public class GameController {
     private final CollisionService collisionService;
     private final MovementService movementService;
     private final GameFlowService gameFlowService;
+    private final PathfindingService pathfindingService;
 
     private Game game;
     private GameRenderer gameRenderer;
@@ -51,6 +52,7 @@ public class GameController {
         this.collisionService = sceneManager.getCollisionService();
         this.movementService = sceneManager.getMovementService();
         this.gameFlowService = sceneManager.getGameFlowService();
+        this.pathfindingService = sceneManager.getPathfindingService();
     }
 
     @FXML
@@ -90,7 +92,7 @@ public class GameController {
 
             GridPosition start = game.getPlayer().getGridPosition();
 
-            currentPath = PathfindingService.findPath(
+            currentPath = pathfindingService.findPath(
                     start,
                     clicked,
                     game.getCurrentRoom(),

@@ -7,7 +7,7 @@ import java.util.*;
 
 public class PathfindingService {
 
-    public static List<GridPosition> findPath(GridPosition start, GridPosition goal, Room room, CollisionService collisionService) {
+    public List<GridPosition> findPath(GridPosition start, GridPosition goal, Room room, CollisionService collisionService) {
         Queue<GridPosition> queue = new LinkedList<>();
         Map<GridPosition, GridPosition> cameFrom = new HashMap<>();
         Set<GridPosition> visited = new HashSet<>();
@@ -33,7 +33,7 @@ public class PathfindingService {
         return List.of();
     }
 
-    private static List<GridPosition> rebuild(Map<GridPosition, GridPosition> cameFrom, GridPosition start, GridPosition goal) {
+    private List<GridPosition> rebuild(Map<GridPosition, GridPosition> cameFrom, GridPosition start, GridPosition goal) {
         LinkedList<GridPosition> path = new LinkedList<>();
         GridPosition current = goal;
 
@@ -45,7 +45,7 @@ public class PathfindingService {
         return path;
     }
 
-    private static List<GridPosition> neighbors(GridPosition p) {
+    private List<GridPosition> neighbors(GridPosition p) {
         return List.of(
                 p.translate(1, 0),
                 p.translate(-1, 0),
