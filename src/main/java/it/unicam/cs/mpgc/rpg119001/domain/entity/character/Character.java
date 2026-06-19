@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.domain.entity.character;
 
+import it.unicam.cs.mpgc.rpg119001.domain.entity.EntityIdGenerator;
 import it.unicam.cs.mpgc.rpg119001.domain.interaction.BlockingEntity;
 import it.unicam.cs.mpgc.rpg119001.domain.movement.Movable;
 import it.unicam.cs.mpgc.rpg119001.domain.movement.MovementState;
@@ -14,7 +15,7 @@ public abstract class Character extends Entity implements Movable, BlockingEntit
     private final MovementState movementState = new MovementState();
 
     public Character(String id, int healthPoints, int attackPoints, int attackRange, GridPosition gridPosition, int speed, int attackSpeed, String spritePath) {
-        super(id, gridPosition, spritePath);
+        super(EntityIdGenerator.next(id), gridPosition, spritePath);
         this.healthPoints = healthPoints;
         this.attackPoints = attackPoints;
         this.speed = speed;
