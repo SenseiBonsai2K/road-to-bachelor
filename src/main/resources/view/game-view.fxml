@@ -55,17 +55,15 @@
               prefHeight="60.0"
               BorderPane.alignment="CENTER">
 
-            <Button fx:id="actionBtn1"
-                    text="Action 1"
-                    prefWidth="120"/>
+            <Button fx:id="saveGameButton"
+                    text="Save"
+                    prefWidth="120"
+                    onAction="#SaveGame"/>
 
-            <Button fx:id="actionBtn2"
-                    text="Action 2"
-                    prefWidth="120"/>
-
-            <Button fx:id="actionBtn3"
-                    text="Action 3"
-                    prefWidth="120"/>
+            <Button fx:id="saveAndExit"
+                    text="Save and Exit"
+                    prefWidth="120"
+                    onAction="#SaveAndExit"/>
 
         </HBox>
     </bottom>

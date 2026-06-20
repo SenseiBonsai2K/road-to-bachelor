@@ -1,20 +1,21 @@
 package it.unicam.cs.mpgc.rpg119001.presentation.controller;
 
 import it.unicam.cs.mpgc.rpg119001.application.manager.SceneManager;
-import it.unicam.cs.mpgc.rpg119001.application.service.CollisionService;
-import it.unicam.cs.mpgc.rpg119001.application.service.GameFlowService;
+import it.unicam.cs.mpgc.rpg119001.application.service.*;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementService;
-import it.unicam.cs.mpgc.rpg119001.application.service.PathfindingService;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Player;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
+import it.unicam.cs.mpgc.rpg119001.domain.game.SaveGame;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 import it.unicam.cs.mpgc.rpg119001.presentation.renderer.GameRenderer;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -30,6 +31,8 @@ public class GameController {
     private final MovementService movementService;
     private final GameFlowService gameFlowService;
     private final PathfindingService pathfindingService;
+    private final SaveService saveService;
+    private final SaveGameMapper saveGameMapper;
 
     private Game game;
     private GameRenderer gameRenderer;
@@ -47,12 +50,16 @@ public class GameController {
 
     @FXML private AnchorPane gamePane;
 
+    @FXML private Button saveGameButton;
+
     public GameController(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
         this.collisionService = sceneManager.getCollisionService();
         this.movementService = sceneManager.getMovementService();
         this.gameFlowService = sceneManager.getGameFlowService();
         this.pathfindingService = sceneManager.getPathfindingService();
+        this.saveService = sceneManager.getSaveService();
+        this.saveGameMapper = sceneManager.getSaveGameMapper();
     }
 
     @FXML
@@ -167,5 +174,26 @@ public class GameController {
         currentPath.clear();
 
         changingRoom = false;
+    }
+
+    @FXML
+    private void SaveGame() {
+        try {
+            SaveGame save = saveGameMapper.fromGame(game);
+            saveService.save(save);
+            System.out.println("Game Saved.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void SaveAndExit() {
+        try {
+            SaveGame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Platform.exit();
     }
 }

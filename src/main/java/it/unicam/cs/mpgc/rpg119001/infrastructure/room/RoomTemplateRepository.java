@@ -1,35 +1,65 @@
 package it.unicam.cs.mpgc.rpg119001.infrastructure.room;
 
 import it.unicam.cs.mpgc.rpg119001.config.Constants;
-import it.unicam.cs.mpgc.rpg119001.config.Constants.RoomPathConstants;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RoomTemplateRepository {
 
     private final RoomTemplateLoader loader = new RoomTemplateLoader();
 
-    private final Random random = new Random();
-
     private final List<String> templates = List.of(
-            RoomPathConstants.CROSSROAD,
-            RoomPathConstants.CHAMBERS,
-            RoomPathConstants.CORRIDOR,
-            RoomPathConstants.RING
+            Constants.RoomPathConstants.CROSSROAD,
+            Constants.RoomPathConstants.CHAMBERS,
+            Constants.RoomPathConstants.CORRIDOR,
+            Constants.RoomPathConstants.RING
     );
 
-    private final List<String> boosTemplates = List.of(
+    private final List<String> bossTemplates = List.of(
             Constants.BossRoomPathConstants.BOSS_CHAMBER
     );
 
+    private final Map<String, String> templateIndex = new HashMap<>();
+
+    public RoomTemplateRepository() {
+        indexTemplates();
+    }
+
+    private void indexTemplates() {
+        for (String file : templates) {
+            RoomTemplateDTO dto = loader.load(file);
+            templateIndex.put(dto.id(), file);
+        }
+
+        for (String file : bossTemplates) {
+            RoomTemplateDTO dto = loader.load(file);
+            templateIndex.put(dto.id(), file);
+        }
+    }
+
     public RoomTemplateDTO randomTemplate() {
-        String file = templates.get(random.nextInt(templates.size()));
+        String file = templates.get(
+                ThreadLocalRandom.current().nextInt(templates.size())
+        );
         return loader.load(file);
     }
 
     public RoomTemplateDTO randomBossTemplate() {
-        String file = boosTemplates.get(random.nextInt(boosTemplates.size()));
+        String file = bossTemplates.get(
+                ThreadLocalRandom.current().nextInt(bossTemplates.size())
+        );
+        return loader.load(file);
+    }
+
+    public RoomTemplateDTO getById(String id) {
+
+        String file = templateIndex.get(id);
+
+        if (file == null) {
+            throw new IllegalArgumentException("Template not found: " + id);
+        }
+
         return loader.load(file);
     }
 }

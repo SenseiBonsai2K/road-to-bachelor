@@ -12,21 +12,39 @@ import java.util.List;
 public class RoomFactory {
 
     private final EnemyFactory enemyFactory = new EnemyFactory();
-    private final RoomTemplateParser roomTemplateParser = new RoomTemplateParser();
-    private final RoomTemplateRepository roomTemplateRepository = new RoomTemplateRepository();
+    private final RoomTemplateParser parser = new RoomTemplateParser();
 
-    public Room createRoom(int level, RoomTemplateDTO templateDTO) {
+    public Room createNewRoom(int level, RoomTemplateDTO dto) {
 
-        RoomTemplate template = roomTemplateParser.parse(templateDTO);
+        List<Entity> entities = new ArrayList<>();
 
-        List<Entity> enemies = new ArrayList<>();
+        RoomTemplate template = parser.parse(dto);
 
-        for (GridPosition spawnPosition : template.enemySpawns()) {
-            Enemy enemy = enemyFactory.createEnemy(level);
-            enemy.setGridPosition(spawnPosition);
-            enemies.add(enemy);
+        for (GridPosition spawn : template.enemySpawns()) {
+            Enemy enemy = enemyFactory.createRandomEnemy(level);
+            enemy.setGridPosition(spawn);
+            entities.add(enemy);
         }
 
-        return new Room(template.tiles(), enemies, template.playerSpawn(), template.leaveSpawn());
+        return new Room(
+                dto.id(),
+                template.tiles(),
+                entities,
+                template.playerSpawn(),
+                template.leaveSpawn()
+        );
+    }
+
+    public Room loadRoom(RoomTemplateDTO dto, List<Entity> entities) {
+
+        RoomTemplate template = parser.parse(dto);
+
+        return new Room(
+                dto.id(),
+                template.tiles(),
+                entities,
+                template.playerSpawn(),
+                template.leaveSpawn()
+        );
     }
 }

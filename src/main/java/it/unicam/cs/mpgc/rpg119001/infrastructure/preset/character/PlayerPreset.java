@@ -7,6 +7,7 @@ public record PlayerPreset(
         int level,
         int experience,
         int experienceCap,
+        int currentHealthPoints,
         int healthPoints,
         int attackPoints,
         int attackRange,

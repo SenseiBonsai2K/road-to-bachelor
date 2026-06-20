@@ -20,7 +20,11 @@
             </Text>
             <VBox id="buttonsVBox" alignment="BOTTOM_CENTER" prefHeight="270.0" prefWidth="350.0" spacing="10.0">
                <children>
-                  <Button fx:id="continueButton" id="continueButton" prefHeight="40.0" prefWidth="200.0" />
+                  <Button fx:id="continueButton"
+                          id="continueButton"
+                          onAction="#onContinue"
+                          prefHeight="40.0"
+                          prefWidth="200.0" />
                   <Button fx:id="newGameButton" id="newGameButton" onAction="#onNewGame" prefHeight="40.0" prefWidth="200.0" />
                   <Button fx:id="settingButton" id="settingButton" prefHeight="40.0" prefWidth="200.0" />
                   <Button fx:id="exitButton" id="exitButton" onAction="#onExit" prefHeight="40.0" prefWidth="200.0" />

@@ -4,6 +4,7 @@ public record EnemyPreset(
         String id,
         String archetype,
         String displayName,
+        int currentHealthPoints,
         int healthPoints,
         int attackPoints,
         int attackRange, //tiles

@@ -2,6 +2,9 @@ package it.unicam.cs.mpgc.rpg119001.presentation.controller;
 
 import it.unicam.cs.mpgc.rpg119001.application.manager.SceneManager;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GameConstants;
+import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
+import it.unicam.cs.mpgc.rpg119001.domain.game.SaveGame;
+import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.GameFactory;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,6 +42,7 @@ public class MainMenuController {
         newGameButton.setText(MainMenuConstants.NEW_GAME_BUTTON_TEXT);
         settingButton.setText(MainMenuConstants.SETTINGS_BUTTON_TEXT);
         exitButton.setText(MainMenuConstants.EXIT_BUTTON_TEXT);
+        continueButton.setDisable(!sceneManager.getSaveService().exists());
     }
 
     @FXML
@@ -48,6 +52,19 @@ public class MainMenuController {
             sceneManager.showPlayerSelection();
         } else {
             System.out.println("SceneManager is not initialized.");
+        }
+    }
+
+    @FXML
+    private void onContinue() {
+
+        try {
+            SaveGame save = sceneManager.getSaveService().load();
+            Game game = new GameFactory().continueGame(save);
+            sceneManager.setCurrentGame(game);
+            sceneManager.showGame();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

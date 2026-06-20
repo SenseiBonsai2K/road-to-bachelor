@@ -1,7 +1,9 @@
 package it.unicam.cs.mpgc.rpg119001.domain.entity.character;
 
+import it.unicam.cs.mpgc.rpg119001.domain.game.SaveGame;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character.PlayerPreset;
+import it.unicam.cs.mpgc.rpg119001.config.Constants.PlayerGameConstants;
 
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class Player extends Character {
     public Player(PlayerPreset preset, GridPosition gridPosition) {
         super(
                 preset.id(),
+                preset.currentHealthPoints(),
                 preset.healthPoints(),
                 preset.attackPoints(),
                 preset.attackRange(),
@@ -40,6 +43,8 @@ public class Player extends Character {
 
     public void levelUp() {
         this.level++;
+        this.setHealthPoints(this.getHealthPoints()+PlayerGameConstants.HEALTH_POINTS_PER_LEVEL);
+        this.setAttackPoints(this.getAttackPoints()+PlayerGameConstants.ATTACK_POINTS_PER_LEVEL);
         nextExperienceCap();
     }
 
@@ -71,5 +76,23 @@ public class Player extends Character {
                 "Speed: " + String.format("%.2f", MS_PER_SECOND / this.getSpeed()) + " tiles/s",
                 "Atk Speed: " + String.format("%.2f", MS_PER_SECOND / this.getAttackSpeed()) + " hit/s"
         );
+    }
+
+    public SaveGame.PlayerState toState() {
+        SaveGame.PlayerState playerState = new SaveGame.PlayerState();
+        playerState.archetype = this.getArchetype();
+        playerState.exp = this.getExperience();
+        playerState.currentHp = this.getCurrentHealthPoints();
+        playerState.level = this.getLevel();
+        playerState.x = this.getGridPosition().getTileX();
+        playerState.y = this.getGridPosition().getTileY();
+        return playerState;
+    }
+
+    public void roadToLevel(int level, int exp) {
+        for (int i = this.getLevel(); i <= level; i++) {
+            this.levelUp();
+        }
+        this.addExperience(exp);
     }
 }

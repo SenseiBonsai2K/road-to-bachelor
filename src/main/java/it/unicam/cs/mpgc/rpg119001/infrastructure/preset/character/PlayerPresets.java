@@ -16,6 +16,7 @@ public final class PlayerPresets {
                     0,
                     100,
                     100,
+                    100,
                     20,
                     1,
                     140,
@@ -30,6 +31,7 @@ public final class PlayerPresets {
                     "Gandalf",
                     1,
                     0,
+                    80,
                     80,
                     80,
                     30,
@@ -49,6 +51,11 @@ public final class PlayerPresets {
             MAGE.id(), MAGE
     );
 
+    private static final Map<String, PlayerPreset> BY_ARCHETYPE = Map.of(
+            WARRIOR.archetype(), WARRIOR,
+            MAGE.archetype(), MAGE
+    );
+
     public static List<PlayerPreset> getAll() {
         return ALL;
     }
@@ -56,4 +63,6 @@ public final class PlayerPresets {
     public static PlayerPreset getById(String id) {
         return BY_ID.get(id);
     }
+
+    public static PlayerPreset getByArchetype(String archetype) { return BY_ARCHETYPE.get(archetype); }
 }

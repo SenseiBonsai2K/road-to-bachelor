@@ -14,6 +14,7 @@ public class Enemy extends Character {
     public Enemy(EnemyPreset preset, GridPosition gridPosition) {
         super(
                 preset.id(),
+                preset.currentHealthPoints(),
                 preset.healthPoints(),
                 preset.attackPoints(),
                 preset.attackRange(),

@@ -20,7 +20,7 @@ public class GameFlowService {
 
         RoomTemplateDTO dto = selectTemplate(level);
 
-        return roomFactory.createRoom(level, dto);
+        return roomFactory.createNewRoom(level, dto);
     }
 
     private RoomTemplateDTO selectTemplate(int level) {

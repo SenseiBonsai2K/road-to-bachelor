@@ -1,8 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.application.manager;
 
-import it.unicam.cs.mpgc.rpg119001.application.service.CollisionService;
-import it.unicam.cs.mpgc.rpg119001.application.service.GameFlowService;
-import it.unicam.cs.mpgc.rpg119001.application.service.PathfindingService;
+import it.unicam.cs.mpgc.rpg119001.application.service.*;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementService;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementStrategy;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.OrthogonalMovementStrategy;
@@ -35,6 +33,8 @@ public class SceneManager {
     private final MovementStrategy movementStrategy;
     private final GameFlowService gameFlowService;
     private final PathfindingService pathfindingService;
+    private final SaveService saveService;
+    private final SaveGameMapper saveGameMapper;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
@@ -46,6 +46,8 @@ public class SceneManager {
         this.collisionService = new CollisionService();
         this.movementStrategy = new OrthogonalMovementStrategy();
         this.pathfindingService = new PathfindingService();
+        this.saveGameMapper = new SaveGameMapper();
+        this.saveService = new SaveService();
         this.movementService = new MovementService(collisionService, movementStrategy);
     }
 
@@ -59,6 +61,8 @@ public class SceneManager {
     public CollisionService getCollisionService() {return collisionService;}
     public MovementStrategy getMovementStrategy() {return movementStrategy;}
     public PathfindingService getPathfindingService() {return pathfindingService;}
+    public SaveGameMapper getSaveGameMapper() {return saveGameMapper;}
+    public SaveService getSaveService() {return saveService;}
 
     public void showMainMenu() {
         loadScene(Constants.ViewPathConstants.MAIN_MENU_VIEW_PATH);

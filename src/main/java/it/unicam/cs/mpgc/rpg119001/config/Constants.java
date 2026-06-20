@@ -16,10 +16,18 @@ public class Constants {
     public static class GameConstants {
         public static final String GAME_TITLE = "Road to Bachelor";
         public static final int START_GAME_LEVEL = 1;
-        public static final int HEALTH_POINTS_PER_LEVEL = 10;
-        public static final int ATTACK_POINTS_PER_LEVEL = 2;
         public static final int DIFFICULTY = 1; // 1 = Easy, 2 = Normal, 3 = Hard
         public static final double MS_PER_SECOND = 1000.0;
+    }
+
+    public static class PlayerGameConstants {
+        public static final int HEALTH_POINTS_PER_LEVEL = 20;
+        public static final int ATTACK_POINTS_PER_LEVEL = 5;
+    }
+
+    public static class EnemyGameConstants {
+        public static final int HEALTH_POINTS_PER_LEVEL = 10;
+        public static final int ATTACK_POINTS_PER_LEVEL = 2;
     }
 
     public static class GridConstants {

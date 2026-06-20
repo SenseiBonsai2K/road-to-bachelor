@@ -13,6 +13,7 @@ public final class EnemyPresets {
                 "Goblin",
                 "Goblin",
                 30,
+                30,
                 5,
                 1,
                 300,
@@ -26,6 +27,7 @@ public final class EnemyPresets {
                 "orc",
                 "Orc",
                 "Orc",
+                50,
                 50,
                 10,
                 1,
@@ -45,6 +47,11 @@ public final class EnemyPresets {
             ORC.id(), ORC
     );
 
+    private static final Map<String, EnemyPreset> BY_ARCHETYPE = Map.of(
+            GOBLIN.archetype(), GOBLIN,
+            ORC.archetype(), ORC
+    );
+
     public static List<EnemyPreset> getAll() {
         return ALL;
     }
@@ -52,4 +59,6 @@ public final class EnemyPresets {
     public static EnemyPreset getById(String id) {
         return BY_ID.get(id);
     }
+
+    public static EnemyPreset getByArchetype(String archetype) { return BY_ARCHETYPE.get(archetype); }
 }

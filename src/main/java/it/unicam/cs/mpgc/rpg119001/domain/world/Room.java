@@ -2,7 +2,8 @@ package it.unicam.cs.mpgc.rpg119001.domain.world;
 
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Player;
+import it.unicam.cs.mpgc.rpg119001.domain.game.SaveGame;
+import it.unicam.cs.mpgc.rpg119001.infrastructure.room.RoomTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +14,13 @@ public class Room {
     private final GridPosition playerSpawnPosition;
     private final List<Entity>[][] entityGrid;
     private final GridPosition leaveSpawn;
-    private final List<Enemy> enemies = new ArrayList<>();
+    private final String roomTemplateId;
 
-    public Room(Tile[][] tiles, List<Entity> entities, GridPosition playerSpawn, GridPosition leaveSpawn) {
+    public Room(String roomTemplateId, Tile[][] tiles, List<Entity> entities, GridPosition playerSpawn, GridPosition leaveSpawn) {
         this.tiles = tiles;
         this.playerSpawnPosition = playerSpawn;
         this.leaveSpawn = leaveSpawn;
+        this.roomTemplateId = roomTemplateId;
 
         int width = tiles.length;
         int height = tiles[0].length;
@@ -34,14 +36,15 @@ public class Room {
         for (Entity entity : entities) {
             GridPosition pos = entity.getGridPosition();
             entityGrid[pos.getTileX()][pos.getTileY()].add(entity);
-            if (entity instanceof Enemy enemy) {
-                enemies.add(enemy);
-            }
         }
     }
 
     public Tile[][] getTiles() {
         return tiles;
+    }
+
+    public String getRoomTemplateId() {
+        return roomTemplateId;
     }
 
     public Tile getTileAt(GridPosition pos) {
@@ -62,14 +65,6 @@ public class Room {
         }
 
         return all;
-    }
-
-    public List<Enemy> getEnemies() {
-        return this.enemies;
-    }
-
-    public boolean hasEnemies() {
-        return getEntities().stream().anyMatch(e -> e instanceof Enemy);
     }
 
     public void addEntity(Entity entity) {
@@ -105,5 +100,23 @@ public class Room {
 
     public int getHeight() {
         return tiles[0].length;
+    }
+
+    public List<SaveGame.EnemyState> extractEnemyState() {
+
+        List<SaveGame.EnemyState> list = new ArrayList<>();
+
+        for (Entity e : getEntities()) {
+            if (e instanceof Enemy enemy) {
+                SaveGame.EnemyState enemyState = new SaveGame.EnemyState();
+                enemyState.archetype = enemy.getArchetype();
+                enemyState.x = enemy.getGridPosition().getTileX();
+                enemyState.y = enemy.getGridPosition().getTileY();
+                enemyState.currentHp = enemy.getCurrentHealthPoints();
+                list.add(enemyState);
+            }
+        }
+
+        return list;
     }
 }
