@@ -4,6 +4,8 @@ import it.unicam.cs.mpgc.rpg119001.application.service.*;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementService;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementStrategy;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.OrthogonalMovementStrategy;
+import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveGameMapper;
+import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveService;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.RoomFactory;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.room.RoomTemplateRepository;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.GameController;
@@ -35,6 +37,9 @@ public class SceneManager {
     private final PathfindingService pathfindingService;
     private final SaveService saveService;
     private final SaveGameMapper saveGameMapper;
+    private final RangeService rangeService;
+    private final LineOfSightService lineOfSightService;
+    private final AttackPositionService attackPositionService;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
@@ -42,13 +47,16 @@ public class SceneManager {
         this.roomFactory = new RoomFactory();
         this.roomTemplateRepository = new RoomTemplateRepository();
 
-        this.gameFlowService = new GameFlowService(roomFactory, roomTemplateRepository);
         this.collisionService = new CollisionService();
         this.movementStrategy = new OrthogonalMovementStrategy();
         this.pathfindingService = new PathfindingService();
         this.saveGameMapper = new SaveGameMapper();
         this.saveService = new SaveService();
+        this.rangeService = new RangeService();
+        this.lineOfSightService = new LineOfSightService();
         this.movementService = new MovementService(collisionService, movementStrategy);
+        this.gameFlowService = new GameFlowService(roomFactory, roomTemplateRepository);
+        this.attackPositionService = new AttackPositionService(rangeService, lineOfSightService, pathfindingService, collisionService);
     }
 
     public void setCurrentGame(Game currentGame) {this.currentGame = currentGame;}
@@ -63,6 +71,9 @@ public class SceneManager {
     public PathfindingService getPathfindingService() {return pathfindingService;}
     public SaveGameMapper getSaveGameMapper() {return saveGameMapper;}
     public SaveService getSaveService() {return saveService;}
+    public LineOfSightService getLineOfSightService() {return lineOfSightService;}
+    public RangeService getRangeService() {return rangeService;}
+    public AttackPositionService getAttackPositionService() {return attackPositionService;}
 
     public void showMainMenu() {
         loadScene(Constants.ViewPathConstants.MAIN_MENU_VIEW_PATH);

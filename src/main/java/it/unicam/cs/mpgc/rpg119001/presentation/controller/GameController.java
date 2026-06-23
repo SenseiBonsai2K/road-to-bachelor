@@ -3,6 +3,8 @@ package it.unicam.cs.mpgc.rpg119001.presentation.controller;
 import it.unicam.cs.mpgc.rpg119001.application.manager.SceneManager;
 import it.unicam.cs.mpgc.rpg119001.application.service.*;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementService;
+import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveGameMapper;
+import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveService;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
@@ -33,6 +35,7 @@ public class GameController {
     private final PathfindingService pathfindingService;
     private final SaveService saveService;
     private final SaveGameMapper saveGameMapper;
+    private final AttackPositionService attackPositionService;
 
     private Game game;
     private GameRenderer gameRenderer;
@@ -60,6 +63,7 @@ public class GameController {
         this.pathfindingService = sceneManager.getPathfindingService();
         this.saveService = sceneManager.getSaveService();
         this.saveGameMapper = sceneManager.getSaveGameMapper();
+        this.attackPositionService = sceneManager.getAttackPositionService();
     }
 
     @FXML
@@ -84,26 +88,20 @@ public class GameController {
             int tileX = (int) Math.floor(event.getX() / tileSize);
             int tileY = (int) Math.floor(event.getY() / tileSize);
 
-            GridPosition clicked = new GridPosition(tileX, tileY);
+            GridPosition end = new GridPosition(tileX, tileY);
+            GridPosition start = game.getPlayer().getGridPosition();
 
-            List<Entity> entities = game.getCurrentRoom().getEntitiesAt(clicked);
+            List<Entity> entities = game.getCurrentRoom().getEntitiesAt(end);
 
             if (!entities.isEmpty()) {
-
                 selectedEnemy = entities.getFirst();
-                if (selectedEnemy instanceof Enemy) {
-                    showEnemy((Enemy) selectedEnemy);
-                    return;
+                if (selectedEnemy instanceof Enemy enemy) {
+                    showEnemy(enemy);
+                    end = this.attackPositionService.findBestAttackPosition(this.game.getPlayer(), enemy, this.game.getCurrentRoom());
                 }
             }
 
-            GridPosition start = game.getPlayer().getGridPosition();
-
-            currentPath = pathfindingService.findPath(
-                    start,
-                    clicked,
-                    game.getCurrentRoom(),
-                    collisionService
+            currentPath = pathfindingService.findPath(start, end, game.getCurrentRoom(), collisionService
             );
         });
     }

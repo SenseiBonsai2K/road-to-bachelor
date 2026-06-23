@@ -1,8 +1,9 @@
 package it.unicam.cs.mpgc.rpg119001.domain.entity.character;
 
+import it.unicam.cs.mpgc.rpg119001.domain.interaction.BlockingEntity;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 
-public abstract class Entity {
+public abstract class Entity implements BlockingEntity {
     private final String id;
     private GridPosition position;
     private final String spritePath;

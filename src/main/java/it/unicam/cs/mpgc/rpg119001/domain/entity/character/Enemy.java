@@ -34,6 +34,8 @@ public class Enemy extends Character {
     public boolean blocksMovement(){
         return true;
     }
+    @Override
+    public boolean blocksLineOfSight(){return true;}
 
     public List<String> getStats() {
         return List.of(

@@ -6,7 +6,7 @@ import it.unicam.cs.mpgc.rpg119001.domain.movement.Movable;
 import it.unicam.cs.mpgc.rpg119001.domain.movement.MovementState;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 
-public abstract class Character extends Entity implements Movable, BlockingEntity {
+public abstract class Character extends Entity implements Movable {
     private int currentHealthPoints;
     private int healthPoints;
     private int attackPoints;

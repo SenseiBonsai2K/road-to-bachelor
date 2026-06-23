@@ -15,11 +15,9 @@ public class Tile {
         this.type = type;
     }
 
-    public boolean isWalkable() {
-        return type.isWalkable();
-    }
+    public boolean isWalkable() {return type.isWalkable();}
 
-    public String getSpritePath() {
-        return type.getSpritePath();
-    }
+    public boolean blocksLineOfSight() { return type.blocksLineOfSight();}
+
+    public String getSpritePath() {return type.getSpritePath();}
 }
