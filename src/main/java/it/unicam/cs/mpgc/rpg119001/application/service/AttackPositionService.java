@@ -66,7 +66,6 @@ public class AttackPositionService {
             }
         }
 
-        System.out.println("Best: "+bestCandidate.toString());
         return bestCandidate;
     }
 

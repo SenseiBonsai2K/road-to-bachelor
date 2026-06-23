@@ -51,8 +51,7 @@ public class LineOfSightService {
         return true;
     }
 
-    private boolean blocksVision(GridPosition position,
-                                 Room room) {
+    private boolean blocksVision(GridPosition position, Room room) {
 
         Tile tile = room.getTileAt(position);
 
@@ -60,12 +59,8 @@ public class LineOfSightService {
             return true;
         }
 
-        for (Entity entity : room.getEntitiesAt(position)) {
-            if (entity.blocksLineOfSight()) {
-                return true;
-            }
-        }
+        Entity entity = room.getEntityAt(position);
 
-        return false;
+        return entity != null && entity.blocksLineOfSight();
     }
 }

@@ -11,17 +11,13 @@ public class CollisionService {
 
     public boolean canMoveTo(Room room, GridPosition pos, Movable mover) {
 
-        if (!isInside(room, pos)) return false;
+        if (!isInside(room, pos)) {return false;}
 
-        Tile tile = room.getTileAt(pos);
-        if (!tile.isWalkable()) return false;
+        if (!room.getTileAt(pos).isWalkable()) {return false;}
 
-        for (Entity entity : room.getEntitiesAt(pos)) {
-            if (entity == mover) continue;
-            if (entity instanceof BlockingEntity b && b.blocksMovement()) return false;
-        }
+        Entity entity = room.getEntityAt(pos);
 
-        return true;
+        return entity == null || entity == mover || !entity.blocksMovement();
     }
 
     public boolean isInside(Room room, GridPosition pos) {

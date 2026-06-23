@@ -91,14 +91,12 @@ public class GameController {
             GridPosition end = new GridPosition(tileX, tileY);
             GridPosition start = game.getPlayer().getGridPosition();
 
-            List<Entity> entities = game.getCurrentRoom().getEntitiesAt(end);
+            Entity entity = game.getCurrentRoom().getEntityAt(end);
 
-            if (!entities.isEmpty()) {
-                selectedEnemy = entities.getFirst();
-                if (selectedEnemy instanceof Enemy enemy) {
-                    showEnemy(enemy);
-                    end = this.attackPositionService.findBestAttackPosition(this.game.getPlayer(), enemy, this.game.getCurrentRoom());
-                }
+            if (entity instanceof Enemy enemy) {
+                selectedEnemy = enemy;
+                showEnemy(enemy);
+                end = this.attackPositionService.findBestAttackPosition(this.game.getPlayer(), enemy, this.game.getCurrentRoom());
             }
 
             currentPath = pathfindingService.findPath(start, end, game.getCurrentRoom(), collisionService

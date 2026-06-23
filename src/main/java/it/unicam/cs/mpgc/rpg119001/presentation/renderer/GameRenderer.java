@@ -53,13 +53,13 @@ public class GameRenderer {
 
     private void renderEntities(Room room) {
 
-        Tile[][] tiles = room.getTiles();
+        for (int x = 0; x < room.getWidth(); x++) {
+            for (int y = 0; y < room.getHeight(); y++) {
 
-        for (int x = 0; x < tiles.length; x++) {
-            for (int y = 0; y < tiles[0].length; y++) {
+                Entity entity = room.getEntityAt(new GridPosition(x, y));
 
-                for (Entity e : room.getEntitiesAt(new GridPosition(x, y))) {
-                    addEntitySprite(e);
+                if (entity != null) {
+                    addEntitySprite(entity);
                 }
             }
         }

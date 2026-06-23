@@ -3,16 +3,16 @@ package it.unicam.cs.mpgc.rpg119001.domain.world;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
 import it.unicam.cs.mpgc.rpg119001.domain.game.SaveGame;
-import it.unicam.cs.mpgc.rpg119001.infrastructure.room.RoomTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Room {
 
     private final Tile[][] tiles;
     private final GridPosition playerSpawnPosition;
-    private final List<Entity>[][] entityGrid;
+    private final Entity[][] entityGrid;
     private final GridPosition leaveSpawn;
     private final String roomTemplateId;
 
@@ -25,17 +25,11 @@ public class Room {
         int width = tiles.length;
         int height = tiles[0].length;
 
-        entityGrid = new ArrayList[width][height];
-
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                entityGrid[x][y] = new ArrayList<>();
-            }
-        }
+        entityGrid = new Entity[width][height];
 
         for (Entity entity : entities) {
             GridPosition pos = entity.getGridPosition();
-            entityGrid[pos.getTileX()][pos.getTileY()].add(entity);
+            entityGrid[pos.getTileX()][pos.getTileY()] = entity;
         }
     }
 
@@ -51,35 +45,37 @@ public class Room {
         return tiles[pos.getTileX()][pos.getTileY()];
     }
 
-    public List<Entity> getEntitiesAt(GridPosition pos) {
+    public Entity getEntityAt(GridPosition pos) {
         return entityGrid[pos.getTileX()][pos.getTileY()];
     }
 
     public List<Entity> getEntities() {
-        List<Entity> all = new ArrayList<>();
+        List<Entity> entities = new ArrayList<>();
 
         for (int x = 0; x < getWidth(); x++) {
-            for (int y = 0; y < getHeight(); y++) {
-                all.addAll(entityGrid[x][y]);
-            }
+            entities.addAll(Arrays.asList(entityGrid[x]).subList(0, getHeight()));
         }
 
-        return all;
-    }
-
-    public void addEntity(Entity entity) {
-        GridPosition p = entity.getGridPosition();
-        entityGrid[p.getTileX()][p.getTileY()].add(entity);
+        return entities;
     }
 
     public void moveEntity(Entity entity, GridPosition newPos) {
+
+        if (entityGrid[newPos.getTileX()][newPos.getTileY()] != null) {
+            throw new IllegalStateException(
+                    "Destination tile already occupied at (" +
+                            newPos.getTileX() + "," +
+                            newPos.getTileY() + ")"
+            );
+        }
+
         GridPosition oldPos = entity.getGridPosition();
 
-        entityGrid[oldPos.getTileX()][oldPos.getTileY()].remove(entity);
+        entityGrid[oldPos.getTileX()][oldPos.getTileY()] = null;
 
         entity.setGridPosition(newPos);
 
-        entityGrid[newPos.getTileX()][newPos.getTileY()].add(entity);
+        entityGrid[newPos.getTileX()][newPos.getTileY()] = entity;
     }
 
     public GridPosition getPlayerSpawnPosition() {
