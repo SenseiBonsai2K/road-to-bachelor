@@ -59,6 +59,28 @@ public class Room {
         return entities;
     }
 
+    public void addEntity(Entity entity) {
+        GridPosition pos = entity.getGridPosition();
+
+        if (entityGrid[pos.getTileX()][pos.getTileY()] != null) {
+            throw new IllegalStateException(
+                    "Tile already occupied at (" +
+                            pos.getTileX() + "," +
+                            pos.getTileY() + ")"
+            );
+        }
+
+        entityGrid[pos.getTileX()][pos.getTileY()] = entity;
+    }
+
+    public void removeEntity(Entity entity) {
+        GridPosition pos = entity.getGridPosition();
+
+        if (entityGrid[pos.getTileX()][pos.getTileY()] == entity) {
+            entityGrid[pos.getTileX()][pos.getTileY()] = null;
+        }
+    }
+
     public void moveEntity(Entity entity, GridPosition newPos) {
 
         if (entityGrid[newPos.getTileX()][newPos.getTileY()] != null) {

@@ -36,6 +36,7 @@ public class GameController {
     private final SaveService saveService;
     private final SaveGameMapper saveGameMapper;
     private final AttackPositionService attackPositionService;
+    private final CombatService combatService;
 
     private Game game;
     private GameRenderer gameRenderer;
@@ -43,7 +44,7 @@ public class GameController {
 
     private List<GridPosition> currentPath = new LinkedList<>();
 
-    private Entity selectedEnemy;
+    private Enemy pendingTarget = null;
 
     @FXML private Label playerNameLabel;
     @FXML private ListView<String> playerStatsList;
@@ -64,6 +65,7 @@ public class GameController {
         this.saveService = sceneManager.getSaveService();
         this.saveGameMapper = sceneManager.getSaveGameMapper();
         this.attackPositionService = sceneManager.getAttackPositionService();
+        this.combatService = sceneManager.getCombatService();
     }
 
     @FXML
@@ -94,13 +96,12 @@ public class GameController {
             Entity entity = game.getCurrentRoom().getEntityAt(end);
 
             if (entity instanceof Enemy enemy) {
-                selectedEnemy = enemy;
+                pendingTarget = enemy;
                 showEnemy(enemy);
                 end = this.attackPositionService.findBestAttackPosition(this.game.getPlayer(), enemy, this.game.getCurrentRoom());
             }
 
-            currentPath = pathfindingService.findPath(start, end, game.getCurrentRoom(), collisionService
-            );
+            currentPath = pathfindingService.findPath(start, end, game.getCurrentRoom(), collisionService);
         });
     }
 
@@ -113,6 +114,11 @@ public class GameController {
     private void showEnemy(Enemy enemy) {
         selectedEnemyNameLabel.setText(enemy.getDisplayName());
         selectedEnemyStatsList.getItems().setAll(enemy.getStats());
+    }
+
+    private void hideEnemy() {
+        selectedEnemyNameLabel.setText("");
+        selectedEnemyStatsList.getItems().setAll("");
     }
 
     private void startGameLoop() {
@@ -133,7 +139,20 @@ public class GameController {
 
     private void handleMovement() {
 
-        if (currentPath == null || currentPath.isEmpty()) return;
+        if (currentPath == null) return;
+
+        if (currentPath.isEmpty()) {
+
+            if (pendingTarget != null) {
+
+                combatService.attack(game.getPlayer(), pendingTarget, game.getCurrentRoom());
+                showEnemy(pendingTarget);
+
+                pendingTarget = null;
+            }
+
+            return;
+        }
 
         GridPosition playerPos = game.getPlayer().getGridPosition();
         GridPosition target = currentPath.getFirst();

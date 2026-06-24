@@ -39,7 +39,7 @@ public class Enemy extends Character {
 
     public List<String> getStats() {
         return List.of(
-                "Health: "+this.getHealthPoints(),
+                "Health: "+this.getCurrentHealthPoints()+" / "+this.getHealthPoints(),
                 "Attack: "+this.getAttackPoints(),
                 "Range: "+this.getAttackRange(),
                 "Speed: " + String.format("%.2f", MS_PER_SECOND / this.getSpeed()) + " tiles/s",

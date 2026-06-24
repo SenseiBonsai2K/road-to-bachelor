@@ -40,6 +40,7 @@ public class SceneManager {
     private final RangeService rangeService;
     private final LineOfSightService lineOfSightService;
     private final AttackPositionService attackPositionService;
+    private final CombatService combatService;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
@@ -57,6 +58,7 @@ public class SceneManager {
         this.movementService = new MovementService(collisionService, movementStrategy);
         this.gameFlowService = new GameFlowService(roomFactory, roomTemplateRepository);
         this.attackPositionService = new AttackPositionService(rangeService, lineOfSightService, pathfindingService, collisionService);
+        this.combatService = new CombatService(rangeService, lineOfSightService);
     }
 
     public void setCurrentGame(Game currentGame) {this.currentGame = currentGame;}
@@ -74,6 +76,7 @@ public class SceneManager {
     public LineOfSightService getLineOfSightService() {return lineOfSightService;}
     public RangeService getRangeService() {return rangeService;}
     public AttackPositionService getAttackPositionService() {return attackPositionService;}
+    public CombatService getCombatService() {return combatService;}
 
     public void showMainMenu() {
         loadScene(Constants.ViewPathConstants.MAIN_MENU_VIEW_PATH);

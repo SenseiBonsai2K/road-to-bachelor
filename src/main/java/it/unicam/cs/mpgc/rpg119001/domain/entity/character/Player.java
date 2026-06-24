@@ -74,7 +74,7 @@ public class Player extends Character {
         return List.of(
                 "Level: "+getLevel(),
                 "Exp: "+getExperience()+" / "+getExperienceCap(),
-                "Health: "+this.getHealthPoints(),
+                "Health: "+this.getCurrentHealthPoints()+" / "+this.getHealthPoints(),
                 "Attack: "+this.getAttackPoints(),
                 "Range: "+this.getAttackRange(),
                 "Speed: " + String.format("%.2f", MS_PER_SECOND / this.getSpeed()) + " tiles/s",

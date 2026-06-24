@@ -28,6 +28,7 @@ public class EnemyFactory {
 
         enemy.setHealthPoints(hp);
         enemy.setAttackPoints(atk);
+        enemy.setCurrentHealthPoints(hp);
 
         return enemy;
     }
