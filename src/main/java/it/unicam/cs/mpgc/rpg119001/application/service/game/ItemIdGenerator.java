@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg119001.domain.entity;
+package it.unicam.cs.mpgc.rpg119001.application.service.game;
 
 public class ItemIdGenerator {
     private static long counter = 0;

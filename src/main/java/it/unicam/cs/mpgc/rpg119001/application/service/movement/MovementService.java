@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.application.service.movement;
 
-import it.unicam.cs.mpgc.rpg119001.application.service.CollisionService;
+import it.unicam.cs.mpgc.rpg119001.application.service.game.CollisionService;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
 import it.unicam.cs.mpgc.rpg119001.domain.movement.Movable;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;

@@ -1,5 +1,8 @@
-package it.unicam.cs.mpgc.rpg119001.application.service;
+package it.unicam.cs.mpgc.rpg119001.application.service.player;
 
+import it.unicam.cs.mpgc.rpg119001.application.service.game.CollisionService;
+import it.unicam.cs.mpgc.rpg119001.application.service.game.UIService;
+import it.unicam.cs.mpgc.rpg119001.application.service.combat.AttackPositionService;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.PathfindingService;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;

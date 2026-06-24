@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.domain.entity.item;
 
-import it.unicam.cs.mpgc.rpg119001.domain.entity.ItemIdGenerator;
+import it.unicam.cs.mpgc.rpg119001.application.service.game.ItemIdGenerator;
 
 public abstract class Item {
 

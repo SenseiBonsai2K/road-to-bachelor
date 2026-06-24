@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg119001.application.service;
+package it.unicam.cs.mpgc.rpg119001.application.service.game;
 
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Player;

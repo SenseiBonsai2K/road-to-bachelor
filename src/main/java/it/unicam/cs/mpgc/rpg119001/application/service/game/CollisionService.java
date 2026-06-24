@@ -1,11 +1,9 @@
-package it.unicam.cs.mpgc.rpg119001.application.service;
+package it.unicam.cs.mpgc.rpg119001.application.service.game;
 
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
-import it.unicam.cs.mpgc.rpg119001.domain.interaction.BlockingEntity;
 import it.unicam.cs.mpgc.rpg119001.domain.movement.Movable;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
-import it.unicam.cs.mpgc.rpg119001.domain.world.Tile;
 
 public class CollisionService {
 

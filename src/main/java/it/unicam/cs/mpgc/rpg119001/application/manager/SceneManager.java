@@ -1,10 +1,17 @@
 package it.unicam.cs.mpgc.rpg119001.application.manager;
 
-import it.unicam.cs.mpgc.rpg119001.application.service.*;
+import it.unicam.cs.mpgc.rpg119001.application.service.combat.AttackPositionService;
+import it.unicam.cs.mpgc.rpg119001.application.service.combat.CombatService;
+import it.unicam.cs.mpgc.rpg119001.application.service.combat.LineOfSightService;
+import it.unicam.cs.mpgc.rpg119001.application.service.combat.RangeService;
+import it.unicam.cs.mpgc.rpg119001.application.service.game.CollisionService;
+import it.unicam.cs.mpgc.rpg119001.application.service.game.GameFlowService;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementService;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementStrategy;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.OrthogonalMovementStrategy;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.PathfindingService;
+import it.unicam.cs.mpgc.rpg119001.application.service.player.PlayerActionService;
+import it.unicam.cs.mpgc.rpg119001.application.service.player.PlayerCommandService;
 import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveGameMapper;
 import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveService;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.RoomFactory;

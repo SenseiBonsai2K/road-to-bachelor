@@ -1,9 +1,8 @@
 package it.unicam.cs.mpgc.rpg119001.domain.entity.character;
 
-import it.unicam.cs.mpgc.rpg119001.domain.entity.EntityIdGenerator;
+import it.unicam.cs.mpgc.rpg119001.application.service.game.EntityIdGenerator;
 import it.unicam.cs.mpgc.rpg119001.domain.game.CombatState;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Fightable;
-import it.unicam.cs.mpgc.rpg119001.domain.interaction.BlockingEntity;
 import it.unicam.cs.mpgc.rpg119001.domain.movement.Movable;
 import it.unicam.cs.mpgc.rpg119001.domain.movement.MovementState;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
