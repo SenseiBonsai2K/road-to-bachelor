@@ -4,6 +4,7 @@ import it.unicam.cs.mpgc.rpg119001.application.service.*;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementService;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementStrategy;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.OrthogonalMovementStrategy;
+import it.unicam.cs.mpgc.rpg119001.application.service.movement.PathfindingService;
 import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveGameMapper;
 import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveService;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.RoomFactory;
@@ -41,6 +42,8 @@ public class SceneManager {
     private final LineOfSightService lineOfSightService;
     private final AttackPositionService attackPositionService;
     private final CombatService combatService;
+    private final PlayerActionService playerActionService;
+    private final PlayerCommandService playerCommandService;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
@@ -59,6 +62,8 @@ public class SceneManager {
         this.gameFlowService = new GameFlowService(roomFactory, roomTemplateRepository);
         this.attackPositionService = new AttackPositionService(rangeService, lineOfSightService, pathfindingService, collisionService);
         this.combatService = new CombatService(rangeService, lineOfSightService);
+        this.playerActionService = new PlayerActionService();
+        this.playerCommandService = new PlayerCommandService(pathfindingService, attackPositionService, collisionService, playerActionService);
     }
 
     public void setCurrentGame(Game currentGame) {this.currentGame = currentGame;}
@@ -77,6 +82,8 @@ public class SceneManager {
     public RangeService getRangeService() {return rangeService;}
     public AttackPositionService getAttackPositionService() {return attackPositionService;}
     public CombatService getCombatService() {return combatService;}
+    public PlayerActionService getPlayerActionService() {return playerActionService;}
+    public PlayerCommandService getPlayerCommandService() {return playerCommandService;}
 
     public void showMainMenu() {
         loadScene(Constants.ViewPathConstants.MAIN_MENU_VIEW_PATH);

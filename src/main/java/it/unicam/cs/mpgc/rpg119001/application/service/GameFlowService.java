@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.application.service;
 
+import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.RoomFactory;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.room.RoomTemplateDTO;
@@ -28,5 +29,16 @@ public class GameFlowService {
             return repository.randomBossTemplate();
         }
         return repository.randomTemplate();
+    }
+
+    public void advanceToNextRoom(Game game) {
+
+        game.nextLevel();
+
+        Room newRoom = nextRoom(game.getLevel());
+
+        game.setCurrentRoom(newRoom);
+
+        game.getPlayer().setGridPosition(newRoom.getPlayerSpawnPosition());
     }
 }

@@ -1,4 +1,5 @@
 package it.unicam.cs.mpgc.rpg119001.application.service;
+import it.unicam.cs.mpgc.rpg119001.application.service.movement.PathfindingService;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Character;

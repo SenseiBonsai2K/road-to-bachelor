@@ -1,6 +1,5 @@
 package it.unicam.cs.mpgc.rpg119001.application.service;
 
-import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Character;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Player;
@@ -8,12 +7,14 @@ import it.unicam.cs.mpgc.rpg119001.domain.game.Fightable;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 
-import java.util.concurrent.ForkJoinPool;
+import java.util.function.Consumer;
 
 public class CombatService {
 
     private final RangeService rangeService;
     private final LineOfSightService lineOfSightService;
+    private Runnable onEnemyDeath;
+    private Consumer<Enemy> onEnemyDamaged;
 
     public CombatService(RangeService rangeService, LineOfSightService lineOfSightService) {
         this.rangeService = rangeService;
@@ -30,18 +31,21 @@ public class CombatService {
                 lineOfSightService.hasLineOfSight(attackerGridPosition, targetGridPosition, room);
     }
 
-    public void attack(Character attacker, Character target, Room room) {
+    public void attack(Fightable attacker, Fightable target, Room room) {
 
         if (!canAttack(attacker, target, room)) return;
 
         int damage = calculateDamage(attacker);
 
         target.takeDamage(damage);
+        if (onEnemyDamaged != null) onEnemyDamaged.accept((Enemy) target);
 
         attacker.getCombatState().registerAttack(System.currentTimeMillis());
 
         if (target.isDead()) {
-            room.removeEntity(target);
+            room.removeEntity((Entity) target);
+            if (onEnemyDeath != null) onEnemyDeath.run();
+
             if (attacker instanceof Player player && target instanceof Enemy enemy) {
                 player.addExperience(enemy.getExperiencePointsReward());
             }
@@ -52,7 +56,15 @@ public class CombatService {
         }
     }
 
-    private int calculateDamage(Character attacker) {
+    public void setOnEnemyDeath(Runnable onEnemyDeath) {
+        this.onEnemyDeath = onEnemyDeath;
+    }
+
+    public void setOnEnemyDamaged(Consumer<Enemy> onEnemyDamaged) {
+        this.onEnemyDamaged = onEnemyDamaged;
+    }
+
+    private int calculateDamage(Fightable attacker) {
         int damage;
 
         int base = attacker.getAttackPoints();

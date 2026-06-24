@@ -58,12 +58,12 @@
             <Button fx:id="saveGameButton"
                     text="Save"
                     prefWidth="120"
-                    onAction="#SaveGame"/>
+                    onAction="#saveGame"/>
 
             <Button fx:id="saveAndExit"
                     text="Save and Exit"
                     prefWidth="120"
-                    onAction="#SaveAndExit"/>
+                    onAction="#saveAndExit"/>
 
         </HBox>
     </bottom>
