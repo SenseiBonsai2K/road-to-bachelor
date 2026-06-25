@@ -11,10 +11,7 @@ public class RangeService {
         return calculateDistance(candidateTile, targetPos) <= range;
     }
 
-    public int calculateDistance(GridPosition a,
-                                 GridPosition b) {
-
-        return Math.abs(a.getTileX() - b.getTileX())
-                + Math.abs(a.getTileY() - b.getTileY());
+    public int calculateDistance(GridPosition a, GridPosition b) {
+        return Math.abs(a.getTileX() - b.getTileX()) + Math.abs(a.getTileY() - b.getTileY());
     }
 }

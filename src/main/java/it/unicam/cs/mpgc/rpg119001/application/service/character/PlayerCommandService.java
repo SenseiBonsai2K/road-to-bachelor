@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg119001.application.service.player;
+package it.unicam.cs.mpgc.rpg119001.application.service.character;
 
 import it.unicam.cs.mpgc.rpg119001.application.service.game.CollisionService;
 import it.unicam.cs.mpgc.rpg119001.application.service.game.UIService;
@@ -19,17 +19,14 @@ public class PlayerCommandService {
 
     private final PathfindingService pathfindingService;
     private final AttackPositionService attackPositionService;
-    private final CollisionService collisionService;
 
     private final PlayerActionService actionService;
 
     public PlayerCommandService(PathfindingService pathfindingService,
                                 AttackPositionService attackPositionService,
-                                CollisionService collisionService,
                                 PlayerActionService actionService) {
         this.pathfindingService = pathfindingService;
         this.attackPositionService = attackPositionService;
-        this.collisionService = collisionService;
         this.actionService = actionService;
     }
 
@@ -53,7 +50,7 @@ public class PlayerCommandService {
             end = attackPositionService.findBestAttackPosition(player, enemy, room);
         }
 
-        List<GridPosition> path = pathfindingService.findPath(player.getGridPosition(), end, room, collisionService);
+        List<GridPosition> path = pathfindingService.findPath(player.getGridPosition(), end, room);
 
         actionService.setPath(path);
     }

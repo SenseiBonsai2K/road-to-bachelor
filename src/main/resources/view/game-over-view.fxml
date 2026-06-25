@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.unicam.cs.mpgc.rpg119001.presentation.controller.GameOverController"
+      alignment="CENTER"
+      spacing="20"
+      style="-fx-background-color: #1e1e1e;"
+      prefWidth="800"
+      prefHeight="600">
+
+    <Label text="GAME OVER"
+           style="-fx-text-fill: white; -fx-font-size: 48px; -fx-font-weight: bold;" />
+
+    <Label text="Thanks for playing!"
+           style="-fx-text-fill: #cccccc; -fx-font-size: 18px;" />
+
+    <VBox spacing="15" alignment="CENTER">
+
+        <Button text="Return to Main Menu"
+                fx:id="mainMenuButton"
+                prefWidth="200"
+                style="-fx-font-size: 14px;"
+                onAction="#showMainMenu"/>
+
+        <Button text="Exit Game"
+                fx:id="exitButton"
+                prefWidth="200"
+                style="-fx-font-size: 14px;"
+                onAction="#exitGame"/>
+
+    </VBox>
+
+</VBox>

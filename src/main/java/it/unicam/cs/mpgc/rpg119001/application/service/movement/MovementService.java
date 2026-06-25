@@ -11,8 +11,7 @@ public class MovementService {
     private final CollisionService collisionService;
     private final MovementStrategy movementStrategy;
 
-    public MovementService(CollisionService collisionService,
-                           MovementStrategy movementStrategy) {
+    public MovementService(CollisionService collisionService, MovementStrategy movementStrategy) {
         this.collisionService = collisionService;
         this.movementStrategy = movementStrategy;
     }

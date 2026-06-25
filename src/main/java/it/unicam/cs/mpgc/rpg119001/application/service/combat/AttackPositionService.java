@@ -52,8 +52,7 @@ public class AttackPositionService {
             List<GridPosition> path = pathfindingService.findPath(
                     attacker.getGridPosition(),
                     candidate,
-                    room,
-                    collisionService
+                    room
             );
 
             if (path.isEmpty()) {

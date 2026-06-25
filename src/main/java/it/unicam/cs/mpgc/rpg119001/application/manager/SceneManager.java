@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg119001.application.manager;
 
+import it.unicam.cs.mpgc.rpg119001.application.service.character.EnemyAIService;
 import it.unicam.cs.mpgc.rpg119001.application.service.combat.AttackPositionService;
 import it.unicam.cs.mpgc.rpg119001.application.service.combat.CombatService;
 import it.unicam.cs.mpgc.rpg119001.application.service.combat.LineOfSightService;
@@ -10,13 +11,14 @@ import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementService;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementStrategy;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.OrthogonalMovementStrategy;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.PathfindingService;
-import it.unicam.cs.mpgc.rpg119001.application.service.player.PlayerActionService;
-import it.unicam.cs.mpgc.rpg119001.application.service.player.PlayerCommandService;
+import it.unicam.cs.mpgc.rpg119001.application.service.character.PlayerActionService;
+import it.unicam.cs.mpgc.rpg119001.application.service.character.PlayerCommandService;
 import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveGameMapper;
 import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveService;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.RoomFactory;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.room.RoomTemplateRepository;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.GameController;
+import it.unicam.cs.mpgc.rpg119001.presentation.controller.GameOverController;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.MainMenuController;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.PlayerSelectionController;
 import it.unicam.cs.mpgc.rpg119001.config.Constants;
@@ -51,6 +53,7 @@ public class SceneManager {
     private final CombatService combatService;
     private final PlayerActionService playerActionService;
     private final PlayerCommandService playerCommandService;
+    private final EnemyAIService enemyAIService;
 
     public SceneManager(Stage stage) {
         this.stage = stage;
@@ -69,8 +72,9 @@ public class SceneManager {
         this.gameFlowService = new GameFlowService(roomFactory, roomTemplateRepository);
         this.attackPositionService = new AttackPositionService(rangeService, lineOfSightService, pathfindingService, collisionService);
         this.combatService = new CombatService(rangeService, lineOfSightService);
+        this.enemyAIService = new EnemyAIService(lineOfSightService, combatService, movementService);
         this.playerActionService = new PlayerActionService();
-        this.playerCommandService = new PlayerCommandService(pathfindingService, attackPositionService, collisionService, playerActionService);
+        this.playerCommandService = new PlayerCommandService(pathfindingService, attackPositionService, playerActionService);
     }
 
     public void setCurrentGame(Game currentGame) {this.currentGame = currentGame;}
@@ -91,6 +95,7 @@ public class SceneManager {
     public CombatService getCombatService() {return combatService;}
     public PlayerActionService getPlayerActionService() {return playerActionService;}
     public PlayerCommandService getPlayerCommandService() {return playerCommandService;}
+    public EnemyAIService getEnemyAIService() {return enemyAIService;}
 
     public void showMainMenu() {
         loadScene(Constants.ViewPathConstants.MAIN_MENU_VIEW_PATH);
@@ -103,6 +108,8 @@ public class SceneManager {
     public void showGame() {
         loadScene(Constants.ViewPathConstants.GAME_VIEW_PATH);
     }
+
+    public void showGameOver() { loadScene(Constants.ViewPathConstants.GAME_OVER_PATH);}
 
     private <T> void loadScene(String fxml) {
         try {
@@ -129,6 +136,9 @@ public class SceneManager {
 
         if (type == GameController.class)
             return new GameController(this);
+
+        if (type == GameOverController.class)
+            return new GameOverController(this);
 
         throw new RuntimeException("Unknown controller: " + type);
     }

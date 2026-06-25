@@ -54,6 +54,7 @@ public class Constants {
         public static final String MAIN_MENU_VIEW_PATH = "/view/main-menu-view.fxml";
         public static final String PLAYER_SELECTION_VIEW_PATH = "/view/player-selection-view.fxml";
         public static final String GAME_VIEW_PATH = "/view/game-view.fxml";
+        public static final String GAME_OVER_PATH = "/view/game-over-view.fxml";
     }
 
     public static class PlayerSpritePathConstants {

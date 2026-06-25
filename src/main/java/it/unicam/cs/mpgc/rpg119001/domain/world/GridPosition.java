@@ -34,6 +34,19 @@ public class GridPosition {
         return tileY * GridConstants.TILE_SIZE;
     }
 
+    private static final java.util.List<int[]> OFFSETS = java.util.List.of(
+            new int[]{1, 0},
+            new int[]{-1, 0},
+            new int[]{0, 1},
+            new int[]{0, -1}
+    );
+
+    public java.util.List<GridPosition> getAdjacentPositions() {
+        return OFFSETS.stream()
+                .map(o -> new GridPosition(tileX + o[0], tileY + o[1]))
+                .toList();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

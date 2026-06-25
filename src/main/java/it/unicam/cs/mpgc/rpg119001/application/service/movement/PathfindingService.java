@@ -8,7 +8,9 @@ import java.util.*;
 
 public class PathfindingService {
 
-    public List<GridPosition> findPath(GridPosition start, GridPosition goal, Room room, CollisionService collisionService) {
+    private final CollisionService collisionService = new CollisionService();
+
+    public List<GridPosition> findPath(GridPosition start, GridPosition goal, Room room) {
         Queue<GridPosition> queue = new LinkedList<>();
         Map<GridPosition, GridPosition> cameFrom = new HashMap<>();
         Set<GridPosition> visited = new HashSet<>();

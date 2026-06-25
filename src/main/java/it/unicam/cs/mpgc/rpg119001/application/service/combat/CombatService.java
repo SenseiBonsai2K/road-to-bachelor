@@ -13,6 +13,7 @@ public class CombatService {
 
     private final RangeService rangeService;
     private final LineOfSightService lineOfSightService;
+    private Runnable onPlayerDeath;
     private Runnable onEnemyDeath;
     private Consumer<Enemy> onEnemyDamaged;
 
@@ -31,29 +32,57 @@ public class CombatService {
                 lineOfSightService.hasLineOfSight(attackerGridPosition, targetGridPosition, room);
     }
 
-    public void attack(Fightable attacker, Fightable target, Room room) {
+    public void attack(Fightable attacker,
+                       Fightable target,
+                       Room room) {
 
-        if (!canAttack(attacker, target, room)) return;
+        if (!canAttack(attacker, target, room)) {
+            return;
+        }
 
         int damage = calculateDamage(attacker);
 
         target.takeDamage(damage);
-        if (onEnemyDamaged != null) onEnemyDamaged.accept((Enemy) target);
 
-        attacker.getCombatState().registerAttack(System.currentTimeMillis());
+        attacker.getCombatState()
+                .registerAttack(System.currentTimeMillis());
 
-        if (target.isDead()) {
-            room.removeEntity((Entity) target);
-            if (onEnemyDeath != null) onEnemyDeath.run();
+        if (target instanceof Enemy enemy && onEnemyDamaged != null) {
+            onEnemyDamaged.accept(enemy);
+        }
 
-            if (attacker instanceof Player player && target instanceof Enemy enemy) {
+        if (!target.isDead()) {
+            return;
+        }
+
+        room.removeEntity((Entity) target);
+
+        if (target instanceof Enemy enemy) {
+            if (onEnemyDeath != null) {
+                onEnemyDeath.run();
+            }
+
+            if (attacker instanceof Player player) {
                 player.addExperience(enemy.getExperiencePointsReward());
             }
-            for (Entity entity : room.getEntities()) {
-                if (entity instanceof Enemy) return;
+        }
+
+        if (target instanceof Player player) {
+            if (onPlayerDeath != null) {
+                onPlayerDeath.run();
             }
+        }
+
+        boolean enemiesRemaining = room.getEntities().stream()
+                .anyMatch(entity -> entity instanceof Enemy);
+
+        if (!enemiesRemaining) {
             room.destroyExitDoor();
         }
+    }
+
+    public void setOnPlayerDeath(Runnable onPlayerDeath) {
+        this.onPlayerDeath = onPlayerDeath;
     }
 
     public void setOnEnemyDeath(Runnable onEnemyDeath) {
@@ -65,12 +94,12 @@ public class CombatService {
     }
 
     private int calculateDamage(Fightable attacker) {
-        int damage;
+        int totalDamage;
 
-        int base = attacker.getAttackPoints();
+        int baseDamage = attacker.getAttackPoints();
         //TODO Implement defense, effect ecc.. to add to damage
 
-        damage = base;
-        return damage;
+        totalDamage = baseDamage;
+        return totalDamage;
     }
 }

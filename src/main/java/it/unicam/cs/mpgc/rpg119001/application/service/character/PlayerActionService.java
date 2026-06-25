@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg119001.application.service.player;
+package it.unicam.cs.mpgc.rpg119001.application.service.character;
 
 import it.unicam.cs.mpgc.rpg119001.application.service.combat.CombatService;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.MovementService;
@@ -39,7 +39,10 @@ public class PlayerActionService {
         if (currentPath == null || currentPath.isEmpty()) {
 
             if (pendingTarget != null) {
-                combatService.attack(player, pendingTarget, room);
+                if (combatService.canAttack(game.getPlayer(), pendingTarget, game.getCurrentRoom())) {
+                    combatService.attack(game.getPlayer(), pendingTarget, game.getCurrentRoom());
+                }
+
                 pendingTarget = null;
             }
 

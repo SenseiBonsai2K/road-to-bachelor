@@ -48,7 +48,6 @@ public class GameFactory {
 
         for (SaveGame.EnemyState enemyState : save.getEnemyStates()) {
             Enemy enemy = enemyFactory.createEnemyByArchetype(save.getLevel(), enemyState.archetype);
-            System.out.println("created a "+enemy);
             enemy.setGridPosition(new GridPosition(enemyState.x, enemyState.y));
             enemy.setCurrentHealthPoints(enemyState.currentHp);
             entities.add(enemy);
