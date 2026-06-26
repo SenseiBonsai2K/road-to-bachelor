@@ -6,6 +6,20 @@ import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.RoomFactory;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.room.RoomTemplateDTO;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.room.RoomTemplateRepository;
 
+/**
+ * Service responsible for managing game progression and room transitions.
+ *
+ * <p>This service handles the creation and selection of rooms based on
+ * the current game level and coordinates the transition between game states.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Select appropriate room templates based on game progression.</li>
+ *     <li>Create new rooms using the RoomFactory.</li>
+ *     <li>Advance the game to the next level.</li>
+ *     <li>Reset player position when entering a new room.</li>
+ * </ul>
+ */
 public class GameFlowService {
 
     private final RoomFactory roomFactory;

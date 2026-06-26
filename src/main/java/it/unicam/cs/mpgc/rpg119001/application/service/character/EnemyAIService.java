@@ -9,11 +9,23 @@ import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Player;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
-import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character.EnemyPresets;
 
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Service responsible for controlling the behavior of enemy entities during the game loop.
+ *
+ * <p>For each enemy, this service evaluates the current game state and determines
+ * the appropriate action according to the following priority:</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Call the Combat Service to attack the player if the player is within attack range.</li>
+ *     <li>Move towards the player if there is a clear line of sight.</li>
+ *     <li>Otherwise, perform a random valid movement.</li>
+ * </ul>
+ */
 public class EnemyAIService {
 
     private final LineOfSightService lineOfSightService;
@@ -51,23 +63,23 @@ public class EnemyAIService {
         }
 
         if (lineOfSightService.hasLineOfSight(enemyPos, playerPos, room)) {
-            moveTowardEnemy(enemy, playerPos, room);
+            moveTowardTarget(enemy, playerPos, room);
             return;
         }
 
         moveRandom(enemy, room);
     }
 
-    private void moveTowardEnemy(Enemy enemy, GridPosition target, Room room) {
+    private void moveTowardTarget(Enemy enemy, GridPosition targetPosition, Room room) {
 
         GridPosition current = enemy.getGridPosition();
 
         List<GridPosition> neighbors = current.getAdjacentPositions();
 
         GridPosition best = neighbors.stream()
-                .filter(p -> room.getTileAt(p).isWalkable())
-                .min((a, b) ->
-                        Integer.compare(distance(a, target), distance(b, target))
+                .filter(neighborPosition -> room.getTileAt(neighborPosition).isWalkable())
+                .min((firstPositionToEvaluate, secondPositionToEvaluate) ->
+                        Integer.compare(distance(firstPositionToEvaluate, targetPosition), distance(secondPositionToEvaluate, targetPosition))
                 )
                 .orElse(current);
 
@@ -94,8 +106,8 @@ public class EnemyAIService {
         movementService.move(enemy, chosen, room);
     }
 
-    private int distance(GridPosition a, GridPosition b) {
-        return Math.abs(a.getTileX() - b.getTileX())
-                + Math.abs(a.getTileY() - b.getTileY());
+    private int distance(GridPosition positionToEvaluate, GridPosition targetPosition) {
+        return Math.abs(positionToEvaluate.getTileX() - targetPosition.getTileX()) +
+                Math.abs(positionToEvaluate.getTileY() - targetPosition.getTileY());
     }
 }

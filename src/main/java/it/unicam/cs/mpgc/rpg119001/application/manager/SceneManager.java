@@ -32,6 +32,26 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Central application manager responsible for controlling scene navigation
+ * and dependency orchestration across the entire application.
+ *
+ * <p>This class acts as a lightweight dependency container and navigation
+ * coordinator for JavaFX scenes. It is responsible for instantiating and
+ * providing access to core services, factories, and game-related components.</p>
+ *
+ * <p>It also manages the lifecycle of the current game session and handles
+ * transitions between different application views such as menus, gameplay,
+ * and game over screens.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Initialize and wire application services and dependencies.</li>
+ *     <li>Manage the current game instance.</li>
+ *     <li>Handle JavaFX scene switching.</li>
+ *     <li>Provide access to shared services across controllers.</li>
+ * </ul>
+ */
 public class SceneManager {
 
     private final Stage stage;
