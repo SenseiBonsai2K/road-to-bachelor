@@ -7,6 +7,21 @@ import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character.EnemyPreset;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.preset.character.EnemyPresets;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 
+/**
+ * Factory responsible for creating enemy instances based on predefined
+ * archetypes and the current game progression.
+ *
+ * <p>This factory applies level scaling and difficulty modifiers to enemy
+ * statistics while instantiating enemies from reusable presets.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Create random enemies for room generation.</li>
+ *     <li>Create enemies from a specific archetype.</li>
+ *     <li>Scale enemy attributes according to game level.</li>
+ *     <li>Apply the current game difficulty multiplier.</li>
+ * </ul>
+ */
 public class EnemyFactory {
     public Enemy createRandomEnemy(int level) {
         EnemyPreset preset = EnemyPresets.getAll().get((int) (Math.random() * EnemyPresets.getAll().size()));

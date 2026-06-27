@@ -9,6 +9,21 @@ import it.unicam.cs.mpgc.rpg119001.infrastructure.room.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Factory responsible for creating room instances from room templates.
+ *
+ * <p>This factory converts serialized room templates into runtime room
+ * objects, spawning enemies and initializing the room state required by
+ * the game.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Create new rooms from room templates.</li>
+ *     <li>Spawn enemies for newly generated rooms.</li>
+ *     <li>Reconstruct rooms when loading saved games.</li>
+ *     <li>Initialize room entities and tile layout.</li>
+ * </ul>
+ */
 public class RoomFactory {
 
     private final EnemyFactory enemyFactory = new EnemyFactory();
@@ -26,25 +41,13 @@ public class RoomFactory {
             entities.add(enemy);
         }
 
-        return new Room(
-                dto.id(),
-                template.tiles(),
-                entities,
-                template.playerSpawn(),
-                template.leaveSpawn()
-        );
+        return new Room(dto.id(), template.tiles(), entities, template.playerSpawn(), template.leaveSpawn());
     }
 
     public Room loadRoom(RoomTemplateDTO dto, List<Entity> entities) {
 
         RoomTemplate template = parser.parse(dto);
 
-        return new Room(
-                dto.id(),
-                template.tiles(),
-                entities,
-                template.playerSpawn(),
-                template.leaveSpawn()
-        );
+        return new Room(dto.id(), template.tiles(), entities, template.playerSpawn(), template.leaveSpawn());
     }
 }

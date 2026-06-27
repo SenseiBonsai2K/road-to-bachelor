@@ -16,6 +16,21 @@ import it.unicam.cs.mpgc.rpg119001.infrastructure.room.RoomTemplateRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Factory responsible for creating complete game sessions.
+ *
+ * <p>This factory supports both the initialization of a new game and the
+ * reconstruction of a previously saved game by assembling all required
+ * domain objects.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Create a new game from a selected player preset.</li>
+ *     <li>Restore a game session from saved data.</li>
+ *     <li>Instantiate players, rooms and enemies.</li>
+ *     <li>Reconstruct the game world from its persistent representation.</li>
+ * </ul>
+ */
 public class GameFactory {
 
     private final RoomFactory roomFactory = new RoomFactory();
@@ -66,10 +81,6 @@ public class GameFactory {
         player.roadToLevel(save.getPlayerState().level, save.getPlayerState().exp);
         player.setCurrentHealthPoints(save.getPlayerState().currentHp);
 
-        return new Game(
-                player,
-                room,
-                save.getLevel()
-        );
+        return new Game(player, room, save.getLevel());
     }
 }
