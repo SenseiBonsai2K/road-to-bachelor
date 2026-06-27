@@ -7,6 +7,27 @@ import java.util.List;
 
 import static it.unicam.cs.mpgc.rpg119001.config.Constants.GameConstants.MS_PER_SECOND;
 
+/**
+ * Represents an enemy controlled by the game.
+ *
+ * <p>An enemy is a combat-capable character created from an
+ * {@link EnemyPreset}. Besides common combat behavior inherited from
+ * {@link Character}, it exposes metadata such as archetype, display name
+ * and experience reward.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Represent hostile characters within the game world.</li>
+ *     <li>Expose enemy-specific metadata.</li>
+ *     <li>Block movement and line of sight.</li>
+ *     <li>Provide formatted statistics for the user interface.</li>
+ * </ul>
+ *
+ * <h2>Design Notes</h2>
+ * <p>Enemy statistics are initialized from immutable presets, while
+ * runtime values such as health are managed by the inherited
+ * {@link Character} implementation.</p>
+ */
 public class Enemy extends Character {
 
     private final EnemyPreset preset;

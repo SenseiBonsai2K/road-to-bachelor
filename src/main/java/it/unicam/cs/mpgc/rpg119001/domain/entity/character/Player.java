@@ -9,6 +9,26 @@ import java.util.List;
 
 import static it.unicam.cs.mpgc.rpg119001.config.Constants.GameConstants.MS_PER_SECOND;
 
+/**
+ * Represents the player-controlled character.
+ *
+ * <p>The player extends the generic {@link Character} model by introducing
+ * progression mechanics such as experience, leveling and persistent state.
+ * It also provides formatted statistics for the user interface.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Represent the player during gameplay.</li>
+ *     <li>Manage experience and level progression.</li>
+ *     <li>Provide player-specific metadata.</li>
+ *     <li>Support serialization for game persistence.</li>
+ * </ul>
+ *
+ * <h2>Design Notes</h2>
+ * <p>The player's initial attributes are loaded from a
+ * {@link PlayerPreset}, while progression dynamically modifies combat
+ * statistics during gameplay.</p>
+ */
 public class Player extends Character {
 
     private final PlayerPreset preset;

@@ -7,6 +7,29 @@ import it.unicam.cs.mpgc.rpg119001.domain.movement.Movable;
 import it.unicam.cs.mpgc.rpg119001.domain.movement.MovementState;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 
+/**
+ * Represents the base abstraction for every combat-capable character in the game.
+ *
+ * <p>A character combines movement and combat capabilities by implementing
+ * both the {@link Movable} and {@link Fightable} contracts. It provides
+ * the common state and behavior shared by players and enemies.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Maintain combat attributes such as health, attack and range.</li>
+ *     <li>Maintain movement and combat state.</li>
+ *     <li>Handle damage reception and death.</li>
+ *     <li>Provide common functionality shared by all characters.</li>
+ * </ul>
+ *
+ * <h2>Design Notes</h2>
+ * <p>This abstract class centralizes character behavior, avoiding
+ * duplication between different character implementations while
+ * allowing subclasses to define their own gameplay-specific features.</p>
+ *
+ * @implNote
+ * When NPC will be introduced, Character will not implement Fightable anymore
+ */
 public abstract class Character extends Entity implements Movable, Fightable {
     private int currentHealthPoints;
     private int healthPoints;
