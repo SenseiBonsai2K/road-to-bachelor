@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<?import javafx.scene.control.Button?>
+<Pane id="mainMenuPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg119001.presentation.controller.MainMenuController">
+   <children>
+      <ImageView id="backgroundImageView" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="350.0">
+         <children>
+            <Text fx:id="titleText" id="titleText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="350.13671875">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Text>
+            <VBox id="buttonsVBox" alignment="BOTTOM_CENTER" prefHeight="270.0" prefWidth="350.0" spacing="10.0">
+               <children>
+                  <Button fx:id="continueButton"
+                          id="continueButton"
+                          onAction="#onContinue"
+                          prefHeight="40.0"
+                          prefWidth="200.0" />
+                  <Button fx:id="newGameButton" id="newGameButton" onAction="#onNewGame" prefHeight="40.0" prefWidth="200.0" />
+                  <Button fx:id="settingButton" id="settingButton" prefHeight="40.0" prefWidth="200.0" />
+                  <Button fx:id="exitButton" id="exitButton" onAction="#onExit" prefHeight="40.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>

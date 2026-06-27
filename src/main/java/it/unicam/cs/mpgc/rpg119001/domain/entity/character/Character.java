@@ -1,0 +1,100 @@
+package it.unicam.cs.mpgc.rpg119001.domain.entity.character;
+
+import it.unicam.cs.mpgc.rpg119001.application.service.game.EntityIdGenerator;
+import it.unicam.cs.mpgc.rpg119001.domain.game.CombatState;
+import it.unicam.cs.mpgc.rpg119001.domain.game.Fightable;
+import it.unicam.cs.mpgc.rpg119001.domain.movement.Movable;
+import it.unicam.cs.mpgc.rpg119001.domain.movement.MovementState;
+import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
+
+/**
+ * Represents the base abstraction for every combat-capable character in the game.
+ *
+ * <p>A character combines movement and combat capabilities by implementing
+ * both the {@link Movable} and {@link Fightable} contracts. It provides
+ * the common state and behavior shared by players and enemies.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Maintain combat attributes such as health, attack and range.</li>
+ *     <li>Maintain movement and combat state.</li>
+ *     <li>Handle damage reception and death.</li>
+ *     <li>Provide common functionality shared by all characters.</li>
+ * </ul>
+ *
+ * <h2>Design Notes</h2>
+ * <p>This abstract class centralizes character behavior, avoiding
+ * duplication between different character implementations while
+ * allowing subclasses to define their own gameplay-specific features.</p>
+ *
+ * @implNote
+ * When NPC will be introduced, Character will not implement Fightable anymore
+ */
+public abstract class Character extends Entity implements Movable, Fightable {
+    private int currentHealthPoints;
+    private int healthPoints;
+    private int attackPoints;
+    private int speed;
+    private int attackRange;
+    private int attackSpeed;
+    private boolean isDead;
+    private final MovementState movementState = new MovementState();
+    private final CombatState combatState = new CombatState();
+
+    public Character(String id, int currentHealthPoints, int healthPoints, int attackPoints, int attackRange, GridPosition gridPosition, int speed, int attackSpeed, String spritePath) {
+        super(EntityIdGenerator.next(id), gridPosition, spritePath);
+        this.healthPoints = healthPoints;
+        this.currentHealthPoints = currentHealthPoints;
+        this.attackPoints = attackPoints;
+        this.speed = speed;
+        this.attackSpeed = attackSpeed;
+        this.attackRange = attackRange;
+        this.isDead = false;
+    }
+
+    public int getAttackPoints() {return attackPoints;}
+    public int getHealthPoints() {return healthPoints;}
+    public int getAttackRange() {return this.attackRange;}
+    public int getAttackSpeed() {return this.attackSpeed;}
+    public int getCurrentHealthPoints() {return this.currentHealthPoints;}
+
+    public void setHealthPoints(int healthPoints) {this.healthPoints = healthPoints;}
+    public void setAttackPoints(int attackPoints) {this.attackPoints = attackPoints;}
+    public void setAttackRange(int attackRange) {this.attackRange = attackRange;}
+    public void setAttackSpeed(int attackSpeed) {this.attackSpeed = attackSpeed;}
+    public void setCurrentHealthPoints(int currentHealthPoints) {this.currentHealthPoints = currentHealthPoints;}
+
+    @Override
+    public void takeDamage(int damage) {
+        if (damage<=0) return;
+        if (getCurrentHealthPoints()-damage <= 0) {
+            this.isDead = true;
+            return;
+        }
+        setCurrentHealthPoints(getCurrentHealthPoints()-damage);
+    }
+
+    @Override
+    public boolean isDead() {
+        return this.isDead;
+    }
+
+    @Override
+    public CombatState getCombatState() {
+        return combatState;
+    }
+
+    @Override
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    @Override
+    public MovementState getMovementState() {
+        return movementState;
+    }
+}
