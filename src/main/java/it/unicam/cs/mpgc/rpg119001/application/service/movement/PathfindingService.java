@@ -6,6 +6,21 @@ import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 
 import java.util.*;
 
+/**
+ * Service responsible for computing movement paths between positions
+ * within a room.
+ *
+ * <p>This service implements a breadth-first search (BFS) algorithm to
+ * determine the shortest traversable path between two grid positions,
+ * taking into account room boundaries, walkable tiles and entity collisions.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Compute the shortest traversable path between two positions.</li>
+ *     <li>Respect collision and movement constraints.</li>
+ *     <li>Reconstruct the resulting path from the search graph.</li>
+ * </ul>
+ */
 public class PathfindingService {
 
     private final CollisionService collisionService = new CollisionService();

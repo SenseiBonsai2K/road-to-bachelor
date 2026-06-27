@@ -6,6 +6,21 @@ import it.unicam.cs.mpgc.rpg119001.domain.movement.Movable;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 
+/**
+ * Service responsible for executing entity movement within the game world.
+ *
+ * <p>This service coordinates movement validation, movement timing and
+ * position updates by combining collision detection with a configurable
+ * movement strategy.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Validate movement cooldowns.</li>
+ *     <li>Compute the next movement step.</li>
+ *     <li>Validate collisions before movement.</li>
+ *     <li>Update entity positions inside a room.</li>
+ * </ul>
+ */
 public class MovementService {
 
     private final CollisionService collisionService;
