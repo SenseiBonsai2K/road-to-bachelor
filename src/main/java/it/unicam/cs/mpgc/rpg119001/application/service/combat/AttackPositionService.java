@@ -65,11 +65,12 @@ public class AttackPositionService {
                 attacker.getAttackRange()
         );
 
-        candidates.removeIf(c -> !collisionService.isInside(room, c));
+        candidates.removeIf(candidate -> !collisionService.isInside(room, candidate));
 
         return candidates.stream()
-                .filter(c -> isValidAttackPosition(attacker, target, room, c))
-                .min(Comparator.comparingInt(c -> computeMovementCost(attacker, c, room)))
+                .filter(candidate -> isValidAttackPosition(attacker, target, room, candidate))
+                .filter(candidate -> !pathfindingService.findPath(attacker.getGridPosition(), candidate, room).isEmpty())
+                .min(Comparator.comparingInt(candidate -> computeMovementCost(attacker, candidate, room)))
                 .orElse(null);
     }
 
