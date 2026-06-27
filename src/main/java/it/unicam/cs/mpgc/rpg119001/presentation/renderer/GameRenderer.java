@@ -13,6 +13,21 @@ import javafx.scene.layout.Pane;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Responsible for rendering the current game state on the JavaFX scene.
+ *
+ * <p>This renderer converts the runtime representation of the game world
+ * into visual components by drawing room tiles, the player and all entities
+ * onto the game pane.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Render the current room layout.</li>
+ *     <li>Render the player and all game entities.</li>
+ *     <li>Manage sprite loading and image caching.</li>
+ *     <li>Refresh the game view every frame.</li>
+ * </ul>
+ */
 public class GameRenderer {
 
     private final Pane gamePane;
