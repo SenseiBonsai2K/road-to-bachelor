@@ -12,6 +12,13 @@ import javafx.scene.control.Button;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.MainMenuConstants;
 import javafx.scene.text.Text;
 
+/**
+ * JavaFX controller responsible for the application's main menu.
+ *
+ * <p>This controller initializes the menu interface and manages
+ * navigation to the different game states, including starting a new
+ * game, continuing a saved game and exiting the application.</p>
+ */
 public class MainMenuController {
 
     @FXML

@@ -12,6 +12,13 @@ import javafx.scene.text.Text;
 
 import java.util.List;
 
+/**
+ * JavaFX controller responsible for the player selection screen.
+ *
+ * <p>This controller allows the user to browse the available player
+ * archetypes, inspect their statistics and start a new game using the
+ * selected preset.</p>
+ */
 public class PlayerSelectionController {
 
     @FXML

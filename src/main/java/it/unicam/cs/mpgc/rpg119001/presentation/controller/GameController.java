@@ -55,6 +55,25 @@ public class GameController {
     @FXML private Button saveAndExitButton;
     @FXML private Button saveAndMainMenuButton;
 
+    /**
+     * JavaFX controller responsible for managing the main game scene.
+     *
+     * <p>This controller coordinates the interaction between the user interface
+     * and the application services during gameplay. It initializes the game,
+     * starts the main update loop, processes player input, updates the UI,
+     * renders the game world and manages save/load related actions.</p>
+     *
+     * <h2>Responsibilities</h2>
+     * <ul>
+     *     <li>Initialize the gameplay scene.</li>
+     *     <li>Handle player mouse input.</li>
+     *     <li>Run the main game loop.</li>
+     *     <li>Coordinate movement, combat and enemy AI.</li>
+     *     <li>Update the graphical interface.</li>
+     *     <li>Manage room transitions.</li>
+     *     <li>Handle game over and save operations.</li>
+     * </ul>
+     */
     public GameController(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
         this.movementService = sceneManager.getMovementService();
