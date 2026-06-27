@@ -8,6 +8,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a playable room within the game world.
+ *
+ * <p>A room contains the tile map, entity placement, player spawn position,
+ * exit location and all information required to simulate gameplay inside
+ * a single level.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Store the room tile layout.</li>
+ *     <li>Manage entity placement and movement.</li>
+ *     <li>Provide access to tiles and entities.</li>
+ *     <li>Maintain room-specific gameplay state.</li>
+ *     <li>Extract runtime data for game persistence.</li>
+ * </ul>
+ */
 public class Room {
 
     private final Tile[][] tiles;
