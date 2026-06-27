@@ -13,8 +13,8 @@ import it.unicam.cs.mpgc.rpg119001.application.service.movement.OrthogonalMoveme
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.PathfindingService;
 import it.unicam.cs.mpgc.rpg119001.application.service.character.PlayerActionService;
 import it.unicam.cs.mpgc.rpg119001.application.service.character.PlayerCommandService;
-import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveGameMapper;
-import it.unicam.cs.mpgc.rpg119001.application.service.save.SaveService;
+import it.unicam.cs.mpgc.rpg119001.application.service.game.SaveGameMapper;
+import it.unicam.cs.mpgc.rpg119001.application.service.game.SaveService;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.factory.RoomFactory;
 import it.unicam.cs.mpgc.rpg119001.infrastructure.room.RoomTemplateRepository;
 import it.unicam.cs.mpgc.rpg119001.presentation.controller.GameController;

@@ -1,10 +1,25 @@
-package it.unicam.cs.mpgc.rpg119001.application.service.save;
+package it.unicam.cs.mpgc.rpg119001.application.service.game;
 
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
 import it.unicam.cs.mpgc.rpg119001.domain.game.SaveGame;
 
 import java.util.List;
 
+/**
+ * Service responsible for converting the runtime game state into its
+ * serializable save representation.
+ *
+ * <p>This mapper extracts only the information required to reconstruct a
+ * game session, producing a {@link it.unicam.cs.mpgc.rpg119001.domain.game.SaveGame}
+ * object suitable for persistence.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Extract player state.</li>
+ *     <li>Extract enemy state.</li>
+ *     <li>Create serializable save objects.</li>
+ * </ul>
+ */
 public class SaveGameMapper {
 
     public SaveGame fromGame(Game game) {
