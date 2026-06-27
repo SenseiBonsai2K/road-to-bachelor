@@ -1,20 +1,34 @@
 package it.unicam.cs.mpgc.rpg119001.application.service.character;
 
-import it.unicam.cs.mpgc.rpg119001.application.service.game.CollisionService;
 import it.unicam.cs.mpgc.rpg119001.application.service.game.UIService;
 import it.unicam.cs.mpgc.rpg119001.application.service.combat.AttackPositionService;
 import it.unicam.cs.mpgc.rpg119001.application.service.movement.PathfindingService;
 import it.unicam.cs.mpgc.rpg119001.config.Constants.GridConstants;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Enemy;
 import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Entity;
-import it.unicam.cs.mpgc.rpg119001.domain.entity.character.Player;
 import it.unicam.cs.mpgc.rpg119001.domain.game.Game;
 import it.unicam.cs.mpgc.rpg119001.domain.world.GridPosition;
 import it.unicam.cs.mpgc.rpg119001.domain.world.Room;
 
-
 import java.util.List;
 
+/**
+ * Service responsible for translating player input into executable game actions.
+ *
+ * <p>This service interprets mouse clicks performed by the player and
+ * generates the corresponding movement or combat commands. Depending on
+ * the clicked tile, it may compute a movement path or determine the
+ * optimal attack position before delegating execution to
+ * {@link PlayerActionService}.</p>
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ *     <li>Interpret player click events.</li>
+ *     <li>Identify clicked entities.</li>
+ *     <li>Compute movement paths.</li>
+ *     <li>Queue movement and combat actions.</li>
+ * </ul>
+ */
 public class PlayerCommandService {
 
     private final PathfindingService pathfindingService;
@@ -30,28 +44,41 @@ public class PlayerCommandService {
         this.actionService = actionService;
     }
 
-    public void handleClick(double x, double y, Game game, UIService uiService) {
+    public void handleClick(double xClick, double yClick, Game game, UIService uiService) {
+
+        GridPosition clickedPosition = toGridPosition(xClick, yClick);
+        GridPosition destination = determineDestination(clickedPosition, game, uiService);
+
+        List<GridPosition> path = pathfindingService.findPath(
+                game.getPlayer().getGridPosition(),
+                destination,
+                game.getCurrentRoom());
+
+        actionService.setPath(path);
+    }
+
+    private GridPosition toGridPosition(double x, double y) {
 
         double tileSize = GridConstants.TILE_SIZE;
 
-        int tileX = (int) Math.floor(x / tileSize);
-        int tileY = (int) Math.floor(y / tileSize);
+        return new GridPosition(
+                (int) Math.floor(x / tileSize),
+                (int) Math.floor(y / tileSize)
+        );
+    }
 
-        GridPosition end = new GridPosition(tileX, tileY);
+    private GridPosition determineDestination(GridPosition clickedPosition, Game game, UIService uiService) {
 
-        Player player = game.getPlayer();
         Room room = game.getCurrentRoom();
 
-        Entity entity = room.getEntityAt(end);
+        Entity entity = room.getEntityAt(clickedPosition);
 
-        if (entity instanceof Enemy enemy) {
-            uiService.updateEnemy(enemy);
-            actionService.setTarget(enemy);
-            end = attackPositionService.findBestAttackPosition(player, enemy, room);
-        }
+        if (!(entity instanceof Enemy enemy)) return clickedPosition;
 
-        List<GridPosition> path = pathfindingService.findPath(player.getGridPosition(), end, room);
+        uiService.updateEnemy(enemy);
 
-        actionService.setPath(path);
+        actionService.setTarget(enemy);
+
+        return attackPositionService.findBestAttackPosition(game.getPlayer(), enemy, room);
     }
 }
