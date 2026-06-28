@@ -91,3 +91,41 @@ In particular, AI was used for:
 - generating documentation (Javadoc and Wiki)
 - theoretical support (e.g. Manhattan distance, BFS)
 - suggestions for refactoring and code improvement (e.g. use of Runnable, Consumer, separation of responsibilities)
+
+## Future developments
+
+The current version of the project focuses on the implementation of the game logic and on a modular architecture designed to be easily extended. Several improvements can be introduced in future iterations, including:
+
+- **Audio system**
+  - Introduction of a dedicated `SoundManager` responsible for background music, sound effects and volume management.
+  - Different soundtracks for menus, exploration and combat.
+  - Audio feedback for attacks, enemy deaths and player interactions.
+
+- **Graphical improvements**
+  - Attack animations and visual effects.
+  - Particle effects for combat and level progression.
+  - Improved environment sprites and character animations.
+
+- **HUD improvements**
+  - Health bars displayed above characters.
+  - Visual indicators for movement and attack availability (cooldowns).
+  - Experience bar and dungeon progression indicators.
+  - Better visualization of the currently selected target.
+
+- **Gameplay improvements**
+  - Equipment management and inventory integration.
+  - Consumable item usage.
+  - Different enemy behaviours and advanced AI.
+  - Additional player classes and enemy archetypes.
+  - Boss-specific mechanics and abilities.
+
+- **Content expansion**
+  - New room templates.
+  - Additional dungeon themes.
+  - New weapons, armour and consumable effects.
+  - Greater variety of enemies and encounters.
+
+- **Technical improvements**
+  - Configurable game settings (difficulty, audio, graphics).
+  - Additional save slots.
+  - Unit and integration tests for the application services.
