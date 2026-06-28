@@ -168,6 +168,8 @@ public class GameController {
         gameFlowService.advanceToNextRoom(game);
 
         playerActionService.clear();
+
+        gamePane.requestFocus();
     }
 
     private void updateSaveButtonsVisibility() {
