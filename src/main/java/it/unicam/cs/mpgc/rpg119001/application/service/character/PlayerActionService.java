@@ -40,7 +40,7 @@ public class PlayerActionService {
     }
 
     public void clear() {
-        currentPath.clear();
+        currentPath = new LinkedList<>();
         pendingTarget = null;
     }
 
