@@ -1,5 +1,9 @@
 package it.unicam.cs.mpgc.rpg119001.domain.game;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,11 +23,10 @@ import java.util.List;
  */
 public class SaveGame {
 
-    private final int level;
-    private final String roomTemplate;
-    private final PlayerState playerState;
-
-    private final List<EnemyState> enemyStates;
+    private int level;
+    private String roomTemplate;
+    private PlayerState playerState;
+    private List<EnemyState> enemyStates = new ArrayList<>();
 
     /**
      * Represents the serialized state of the player inside a saved game.
@@ -52,6 +55,8 @@ public class SaveGame {
         public int x;
         public int y;
     }
+
+    public SaveGame() {}
 
     public SaveGame(int level, String roomTemplate,
                     PlayerState playerState,

@@ -70,6 +70,9 @@ public class GameFactory {
 
         Room room = roomFactory.loadRoom(dto, entities);
 
+        //Save Game...so also continue game is allowed only when a room is completed
+        room.destroyExitDoor();
+
         String playerArchetype = save.getPlayerState().archetype;
         PlayerPreset playerPreset = PlayerPresets.getByArchetype(playerArchetype);
 
