@@ -88,6 +88,6 @@ During development, Artificial Intelligence tools (OpenAI’s ChatGPT) were used
 In particular, AI was used for:
 
 - architectural suggestions
-- generating documentation (Javadoc)
+- generating documentation (Javadoc and Wiki)
 - theoretical support (e.g. Manhattan distance, BFS)
 - suggestions for refactoring and code improvement (e.g. use of Runnable, Consumer, separation of responsibilities)
