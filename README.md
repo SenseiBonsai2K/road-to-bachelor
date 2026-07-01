@@ -127,5 +127,6 @@ The current version of the project focuses on the implementation of the game log
 
 - **Technical improvements**
   - Configurable game settings (difficulty, audio, graphics).
+  - Save game even if the room is not completed (partially implemented)
   - Additional save slots.
   - Unit and integration tests for the application services.
